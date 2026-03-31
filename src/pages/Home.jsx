@@ -1,1 +1,130 @@
-export default function Home() { return <div>Home</div> }
+import { Link } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+
+const SECTION_CARDS = [
+  {
+    to: '/classes',
+    icon: '💃',
+    title: 'Classes',
+    subtitle: 'Year-round instruction',
+    gradient: 'from-[#0d1b36] to-[#1e3a6e]',
+    accentColor: 'text-[#7ab3e8]',
+    description:
+      'Ballet, jazz, hip hop, and more for all ages and skill levels. Weekly sessions in a supportive, energetic environment.',
+    linkLabel: 'View Classes',
+  },
+  {
+    to: '/camps',
+    icon: '☀️',
+    title: 'Camps',
+    subtitle: 'Summer & holiday',
+    gradient: 'from-[#5a1020] to-[#8a1a30]',
+    accentColor: 'text-[#f4d0b8]',
+    description:
+      'Immersive multi-day camps packed with dance, creativity, and fun. Perfect for school breaks and summer schedules.',
+    linkLabel: 'View Camps',
+  },
+  {
+    to: '/birthdays',
+    icon: '🎂',
+    title: 'Birthdays',
+    subtitle: 'Party packages',
+    gradient: 'from-[#1a1040] to-[#2a1a60]',
+    accentColor: 'text-[#f4a8b4]',
+    description:
+      'Celebrate in style at the studio! Custom dance party packages for kids of all ages. Unforgettable memories guaranteed.',
+    linkLabel: 'View Packages',
+  },
+  {
+    to: '/contact',
+    icon: '📬',
+    title: 'Contact Us',
+    subtitle: 'Get in touch',
+    gradient: 'from-[#0d3020] to-[#1a5a3a]',
+    accentColor: 'text-[#b8f0d4]',
+    description:
+      "Questions? Ready to enroll? Reach out and we'll get back to you quickly. We'd love to have your dancer join our family.",
+    linkLabel: 'Contact Us',
+  },
+]
+
+export default function Home() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0d1b36] via-[#1a1040] to-[#5a1020] py-24 px-6 text-center">
+        <div className="absolute -top-16 -right-16 w-64 h-64 bg-brand-red opacity-[0.08] rounded-full" />
+        <div className="absolute -bottom-20 -left-16 w-80 h-80 bg-[#7ab3e8] opacity-[0.06] rounded-full" />
+        <div className="absolute top-8 left-16 w-2 h-2 bg-[#f4a8b4] opacity-60 rounded-full" />
+        <div className="absolute bottom-12 right-20 w-1.5 h-1.5 bg-[#f4d0b8] opacity-60 rounded-full" />
+        <div className="relative max-w-2xl mx-auto">
+          <p className="text-[#f4a8b4] text-xs font-semibold tracking-[0.4em] uppercase mb-3">
+            Midlothian, Virginia
+          </p>
+          <h1 className="text-white text-5xl md:text-6xl font-black tracking-tight leading-tight mb-4">
+            MOVE WITH<br />
+            <span className="text-[#f4a8b4]">PURPOSE</span>
+          </h1>
+          <p className="text-[#b8d4f0] text-base md:text-lg mb-10 leading-relaxed">
+            Classes, camps, and birthday parties for dancers of all ages and skill levels.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/classes"
+              className="bg-brand-red text-white font-bold px-8 py-3 rounded-md hover:bg-red-700 transition-colors"
+            >
+              Explore Classes
+            </Link>
+            <Link
+              to="/birthdays"
+              className="border-2 border-white/30 text-white font-semibold px-8 py-3 rounded-md hover:border-white/60 transition-colors"
+            >
+              Plan a Party
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Section intro */}
+      <section className="bg-white py-12 px-6 text-center">
+        <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">
+          What We Offer
+        </p>
+        <h2 className="text-navy-dark text-3xl font-black">Everything your dancer needs</h2>
+        <p className="text-[#5a6a8a] text-sm mt-2">
+          From weekly classes to summer camps and unforgettable birthday parties
+        </p>
+      </section>
+
+      {/* Section cards */}
+      <section className="bg-surface-light px-6 pb-16 flex-1">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          {SECTION_CARDS.map(({ to, icon, title, subtitle, gradient, accentColor, description, linkLabel }) => (
+            <Link
+              key={to}
+              to={to}
+              className="bg-white rounded-xl overflow-hidden border border-surface-border hover:shadow-lg transition-shadow group"
+            >
+              <div className={`bg-gradient-to-br ${gradient} px-6 py-7 text-center`}>
+                <div className="text-4xl mb-2">{icon}</div>
+                <div className="text-white text-lg font-black tracking-wide">{title}</div>
+                <div className={`${accentColor} text-xs mt-1`}>{subtitle}</div>
+              </div>
+              <div className="p-5">
+                <p className="text-[#3a4a6a] text-sm leading-relaxed mb-3">{description}</p>
+                <span className="text-brand-red text-xs font-bold group-hover:underline">
+                  {linkLabel} →
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  )
+}
