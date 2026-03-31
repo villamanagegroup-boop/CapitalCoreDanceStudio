@@ -14,7 +14,7 @@ export default function Contact() {
 
       <section className="bg-white flex-1 px-6 py-12">
         <div className="max-w-xl mx-auto">
-          <form className="flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
+          <form className="flex flex-col gap-5" aria-label="Contact us" onSubmit={(e) => e.preventDefault()}>
             {/* Name row */}
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1 flex flex-col gap-1.5">

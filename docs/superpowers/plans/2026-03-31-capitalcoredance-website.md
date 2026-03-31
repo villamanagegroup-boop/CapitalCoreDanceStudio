@@ -6,7 +6,7 @@
 
 **Architecture:** Single-page application shell with React Router v6 client-side routing. Three shared layout components (Navbar, PageHeader, Footer) are composed directly into each page component. All content is static placeholder data — no API calls or state management beyond the Navbar mobile toggle.
 
-**Tech Stack:** React 18, Vite, Tailwind CSS v3, React Router v6, Vitest, @testing-library/react, jsdom
+**Tech Stack:** React 19, Vite, Tailwind CSS v3, React Router v7 (library mode), Vitest, @testing-library/react, jsdom
 
 ---
 
