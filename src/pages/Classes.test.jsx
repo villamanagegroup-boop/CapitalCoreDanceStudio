@@ -11,11 +11,22 @@ test('renders page title', () => {
   expect(screen.getByRole('heading', { name: 'Classes' })).toBeInTheDocument()
 })
 
-test('renders class listing cards', () => {
+test('renders day group headers', () => {
   renderClasses()
-  expect(screen.getByText('Ballet')).toBeInTheDocument()
-  expect(screen.getByText('Hip Hop')).toBeInTheDocument()
-  expect(screen.getByText('Jazz')).toBeInTheDocument()
+  expect(screen.getByText('Monday')).toBeInTheDocument()
+  expect(screen.getByText('Tuesday')).toBeInTheDocument()
+  expect(screen.getByText('Wednesday')).toBeInTheDocument()
+  expect(screen.getByText('Thursday')).toBeInTheDocument()
+  expect(screen.getByText('Friday')).toBeInTheDocument()
+})
+
+test('renders real class names', () => {
+  renderClasses()
+  expect(screen.getAllByText('Tiny Ballet + Tumble').length).toBeGreaterThan(0)
+  expect(screen.getAllByText('Irish Dance').length).toBeGreaterThan(0)
+  expect(screen.getByText('Hip Hop + Breakdancing')).toBeInTheDocument()
+  expect(screen.getByText('Musical Theatre')).toBeInTheDocument()
+  expect(screen.getByText('Tumble Techniques')).toBeInTheDocument()
 })
 
 test('renders Enroll Now CTA', () => {
