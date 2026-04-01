@@ -53,6 +53,31 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+            {/* Social links */}
+            <div className="flex gap-3 mt-4">
+              <a
+                href="https://www.instagram.com/capitalcoredance"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1e2f50] hover:bg-[#2a3f6a] transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f4a8b4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/p/Capital-Core-Dance-Challenge-61566002721661/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1e2f50] hover:bg-[#2a3f6a] transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7ab3e8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Nav links */}
@@ -90,9 +115,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-5 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#5a7aaa] text-xs">© 2026 Capital Core Dance Studio. All rights reserved.</p>
-          <p className="text-[#3a4a6a] text-xs">Managed by Hicks Virtual Solutions LLC</p>
+          <div className="flex items-center gap-4">
+            <a href="https://www.instagram.com/capitalcoredance" target="_blank" rel="noreferrer" className="text-[#5a7aaa] text-xs hover:text-[#f4a8b4] transition-colors">Instagram</a>
+            <a href="https://www.facebook.com/p/Capital-Core-Dance-Challenge-61566002721661/" target="_blank" rel="noreferrer" className="text-[#5a7aaa] text-xs hover:text-[#7ab3e8] transition-colors">Facebook</a>
+            <p className="text-[#3a4a6a] text-xs">Managed by Hicks Virtual Solutions LLC</p>
+          </div>
         </div>
 
       </div>
