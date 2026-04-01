@@ -3,9 +3,13 @@ import { Link, useLocation } from 'react-router-dom'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/classes', label: 'Classes' },
-  { to: '/camps', label: 'Camps' },
+  { to: '/about', label: 'About Us' },
+  { to: '/classes', label: 'Our Classes' },
+  { to: '/camps', label: 'Summer Camps' },
+  { to: '/tuition', label: 'Tuition' },
+  { to: '/mini-series', label: 'Mini Series' },
   { to: '/birthdays', label: 'Birthdays' },
+  { to: '/recital', label: 'Recital' },
 ]
 
 export default function Navbar() {
@@ -23,9 +27,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-navy-mid border-2 border-dashed border-[#4a6a9e] rounded-md flex items-center justify-center flex-shrink-0">
-            <span className="text-[#7ab3e8] text-[10px] font-bold">LOGO</span>
-          </div>
+          <img src="/logo.png" alt="Capital Core Dance Studio" className="h-10 w-10 object-contain flex-shrink-0" />
           <div>
             <div className="text-white font-black text-sm tracking-widest">CAPITAL CORE</div>
             <div className="text-[#7ab3e8] text-[10px] tracking-[0.3em]">DANCE STUDIO</div>

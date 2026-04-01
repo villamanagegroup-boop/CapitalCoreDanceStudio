@@ -37,6 +37,28 @@ const SECTION_CARDS = [
     linkLabel: 'View Packages',
   },
   {
+    to: '/mini-series',
+    icon: '✨',
+    title: 'Mini Series',
+    subtitle: 'Spring 2026',
+    gradient: 'from-[#7a3a10] to-[#c46a30]',
+    accentColor: 'text-[#ffd4a8]',
+    description:
+      'Short-term class series combining two styles into one fun session. A low-commitment way to try something new this spring.',
+    linkLabel: 'View Mini Series',
+  },
+  {
+    to: '/recital',
+    icon: '🎭',
+    title: 'Recital',
+    subtitle: 'Annual showcase',
+    gradient: 'from-[#2a0a4a] to-[#4a1a7a]',
+    accentColor: 'text-[#d4b8f4]',
+    description:
+      'Our annual recital is the highlight of the year — a chance for every dancer to shine on stage in front of family and friends.',
+    linkLabel: 'View Recital Info',
+  },
+  {
     to: '/contact',
     icon: '📬',
     title: 'Contact Us',
@@ -85,6 +107,24 @@ export default function Home() {
               Plan a Party
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* First class free banner */}
+      <section className="px-6 py-4" style={{ backgroundColor: '#daf0f7' }}>
+        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-center sm:text-left">
+            <p className="text-navy-dark font-black text-lg leading-snug">Your first class is always FREE.</p>
+            <p className="text-[#3a6a8a] text-sm mt-0.5">Come try us out — no commitment needed.</p>
+          </div>
+          <a
+            href="https://portal.iclasspro.com/capitalcoredance/dashboard"
+            target="_blank"
+            rel="noreferrer"
+            className="flex-shrink-0 bg-navy-dark text-white text-sm font-bold px-6 py-2 rounded-md hover:bg-navy-mid transition-colors whitespace-nowrap"
+          >
+            Register for a Trial →
+          </a>
         </div>
       </section>
 
