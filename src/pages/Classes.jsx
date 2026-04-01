@@ -175,8 +175,8 @@ export default function Classes() {
       <section className="px-6 py-4" style={{ backgroundColor: '#FFA76B' }}>
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-center sm:text-left">
-            <p className="text-navy-dark font-black text-lg leading-snug">Curious about dance? Try our Free Mini Series.</p>
-            <p className="text-navy-dark/70 text-sm mt-0.5">No commitment — just movement.</p>
+            <p className="text-navy-dark font-black text-lg leading-snug">Curious about dance? Try our Mini Series.</p>
+            <p className="text-navy-dark/70 text-sm mt-0.5">Short-term classes combining two styles in one session.</p>
           </div>
           <Link
             to="/mini-series"

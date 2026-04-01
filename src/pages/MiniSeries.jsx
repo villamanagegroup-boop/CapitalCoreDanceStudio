@@ -13,20 +13,20 @@ const ACCENT_COLORS = [
 const DAY_ORDER = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
 const SERIES = [
-  { name: 'Tiny Ballet + Tumble (Ages 2–5)', level: 'All Levels', day: 'Monday', time: '5:00 PM', category: 'Tiny' },
-  { name: 'Ballet + Modern/Contemporary', level: 'Beginner+', day: 'Monday', time: '5:30 PM', category: 'Ballet' },
-  { name: 'Jazz + Acro Arts', level: 'Beginner+', day: 'Monday', time: '5:30 PM', category: 'Jazz' },
-  { name: 'Ballet + Jazz', level: 'Beginner+', day: 'Monday', time: '6:15 PM', category: 'Ballet' },
-  { name: 'Lyrical + Acro Arts', level: 'Beginner+', day: 'Monday', time: '6:15 PM', category: 'Lyrical' },
-  { name: 'Irish Dance', level: 'Beginner – Novice', day: 'Tuesday', time: '5:30 PM', category: 'Irish Dance' },
-  { name: 'Ballet + Hip Hop', level: 'Beginner – Novice', day: 'Tuesday', time: '6:15 PM', category: 'Ballet' },
-  { name: 'Tiny Ballet + Tap (Ages 2–5)', level: 'All Levels', day: 'Wednesday', time: '5:30 PM', category: 'Tiny' },
-  { name: 'Ballet + Tap', level: 'Beginner – Novice', day: 'Thursday', time: '6:00 PM', category: 'Ballet' },
-  { name: 'Pom Pom + Cheer Dance', level: 'Beginner+', day: 'Thursday', time: '6:45 PM', category: 'Cheer' },
-  { name: 'Tumble Techniques', level: 'All Levels', day: 'Thursday', time: '7:30 PM', category: 'Tumble' },
-  { name: 'Musical Theatre', level: 'Beginner – Advanced', day: 'Friday', time: '5:30 PM', category: 'Musical Theatre' },
-  { name: 'Tiny Ballet + Tap (Ages 2–5)', level: 'All Levels', day: 'Friday', time: '5:30 PM', category: 'Tiny' },
-  { name: 'Hip Hop + Breakdancing', level: 'Beginner – Advanced', day: 'Friday', time: '6:15 PM', category: 'Hip Hop' },
+  { name: 'Tiny Ballet + Tumble (Ages 2–5)', level: 'All Levels', day: 'Monday', time: '5:00 PM – 5:30 PM', category: 'Tiny' },
+  { name: 'Ballet + Modern/Contemporary', level: 'Beginner+', day: 'Monday', time: '5:30 PM – 6:15 PM', category: 'Ballet' },
+  { name: 'Jazz + Acro Arts', level: 'Beginner+', day: 'Monday', time: '5:30 PM – 6:15 PM', category: 'Jazz' },
+  { name: 'Ballet + Jazz', level: 'Beginner+', day: 'Monday', time: '6:15 PM – 7:15 PM', category: 'Ballet' },
+  { name: 'Lyrical + Acro Arts', level: 'Beginner+', day: 'Monday', time: '6:15 PM – 7:15 PM', category: 'Lyrical' },
+  { name: 'Irish Dance', level: 'Beginner – Novice', day: 'Tuesday', time: '5:30 PM – 6:15 PM', category: 'Irish Dance' },
+  { name: 'Ballet + Hip Hop', level: 'Beginner – Novice', day: 'Tuesday', time: '6:15 PM – 7:15 PM', category: 'Ballet' },
+  { name: 'Tiny Ballet + Tap (Ages 2–5)', level: 'All Levels', day: 'Wednesday', time: '5:30 PM – 6:00 PM', category: 'Tiny' },
+  { name: 'Ballet + Tap', level: 'Beginner – Novice', day: 'Thursday', time: '6:00 PM – 6:45 PM', category: 'Ballet' },
+  { name: 'Pom Pom + Cheer Dance', level: 'Beginner+', day: 'Thursday', time: '6:45 PM – 7:30 PM', category: 'Cheer' },
+  { name: 'Tumble Techniques', level: 'All Levels', day: 'Thursday', time: '7:30 PM – 8:15 PM', category: 'Tumble' },
+  { name: 'Musical Theatre', level: 'Beginner – Advanced', day: 'Friday', time: '5:30 PM – 6:15 PM', category: 'Musical Theatre' },
+  { name: 'Tiny Ballet + Tap (Ages 2–5)', level: 'All Levels', day: 'Friday', time: '5:30 PM – 6:00 PM', category: 'Tiny' },
+  { name: 'Hip Hop + Breakdancing', level: 'Beginner – Advanced', day: 'Friday', time: '6:15 PM – 7:00 PM', category: 'Hip Hop' },
 ]
 
 const DAYS = ['All Days', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -99,13 +99,15 @@ export default function MiniSeries() {
                     {filtered.filter(s => s.day === day).map(({ name, level, time }, i) => (
                       <div
                         key={`${name}-${day}`}
-                        className={`border border-surface-border border-l-4 ${ACCENT_COLORS[i % ACCENT_COLORS.length]} rounded-lg px-5 py-4`}
+                        className={`border border-surface-border border-l-4 ${ACCENT_COLORS[i % ACCENT_COLORS.length]} rounded-lg px-5 py-4 flex items-center justify-between gap-4`}
                       >
-                        <div className="font-bold text-navy-dark text-base">{name}</div>
-                        <div className="flex items-center gap-3 mt-0.5">
-                          <span className="text-[#5a6a8a] text-sm">{level}</span>
-                          <span className="text-[#c8d8e8] text-xs">·</span>
-                          <span className="text-[#5a6a8a] text-sm">{time}</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-navy-dark font-bold text-base">{name}</div>
+                          <div className="text-[#5a6a8a] text-sm mt-0.5">{level}</div>
+                        </div>
+                        <div className="text-right flex-shrink-0">
+                          <div className="text-[#7ab3e8] text-sm font-medium">{time}</div>
+                          <div className="text-brand-red text-xs font-bold mt-0.5">$165</div>
                         </div>
                       </div>
                     ))}
