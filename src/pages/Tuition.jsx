@@ -5,11 +5,11 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 
 const CLASS_PRICES = [
-  { duration: '30 Min', monthly: '$65', semester: '$260' },
-  { duration: '45 Min', monthly: '$85', semester: '$340' },
-  { duration: '60 Min', monthly: '$105', semester: '$420' },
-  { duration: '75 Min', monthly: '$125', semester: '$500' },
-  { duration: '90 Min', monthly: '$150', semester: '$600' },
+  { duration: '30 Min', monthly: '$65' },
+  { duration: '45 Min', monthly: '$85' },
+  { duration: '60 Min', monthly: '$105' },
+  { duration: '75 Min', monthly: '$125' },
+  { duration: '90 Min', monthly: '$150' },
 ]
 
 const ACCENT_COLORS = [
@@ -117,28 +117,22 @@ export default function Tuition() {
             <p className="text-[#5a6a8a] text-sm mb-6">Prices are per class. Multi-class and multi-student discounts available.</p>
 
             <div className="flex flex-col gap-3">
-              {CLASS_PRICES.map(({ duration, monthly, semester }, i) => (
+              {CLASS_PRICES.map(({ duration, monthly }, i) => (
                 <div
                   key={duration}
                   className={`border border-surface-border border-l-4 ${ACCENT_COLORS[i]} rounded-lg px-5 py-4 flex flex-wrap items-center justify-between gap-3`}
                 >
                   <div className="font-bold text-navy-dark text-base">{duration} Classes</div>
-                  <div className="flex items-center gap-6">
-                    <div className="text-right">
-                      <div className="text-[#5a6a8a] text-xs uppercase tracking-wide">Monthly</div>
-                      <div className="text-navy-dark font-black text-lg">{monthly}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-[#5a6a8a] text-xs uppercase tracking-wide">Full Semester</div>
-                      <div className="text-navy-dark font-black text-lg">{semester}</div>
-                    </div>
+                  <div className="text-right">
+                    <div className="text-[#5a6a8a] text-xs uppercase tracking-wide">Monthly</div>
+                    <div className="text-navy-dark font-black text-lg">{monthly}</div>
                   </div>
                 </div>
               ))}
             </div>
 
             <p className="text-[#5a6a8a] text-xs mt-4 italic">
-              Interested in paying for the full year? Reach out to us directly and we'll assist you.
+              Semester rates vary — reach out to us directly for full-semester pricing.
             </p>
           </div>
 
@@ -178,6 +172,18 @@ export default function Tuition() {
             <p className="text-[#5a6a8a] text-xs italic">
               Having trouble with the portal? Reach out to us and we'll help.
             </p>
+          </div>
+
+          {/* Summer classes */}
+          <div className="border border-surface-border border-l-4 border-l-[#b5e0c8] rounded-lg px-5 py-5">
+            <p className="text-[#3aaa6a] text-xs font-bold tracking-[0.3em] uppercase mb-2">Summer Classes</p>
+            <h3 className="text-navy-dark text-lg font-black mb-2">Summer Class Schedule</h3>
+            <p className="text-[#3a4a6a] text-sm leading-relaxed mb-3">
+              We offer summer classes for dancers who want to keep training between semesters. Pricing and scheduling details are on the way!
+            </p>
+            <div className="bg-[#f0faf5] border border-[#b5e0c8] rounded px-4 py-2 text-sm text-[#3a4a6a] italic">
+              Details coming soon — check back or contact us for more info.
+            </div>
           </div>
 
           {/* Specialty note */}

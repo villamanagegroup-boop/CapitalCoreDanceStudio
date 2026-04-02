@@ -11,6 +11,13 @@ const ACCENT_COLORS = [
   'border-[#f4a060]',
 ]
 
+const WEEK_TEXT_COLORS = [
+  'text-brand-red',
+  'text-[#7ab3e8]',
+  'text-[#f4a8b4]',
+  'text-[#f4a060]',
+]
+
 const CAMPS = [
   {
     week: 1,
@@ -81,7 +88,7 @@ export default function Camps() {
       <section className="px-6 py-4" style={{ backgroundColor: '#ecc9ff' }}>
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-center sm:text-left">
-            <p className="text-navy-dark font-black text-lg leading-snug">Save on summer camp with CertifiKid!</p>
+            <p className="text-navy-dark font-black text-lg leading-snug">Save $40–$60 on summer camp with CertifiKid — for each week!</p>
             <p className="text-navy-dark/70 text-sm mt-0.5">Exclusive deals available for our families.</p>
           </div>
           <a
@@ -107,7 +114,7 @@ export default function Camps() {
             </div>
             <div className="flex flex-wrap gap-x-6 gap-y-1 mt-1">
               <span><span className="font-bold">Current dancers</span> (Fall 2025 / Spring 2026): <span className="text-brand-red font-bold">$205 / week</span></span>
-              <span><span className="font-bold">Non-studio campers:</span> <span className="font-bold">$185 / week</span></span>
+              <span><span className="font-bold">Non-studio campers:</span> <span className="font-bold">$225 / week</span></span>
             </div>
           </div>
 
@@ -126,7 +133,7 @@ export default function Camps() {
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <span className="text-[#8a9aaa] text-xs font-bold uppercase tracking-widest mr-2">Week {week}</span>
+                    <span className={`${WEEK_TEXT_COLORS[i % WEEK_TEXT_COLORS.length]} text-xs font-bold uppercase tracking-widest mr-2`}>Week {week}</span>
                     <span className="text-[#5a6a8a] text-xs">{dates}</span>
                   </div>
                 </div>

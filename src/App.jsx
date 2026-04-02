@@ -7,6 +7,9 @@ import Tuition from './pages/Tuition'
 import Camps from './pages/Camps'
 import MiniSeries from './pages/MiniSeries'
 import Birthdays from './pages/Birthdays'
+import BirthdayForm from './pages/BirthdayForm'
+import BirthdayPayment from './pages/BirthdayPayment'
+import BirthdayThankYou from './pages/BirthdayThankYou'
 import Contact from './pages/Contact'
 import Recital from './pages/Recital'
 import FAQ from './pages/FAQ'
@@ -29,6 +32,9 @@ export default function App() {
         <Route path="/camps" element={<Camps />} />
         <Route path="/mini-series" element={<MiniSeries />} />
         <Route path="/birthdays" element={<Birthdays />} />
+        <Route path="/birthday-booking" element={<BirthdayForm />} />
+        <Route path="/birthday-payment" element={<BirthdayPayment />} />
+        <Route path="/birthday-thankyou" element={<BirthdayThankYou />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/recital" element={<Recital />} />
         <Route path="/faq" element={<FAQ />} />

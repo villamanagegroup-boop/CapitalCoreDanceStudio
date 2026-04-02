@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
@@ -47,14 +48,12 @@ export default function Birthdays() {
             <p className="text-navy-dark font-black text-lg leading-snug">Ready to book your party?</p>
             <p className="text-navy-dark/70 text-sm mt-0.5">Get started in minutes — no phone tag required.</p>
           </div>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLScqyAMPaRtAtXSl15BNqCDAIp9U4P2gwyjaF16-cJLg0z8KFA/viewform?usp=header"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/birthday-booking"
             className="flex-shrink-0 bg-navy-dark text-white text-sm font-bold px-6 py-2 rounded-md hover:bg-navy-mid transition-colors whitespace-nowrap"
           >
             Complete Our Form Now →
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -147,14 +146,12 @@ export default function Birthdays() {
             </ul>
           </div>
 
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLScqyAMPaRtAtXSl15BNqCDAIp9U4P2gwyjaF16-cJLg0z8KFA/viewform?usp=header"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/birthday-booking"
             className="block w-full bg-brand-red text-white text-center font-bold py-3 rounded-md hover:bg-red-700 transition-colors"
           >
-            Complete Our Form Now →
-          </a>
+            Book Your Party →
+          </Link>
         </div>
       </section>
 

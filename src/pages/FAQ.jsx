@@ -83,7 +83,7 @@ const FAQS = [
     ],
   },
   {
-    category: 'Summer Camps',
+    category: 'Summer Camps & Classes',
     items: [
       {
         q: 'Do you offer summer camps?',
@@ -92,6 +92,14 @@ const FAQS = [
       {
         q: 'How do I register for a summer camp?',
         a: 'Camp registration is handled through our iClassPro portal. Visit the Summer Camps page for the full schedule and available weeks, then register online.',
+      },
+      {
+        q: 'Do you offer summer dance classes?',
+        a: 'Yes! Our summer classes run from mid-June through early August — approximately 7 weeks. They follow a full-semester pay scale and cover a range of genres, giving dancers a great way to keep training and explore new styles over the summer. Details on specific classes and scheduling are coming soon.',
+      },
+      {
+        q: 'Can my dancer do both a summer camp week and a summer class?',
+        a: 'Absolutely — dancers are welcome to participate in both! However, they cannot be left at the studio between camp and their class. Families would need to pick up their dancer after camp ends and bring them back when their class begins.',
       },
     ],
   },
