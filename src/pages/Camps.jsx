@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const ACCENT_COLORS = [
   'border-brand-red',
@@ -64,6 +65,11 @@ const CAMPS = [
 export default function Camps() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Summer Dance Camps 2026 | Capital Core Dance Studio – Midlothian, VA"
+        description="Immersive summer dance camps for kids ages 4–13 in Midlothian, VA. Eight themed weeks of dance, creativity, and fun. Monday–Friday, June through August 2026."
+        canonical="/camps"
+      />
       <Navbar />
       <PageHeader
         eyebrow="Capital Core Dance"

@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const INCLUDED = [
   'Private studio space',
@@ -27,6 +28,11 @@ const THEMES = [
 export default function Birthdays() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Dance Birthday Parties | Capital Core Dance Studio – Midlothian, VA"
+        description="Celebrate your child's birthday with a dance party at Capital Core Dance Studio in Midlothian, VA. Private studio, instructor-led fun, custom packages for all ages."
+        canonical="/birthdays"
+      />
       <Navbar />
       <PageHeader
         eyebrow="Capital Core Dance"

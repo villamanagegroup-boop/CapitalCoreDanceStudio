@@ -1,10 +1,16 @@
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 export default function Contact() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Enroll Now | Capital Core Dance Studio – Midlothian, VA"
+        description="Ready to start dancing? Contact Capital Core Dance Studio to enroll in classes or schedule a trial. Serving Midlothian, Chesterfield, and Richmond, VA."
+        canonical="/contact"
+      />
       <Navbar />
       <PageHeader
         eyebrow="We'd love to hear from you"

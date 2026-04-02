@@ -9,6 +9,7 @@ import MiniSeries from './pages/MiniSeries'
 import Birthdays from './pages/Birthdays'
 import Contact from './pages/Contact'
 import Recital from './pages/Recital'
+import FAQ from './pages/FAQ'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/birthdays" element={<Birthdays />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/recital" element={<Recital />} />
+        <Route path="/faq" element={<FAQ />} />
       </Routes>
     </BrowserRouter>
   )

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const ACCENT_COLORS = [
   'border-brand-red',
@@ -59,6 +60,11 @@ export default function MiniSeries() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Spring Mini Series Classes | Capital Core Dance Studio – Midlothian, VA"
+        description="Try something new with our Spring 2026 Mini Series — short-term classes combining two dance styles in one fun session. Low commitment, high energy. April–May 2026."
+        canonical="/mini-series"
+      />
       <Navbar />
       <PageHeader
         eyebrow="Capital Core Dance"
@@ -107,7 +113,7 @@ export default function MiniSeries() {
                         </div>
                         <div className="text-right flex-shrink-0">
                           <div className="text-[#7ab3e8] text-sm font-medium">{time}</div>
-                          <div className="text-brand-red text-xs font-bold mt-0.5">$165</div>
+                          <div className="text-brand-red text-xs font-bold mt-0.5">$145</div>
                         </div>
                       </div>
                     ))}

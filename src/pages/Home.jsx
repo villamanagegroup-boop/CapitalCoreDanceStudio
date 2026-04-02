@@ -1,6 +1,37 @@
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'DanceSchool',
+  name: 'Capital Core Dance Studio',
+  url: 'https://capitalcoredance.com',
+  telephone: '804-234-4014',
+  email: 'info@capitalcoredance.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '13110 Midlothian Turnpike',
+    addressLocality: 'Midlothian',
+    addressRegion: 'VA',
+    postalCode: '23113',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '37.50376329673492',
+    longitude: '-77.64043756100419',
+  },
+  openingHours: ['Mo-Fr 15:00-20:00', 'Sa 09:00-14:00'],
+  priceRange: '$$',
+  description: 'Dance classes for all ages in Midlothian, VA. Ballet, hip hop, jazz, contemporary, acro, and more.',
+  sameAs: [
+    'https://www.instagram.com/capitalcoredance',
+    'https://www.facebook.com/p/Capital-Core-Dance-Challenge-61566002721661/',
+  ],
+}
 
 const SECTION_CARDS = [
   {
@@ -74,6 +105,15 @@ const SECTION_CARDS = [
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Capital Core Dance Studio | Dance Classes in Midlothian, VA"
+        description="Capital Core Dance Studio offers ballet, hip hop, contemporary, and more in Midlothian, VA. Classes for all ages and skill levels. Enroll today!"
+        canonical="/"
+      />
+      <Helmet>
+        <meta name="keywords" content="dance studio Midlothian VA, dance classes Richmond VA, ballet classes, kids dance classes Chesterfield County" />
+        <script type="application/ld+json">{JSON.stringify(JSON_LD)}</script>
+      </Helmet>
       <Navbar />
 
       {/* Hero */}

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const PILLARS = [
   {
@@ -39,6 +40,11 @@ const PROGRAMS = [
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="About Us | Capital Core Dance Studio"
+        description="Learn about Capital Core Dance Studio's mission, instructors, and our commitment to building confident, skilled dancers in the Richmond/Midlothian area."
+        canonical="/about"
+      />
       <Navbar />
       <PageHeader
         eyebrow="Capital Core Dance"

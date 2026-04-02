@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const CLASS_PRICES = [
   { duration: '30 Min', monthly: '$65', semester: '$260' },
@@ -22,6 +23,11 @@ const ACCENT_COLORS = [
 export default function Tuition() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Dance Class Tuition & Fees | Capital Core Dance Studio – Midlothian, VA"
+        description="Transparent pricing for dance classes at Capital Core Dance Studio. Monthly and semester rates for 30–90 minute classes. Registration fees and recital costs explained."
+        canonical="/tuition"
+      />
       <Navbar />
       <PageHeader
         eyebrow="Capital Core Dance"

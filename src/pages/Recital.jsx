@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 export default function Recital() {
   return (
     <div className="min-h-screen flex flex-col bg-navy-dark">
+      <SEO
+        title="Annual Recital 2026 – A Night at the Cinema | Capital Core Dance Studio"
+        description="Capital Core Dance Studio presents 'A Night at the Cinema' — our annual spring recital June 12–14, 2026. All enrolled dancers perform. Ticket info coming soon."
+        canonical="/recital"
+      />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 
@@ -85,22 +91,25 @@ export default function Recital() {
 
           {/* Title card */}
           <div className="fu2 title-card rounded px-8 py-10 mb-10">
-            {/* "A" — large and prominent */}
-            <p className="recital-playfair italic font-black gold-gradient mb-1" style={{ fontSize: 'clamp(2rem, 5vw, 2.8rem)', lineHeight: 1 }}>A</p>
+            {/* Visually hidden full title for screen readers / SEO */}
+            <h1 className="sr-only">A Night at the Cinema — Capital Core Dance Studio Annual Recital 2026</h1>
 
-            {/* "Night" with enough bottom padding so descender clears */}
-            <h1 className="gold-gradient recital-playfair italic font-black" style={{ fontSize: 'clamp(3.2rem, 10vw, 6rem)', lineHeight: 1.05, paddingBottom: '0.1em', marginBottom: '0.15em' }}>
+            {/* "A" — large and prominent, decorative (aria-hidden) */}
+            <p aria-hidden="true" className="recital-playfair italic font-black gold-gradient mb-1" style={{ fontSize: 'clamp(2rem, 5vw, 2.8rem)', lineHeight: 1 }}>A</p>
+
+            {/* "Night" — decorative display */}
+            <p aria-hidden="true" className="gold-gradient recital-playfair italic font-black" style={{ fontSize: 'clamp(3.2rem, 10vw, 6rem)', lineHeight: 1.05, paddingBottom: '0.1em', marginBottom: '0.15em' }}>
               Night
-            </h1>
+            </p>
 
             {/* "at the" — clear gap from Night */}
             <p className="recital-cormorant text-[#c8b890] tracking-[0.5em] uppercase text-sm font-semibold mb-3">
               at the
             </p>
 
-            <h2 className="gold-gradient recital-playfair italic font-black leading-none" style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)' }}>
+            <p aria-hidden="true" className="gold-gradient recital-playfair italic font-black leading-none" style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)' }}>
               Cinema
-            </h2>
+            </p>
 
             <div className="w-12 h-px bg-[#c9a84c] opacity-40 mx-auto my-5" />
 
@@ -200,7 +209,7 @@ export default function Recital() {
       <section className="bg-navy-dark flex-1 px-6 py-16 text-center">
         <div className="max-w-md mx-auto">
           <p className="recital-cormorant text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-3">More Details</p>
-          <h3 className="recital-playfair text-white font-bold italic text-2xl mb-4">Coming Soon</h3>
+          <h2 className="recital-playfair text-white font-bold italic text-2xl mb-4">Coming Soon</h2>
           <p className="recital-cormorant text-[#8a9aaa] text-base leading-relaxed italic mb-8">
             Showtime schedule, costume information, and ticket purchase links will be posted here as the date approaches. Stay tuned!
           </p>

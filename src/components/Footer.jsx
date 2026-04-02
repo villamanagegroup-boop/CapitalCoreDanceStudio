@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { to: '/mini-series', label: 'Mini Series' },
   { to: '/birthdays', label: 'Birthdays' },
   { to: '/recital', label: 'Recital' },
+  { to: '/faq', label: 'FAQ' },
   { to: '/contact', label: 'Contact Us' },
 ]
 

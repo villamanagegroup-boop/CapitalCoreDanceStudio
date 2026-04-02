@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const ACCENT_COLORS = [
   'border-brand-red',
@@ -164,6 +165,11 @@ export default function Classes() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO
+        title="Dance Classes | Capital Core Dance Studio – Midlothian, VA"
+        description="Explore our full class schedule including ballet, jazz, hip hop, and contemporary. Classes for toddlers through adults in Midlothian, VA."
+        canonical="/classes"
+      />
       <Navbar />
       <PageHeader
         eyebrow="Capital Core Dance"
