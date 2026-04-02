@@ -13,6 +13,7 @@ vi.mock('../lib/supabase', () => ({
 
 afterEach(() => {
   vi.restoreAllMocks()
+  delete global.fetch
 })
 
 function renderContact() {

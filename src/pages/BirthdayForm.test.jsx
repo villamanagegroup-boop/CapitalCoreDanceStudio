@@ -18,6 +18,7 @@ vi.mock('react-router-dom', async () => {
 
 afterEach(() => {
   vi.restoreAllMocks()
+  delete global.fetch
 })
 
 function renderForm() {
