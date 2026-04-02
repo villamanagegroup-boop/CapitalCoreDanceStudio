@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import { vi } from 'vitest'
+import { vi, afterEach } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import Contact from './Contact'
 
@@ -10,6 +10,10 @@ vi.mock('../lib/supabase', () => ({
     })),
   },
 }))
+
+afterEach(() => {
+  vi.restoreAllMocks()
+})
 
 function renderContact() {
   return render(<MemoryRouter initialEntries={['/contact']}><Contact /></MemoryRouter>)
