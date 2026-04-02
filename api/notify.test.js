@@ -19,7 +19,6 @@ function makeRes() {
 
 beforeEach(() => {
   mockSend.mockReset()
-  process.env.RESEND_API_KEY = 'test-key'
   process.env.ADMIN_EMAIL = 'admin@example.com'
   process.env.FROM_EMAIL = 'from@example.com'
 })
@@ -30,6 +29,13 @@ describe('notify handler', () => {
     const res = makeRes()
     await handler(req, res)
     expect(res.status).toHaveBeenCalledWith(405)
+  })
+
+  it('returns 400 for missing or invalid body', async () => {
+    const req = { method: 'POST', body: null }
+    const res = makeRes()
+    await handler(req, res)
+    expect(res.status).toHaveBeenCalledWith(400)
   })
 
   it('returns 400 for unknown formType', async () => {
