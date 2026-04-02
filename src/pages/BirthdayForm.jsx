@@ -131,6 +131,31 @@ export default function BirthdayForm() {
       setStatus('error')
       setErrorMsg('Something went wrong. Please try again or email us at info@capitalcoredance.com.')
     } else {
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'birthday',
+          parentName: form.parentName,
+          email: form.email,
+          phone: form.phone,
+          birthdayName: form.birthdayName,
+          birthdayAge: form.birthdayAge,
+          enrolled: form.enrolled,
+          dateFirst: form.dateFirst,
+          dateSecond: form.dateSecond,
+          timeSlot: form.timeSlot,
+          guestCount: form.guestCount,
+          theme: form.theme,
+          customTheme: form.customTheme,
+          upgrades: form.upgrades,
+          bringingFood: form.bringingFood,
+          allergies: form.allergies,
+          referral: form.referral,
+          promoCode: form.promoCode,
+          notes: form.notes,
+        }),
+      }).catch(() => {})
       navigate('/birthday-payment')
     }
   }
