@@ -1,6 +1,15 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import Contact from './Contact'
+
+vi.mock('../lib/supabase', () => ({
+  supabase: {
+    from: vi.fn(() => ({
+      insert: vi.fn(() => Promise.resolve({ error: null })),
+    })),
+  },
+}))
 
 function renderContact() {
   return render(<MemoryRouter initialEntries={['/contact']}><Contact /></MemoryRouter>)
@@ -40,4 +49,24 @@ test('renders message textarea', () => {
 test('renders submit button', () => {
   renderContact()
   expect(screen.getByRole('button', { name: 'Send Message' })).toBeInTheDocument()
+})
+
+test('calls /api/notify with contact formType after successful submission', async () => {
+  global.fetch = vi.fn(() => Promise.resolve({ ok: true }))
+
+  renderContact()
+
+  fireEvent.change(screen.getByPlaceholderText('First name'), { target: { value: 'Jane' } })
+  fireEvent.change(screen.getByPlaceholderText('Last name'), { target: { value: 'Doe' } })
+  fireEvent.change(screen.getByPlaceholderText('your@email.com'), { target: { value: 'jane@example.com' } })
+  fireEvent.change(screen.getByPlaceholderText('How can we help?'), { target: { value: 'Hello' } })
+  fireEvent.click(screen.getByRole('button', { name: 'Send Message' }))
+
+  await waitFor(() => {
+    expect(global.fetch).toHaveBeenCalledWith('/api/notify', expect.objectContaining({
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: expect.stringContaining('"formType":"contact"'),
+    }))
+  })
 })

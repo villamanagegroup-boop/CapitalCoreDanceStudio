@@ -43,6 +43,19 @@ export default function Contact() {
       setStatus('error')
       setErrorMsg('Something went wrong. Please try again or email us directly at info@capitalcoredance.com.')
     } else {
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'contact',
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          phone: form.phone,
+          interest: form.interest,
+          message: form.message,
+        }),
+      }).catch(() => {})
       setStatus('success')
       setForm(INITIAL_FORM)
     }
