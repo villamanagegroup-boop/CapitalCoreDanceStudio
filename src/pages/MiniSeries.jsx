@@ -19,8 +19,6 @@ const SERIES = [
   { name: 'Jazz + Acro Arts', level: 'Beginner+', day: 'Monday', time: '5:30 PM – 6:15 PM', category: 'Jazz' },
   { name: 'Ballet + Jazz', level: 'Beginner+', day: 'Monday', time: '6:15 PM – 7:15 PM', category: 'Ballet' },
   { name: 'Lyrical + Acro Arts', level: 'Beginner+', day: 'Monday', time: '6:15 PM – 7:15 PM', category: 'Lyrical' },
-  { name: 'Irish Dance', level: 'Beginner – Novice', day: 'Tuesday', time: '5:30 PM – 6:15 PM', category: 'Irish Dance' },
-  { name: 'Ballet + Hip Hop', level: 'Beginner – Novice', day: 'Tuesday', time: '6:15 PM – 7:15 PM', category: 'Ballet' },
   { name: 'Tiny Ballet + Tap (Ages 2–5)', level: 'All Levels', day: 'Wednesday', time: '5:30 PM – 6:00 PM', category: 'Tiny' },
   { name: 'Ballet + Tap', level: 'Beginner – Novice', day: 'Thursday', time: '6:00 PM – 6:45 PM', category: 'Ballet' },
   { name: 'Pom Pom + Cheer Dance', level: 'Beginner+', day: 'Thursday', time: '6:45 PM – 7:30 PM', category: 'Cheer' },

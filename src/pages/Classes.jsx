@@ -24,13 +24,6 @@ const MINI_SERIES = [
     ],
   },
   {
-    day: 'Tuesday',
-    classes: [
-      { name: 'Irish Dance', time: '5:30 PM – 6:15 PM', level: 'Beg–Nov' },
-      { name: 'Ballet + Hip Hop', time: '6:15 PM – 7:15 PM', level: 'Beg–Nov' },
-    ],
-  },
-  {
     day: 'Wednesday',
     classes: [
       { name: 'Tiny Ballet + Tap', time: '5:30 PM – 6:00 PM', level: 'Ages 2–5' },
@@ -71,9 +64,9 @@ const SCHEDULE = [
   {
     day: 'Tuesday',
     classes: [
-      { name: 'Irish Dance', time: '5:30 PM – 6:15 PM', ages: 'Ages 4–17 · Beg–Novice', price: '$85/mo', ageGroups: ['kids', 'teen'], category: 'irish' },
-      { name: 'Ballet + Hip Hop', time: '6:15 PM – 7:15 PM', ages: 'Ages 4–17 · Beg–Novice', price: '$85/mo', ageGroups: ['kids', 'teen'], category: 'hiphop' },
-      { name: 'Irish Dance', time: '7:15 PM – 8:00 PM', ages: 'Ages 6–17 · Int–Adv', price: '$85/mo', ageGroups: ['teen'], category: 'irish' },
+      { name: 'Irish Dance', time: '5:30 PM – 6:15 PM', ages: 'Ages 4–17 · Beg–Novice', price: 'Enrollment Closed', ageGroups: ['kids', 'teen'], category: 'irish' },
+      { name: 'Ballet + Hip Hop', time: '6:15 PM – 7:15 PM', ages: 'Ages 4–17 · Beg–Novice', price: 'Enrollment Closed', ageGroups: ['kids', 'teen'], category: 'hiphop' },
+      { name: 'Irish Dance', time: '7:15 PM – 8:00 PM', ages: 'Ages 6–17 · Int–Adv', price: 'Enrollment Closed', ageGroups: ['teen'], category: 'irish' },
     ],
   },
   {
