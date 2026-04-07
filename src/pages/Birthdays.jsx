@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
@@ -26,7 +27,14 @@ const THEMES = [
   'Dance & Craft Party',
 ]
 
+const FLYERS = [
+  { src: '/birthday-flyer-overview.png', alt: 'Birthday Parties at Capital Core Dance Studio', filename: 'birthday-parties-flyer.png' },
+  { src: '/birthday-flyer-pricing.png', alt: 'Birthday Party Pricing at Capital Core Dance Studio', filename: 'birthday-party-pricing.png' },
+]
+
 export default function Birthdays() {
+  const [activeFlyer, setActiveFlyer] = useState(null)
+
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
@@ -40,6 +48,26 @@ export default function Birthdays() {
         title="Birthday Parties"
         subtitle="A fun, active, and stress-free way to celebrate your child's special day — hosted by our experienced staff in a private studio setting."
       />
+
+      {/* Hero Photos */}
+      <div className="grid grid-cols-2 w-full overflow-hidden" style={{ maxHeight: '210px' }}>
+        <div className="relative" style={{ maxHeight: '210px' }}>
+          <img
+            src="/birthday-hero.jpg"
+            alt="Birthday party balloons and gift"
+            className="w-full h-full object-cover object-center"
+            style={{ maxHeight: '210px' }}
+          />
+        </div>
+        <div className="relative" style={{ maxHeight: '210px' }}>
+          <img
+            src="/birthday-party-kids.jpg"
+            alt="Kids dancing at a birthday party"
+            className="w-full h-full object-cover object-center"
+            style={{ maxHeight: '210px' }}
+          />
+        </div>
+      </div>
 
       {/* Booking Banner */}
       <section className="px-6 py-4" style={{ backgroundColor: '#f4a8b4' }}>
@@ -61,9 +89,27 @@ export default function Birthdays() {
         <div className="max-w-3xl mx-auto">
 
           {/* Intro */}
-          <p className="text-[#3a4a6a] text-sm leading-relaxed mb-10">
+          <p className="text-[#3a4a6a] text-sm leading-relaxed mb-8">
             By popular demand, our birthday parties combine dancing, games, themed activities, and imagination-filled fun — all hosted by our experienced staff in a private studio setting.
           </p>
+
+          {/* Flyers side by side */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            {FLYERS.map((flyer) => (
+              <button
+                key={flyer.src}
+                onClick={() => setActiveFlyer(flyer)}
+                className="rounded-xl overflow-hidden shadow-lg border border-surface-border group relative text-left cursor-zoom-in"
+              >
+                <img src={flyer.src} alt={flyer.alt} className="w-full h-auto block" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-navy-dark text-xs font-bold px-3 py-1.5 rounded-full shadow">
+                    Click to expand
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
 
           {/* Three columns */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -156,6 +202,36 @@ export default function Birthdays() {
       </section>
 
       <Footer />
+
+      {/* Flyer lightbox */}
+      {activeFlyer && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 px-4 py-6"
+          onClick={() => setActiveFlyer(null)}
+        >
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={activeFlyer.src} alt={activeFlyer.alt} className="w-full h-auto block" />
+            <div className="flex items-center justify-between gap-3 px-5 py-4 border-t border-surface-border">
+              <a
+                href={activeFlyer.src}
+                download={activeFlyer.filename}
+                className="bg-brand-red text-white text-sm font-bold px-5 py-2 rounded-md hover:bg-red-700 transition-colors"
+              >
+                Download Flyer
+              </a>
+              <button
+                onClick={() => setActiveFlyer(null)}
+                className="text-[#8a9aaa] text-sm hover:text-navy-dark transition-colors"
+              >
+                Close ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

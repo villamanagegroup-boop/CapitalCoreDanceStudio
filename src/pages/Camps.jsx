@@ -84,6 +84,27 @@ export default function Camps() {
         subtitle="Eight themed weeks of dance, creativity, and fun — Monday through Friday, 9:30 AM to 3:30 PM. Ages 4–13."
       />
 
+      {/* Hero Photos */}
+      <div className="grid grid-cols-2 w-full overflow-hidden" style={{ maxHeight: '210px' }}>
+        <div className="relative" style={{ maxHeight: '210px' }}>
+          <img
+            src="/camp-hero-1.jpg"
+            alt="Happy kids and counselors at summer camp"
+            className="w-full h-full object-cover object-center"
+            style={{ maxHeight: '210px' }}
+          />
+        </div>
+        <div className="relative" style={{ maxHeight: '210px' }}>
+          <img
+            src="/camp-hero-2.jpg"
+            alt="Kids dancing in a dance studio"
+            className="w-full h-full object-cover"
+            style={{ maxHeight: '210px', objectPosition: 'center 25%' }}
+            style={{ maxHeight: '210px' }}
+          />
+        </div>
+      </div>
+
       {/* CertifiKid Banner */}
       <section className="px-6 py-4" style={{ backgroundColor: '#ecc9ff' }}>
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">

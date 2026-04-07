@@ -73,11 +73,13 @@ const SCHEDULE = [
     day: 'Wednesday',
     classes: [
       { name: 'Tiny Ballet + Tap', time: '5:30 PM – 6:00 PM', ages: 'Ages 2–5', price: '$65/mo', ageGroups: ['tiny'], category: 'tiny' },
+      { name: 'Daddy Daughter Dance', time: '6:00 PM', ages: 'All Ages', price: 'Free', ageGroups: ['tiny', 'kids', 'teen', 'adult'], category: 'special' },
     ],
   },
   {
     day: 'Thursday',
     classes: [
+      { name: 'Opening Routine Practice', time: '5:15 PM', ages: 'Ages 5+', price: 'Free', ageGroups: ['kids', 'teen', 'adult'], category: 'special' },
       { name: 'Ballet + Tap', time: '6:00 PM – 6:45 PM', ages: 'Ages 4–17 · Beg–Novice', price: '$85/mo', ageGroups: ['kids', 'teen'], category: 'ballet' },
       { name: 'Pom Pom + Cheer Dance', time: '6:45 PM – 7:30 PM', ages: 'Ages 4–17 · Beg–Adv', price: '$85/mo', ageGroups: ['kids', 'teen'], category: 'tumble-cheer' },
       { name: 'Tumble Techniques', time: '7:30 PM – 8:15 PM', ages: 'Ages 6–17 · Beg–Adv', price: '$85/mo', ageGroups: ['kids', 'teen'], category: 'tumble-cheer' },
@@ -169,6 +171,26 @@ export default function Classes() {
         title="Classes"
         subtitle="Year-round dance instruction for all ages and skill levels in a supportive, energetic environment."
       />
+
+      {/* Hero Photos */}
+      <div className="grid grid-cols-2 w-full overflow-hidden" style={{ maxHeight: '210px' }}>
+        <div className="relative" style={{ maxHeight: '210px' }}>
+          <img
+            src="/classes-hero-1.jpg"
+            alt="Girls in tutus dancing in class"
+            className="w-full h-full object-cover"
+            style={{ maxHeight: '210px', objectPosition: 'center 25%' }}
+          />
+        </div>
+        <div className="relative" style={{ maxHeight: '210px' }}>
+          <img
+            src="/classes-hero-2.jpg"
+            alt="Child dancers sitting in a circle in tutus"
+            className="w-full h-full object-cover"
+            style={{ maxHeight: '210px', objectPosition: 'center 25%' }}
+          />
+        </div>
+      </div>
 
       {/* Mini Series Banner */}
       <section className="px-6 py-4" style={{ backgroundColor: '#FFA76B' }}>

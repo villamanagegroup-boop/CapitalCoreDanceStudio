@@ -36,66 +36,54 @@ const JSON_LD = {
 const SECTION_CARDS = [
   {
     to: '/classes',
-    icon: '💃',
     title: 'Classes',
     subtitle: 'Year-round instruction',
-    gradient: 'from-[#0d1b36] to-[#1e3a6e]',
-    accentColor: 'text-[#7ab3e8]',
+    photo: '/card-classes.jpg',
     description:
       'Ballet, jazz, hip hop, and more for all ages and skill levels. Weekly sessions in a supportive, energetic environment.',
     linkLabel: 'View Classes',
   },
   {
     to: '/camps',
-    icon: '☀️',
     title: 'Camps',
     subtitle: 'Summer & holiday',
-    gradient: 'from-[#5a1020] to-[#8a1a30]',
-    accentColor: 'text-[#f4d0b8]',
+    photo: '/card-camps.jpg',
     description:
       'Immersive multi-day camps packed with dance, creativity, and fun. Perfect for school breaks and summer schedules.',
     linkLabel: 'View Camps',
   },
   {
     to: '/birthdays',
-    icon: '🎂',
     title: 'Birthdays',
     subtitle: 'Party packages',
-    gradient: 'from-[#1a1040] to-[#2a1a60]',
-    accentColor: 'text-[#f4a8b4]',
+    photo: '/card-birthdays.jpg',
     description:
       'Celebrate in style at the studio! Custom dance party packages for kids of all ages. Unforgettable memories guaranteed.',
     linkLabel: 'View Packages',
   },
   {
     to: '/mini-series',
-    icon: '✨',
     title: 'Mini Series',
     subtitle: 'Spring 2026',
-    gradient: 'from-[#7a3a10] to-[#c46a30]',
-    accentColor: 'text-[#ffd4a8]',
+    photo: '/card-mini-series.jpg',
     description:
       'Short-term class series combining two styles into one fun session. A low-commitment way to try something new this spring.',
     linkLabel: 'View Mini Series',
   },
   {
     to: '/recital',
-    icon: '🎭',
     title: 'Recital',
     subtitle: 'Annual showcase',
-    gradient: 'from-[#2a0a4a] to-[#4a1a7a]',
-    accentColor: 'text-[#d4b8f4]',
+    photo: '/card-recital.jpg',
     description:
       'Our annual recital is the highlight of the year — a chance for every dancer to shine on stage in front of family and friends.',
     linkLabel: 'View Recital Info',
   },
   {
     to: '/contact',
-    icon: '📬',
     title: 'Contact Us',
     subtitle: 'Get in touch',
-    gradient: 'from-[#0d3020] to-[#1a5a3a]',
-    accentColor: 'text-[#b8f0d4]',
+    photo: '/card-contact.png',
     description:
       "Questions? Ready to enroll? Reach out and we'll get back to you quickly. We'd love to have your dancer join our family.",
     linkLabel: 'Contact Us',
@@ -182,16 +170,23 @@ export default function Home() {
       {/* Section cards */}
       <section className="bg-surface-light px-6 pb-16 flex-1">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SECTION_CARDS.map(({ to, icon, title, subtitle, gradient, accentColor, description, linkLabel }) => (
+          {SECTION_CARDS.map(({ to, title, subtitle, photo, description, linkLabel }) => (
             <Link
               key={to}
               to={to}
               className="bg-white rounded-xl overflow-hidden border border-surface-border hover:shadow-lg transition-shadow group"
             >
-              <div className={`bg-gradient-to-br ${gradient} px-6 py-7 text-center`}>
-                <div className="text-4xl mb-2">{icon}</div>
-                <div className="text-white text-lg font-black tracking-wide">{title}</div>
-                <div className={`${accentColor} text-xs mt-1`}>{subtitle}</div>
+              <div className="relative h-44 overflow-hidden">
+                <img
+                  src={photo}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 px-5 pb-4 text-center">
+                  <div className="text-white text-lg font-black tracking-wide drop-shadow">{title}</div>
+                  <div className="text-white/80 text-xs mt-0.5 drop-shadow">{subtitle}</div>
+                </div>
               </div>
               <div className="p-5">
                 <p className="text-[#3a4a6a] text-sm leading-relaxed mb-3">{description}</p>

@@ -157,9 +157,9 @@ export default function Recital() {
             { label: 'Performers', value: 'All Enrolled Dancers', sub: 'Spring 2026 semester' },
           ].map(({ label, value, sub }) => (
             <div key={label}>
-              <p className="recital-cormorant text-[#c9a84c] text-xs tracking-[0.3em] uppercase mb-1">{label}</p>
-              <p className="recital-playfair text-white font-bold text-base">{value}</p>
-              <p className="recital-cormorant italic text-[#7a8aaa] text-xs mt-1">{sub}</p>
+              <p className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase mb-1">{label}</p>
+              <p className="text-white font-bold text-base">{value}</p>
+              <p className="text-[#7a8aaa] text-xs mt-1">{sub}</p>
             </div>
           ))}
         </div>
@@ -168,14 +168,14 @@ export default function Recital() {
       {/* Sign-up banner */}
       <section className="bg-[#0a1525] border-b border-[#1e2e4a] px-6 py-8">
         <div className="max-w-2xl mx-auto">
-          <p className="recital-cormorant text-[#c9a84c] text-xs tracking-[0.4em] uppercase text-center mb-5">Now Enrolling</p>
+          <p className="text-[#c9a84c] text-xs tracking-[0.4em] uppercase text-center mb-5">Now Enrolling</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
             {/* Daddy Daughter Dance */}
             <div className="bg-[#0f1c30] border border-[#2a3a5a] rounded-lg px-5 py-5">
-              <p className="recital-cormorant text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-1">Parent & Me</p>
-              <p className="recital-playfair text-white font-bold text-base mb-1">Daddy / Daughter Dance</p>
-              <p className="recital-cormorant italic text-[#7a8aaa] text-sm mb-3">Apr 8 – May 27, 2026 · Open to all ages · No cost to sign up</p>
+              <p className="text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-1">Parent & Me</p>
+              <p className="text-white font-bold text-base mb-1">Daddy / Daughter Dance</p>
+              <p className="text-[#7a8aaa] text-sm mb-3">Apr 8 – May 27, 2026 · Open to all ages · No cost to sign up</p>
               <a
                 href="https://portal.iclasspro.com/capitalcoredance/camps/6?sortBy=time"
                 target="_blank"
@@ -188,9 +188,9 @@ export default function Recital() {
 
             {/* Opening Routine */}
             <div className="bg-[#0f1c30] border border-[#2a3a5a] rounded-lg px-5 py-5">
-              <p className="recital-cormorant text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-1">All Dancers Welcome</p>
-              <p className="recital-playfair text-white font-bold text-base mb-1">Spring Recital Opening Routine</p>
-              <p className="recital-cormorant italic text-[#7a8aaa] text-sm mb-3">Apr 9 – May 28, 2026 · Open to all enrolled dancers · No cost to sign up</p>
+              <p className="text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-1">All Dancers Welcome</p>
+              <p className="text-white font-bold text-base mb-1">Spring Recital Opening Routine</p>
+              <p className="text-[#7a8aaa] text-sm mb-3">Apr 9 – May 28, 2026 · Open to all enrolled dancers · No cost to sign up</p>
               <a
                 href="https://portal.iclasspro.com/capitalcoredance/camps/6?sortBy=time"
                 target="_blank"
