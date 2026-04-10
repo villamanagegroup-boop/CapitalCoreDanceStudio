@@ -28,6 +28,21 @@ const SERIES = [
   { name: 'Hip Hop + Breakdancing', level: 'Beginner – Advanced', day: 'Friday', time: '6:15 PM – 7:00 PM', category: 'Hip Hop' },
 ]
 
+function getPrice(time) {
+  const match = time.match(/(\d+):(\d+) (AM|PM) – (\d+):(\d+) (AM|PM)/)
+  if (!match) return '$145'
+  const toMins = (h, m, period) => {
+    let hrs = parseInt(h)
+    if (period === 'PM' && hrs !== 12) hrs += 12
+    if (period === 'AM' && hrs === 12) hrs = 0
+    return hrs * 60 + parseInt(m)
+  }
+  const duration = toMins(match[4], match[5], match[6]) - toMins(match[1], match[2], match[3])
+  if (duration <= 30) return '$145'
+  if (duration <= 45) return '$155'
+  return '$165'
+}
+
 const DAYS = ['All Days', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 const CATEGORIES = ['All Styles', 'Ballet', 'Hip Hop', 'Irish Dance', 'Jazz', 'Lyrical', 'Musical Theatre', 'Cheer', 'Tiny', 'Tumble']
 
@@ -71,7 +86,7 @@ export default function MiniSeries() {
       />
 
       {/* Filter bar */}
-      <div className="bg-surface-light border-b border-surface-border px-6 py-4 sticky top-16 z-40">
+      <div className="border-b border-surface-border px-6 py-4 sticky top-16 z-40" style={{ background: 'linear-gradient(to right, #d4f5e2, #d0eef9)' }}>
         <div className="max-w-3xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FilterSelect label="Day" options={DAYS} value={selectedDay} onChange={setSelectedDay} />
@@ -100,7 +115,7 @@ export default function MiniSeries() {
                 <div key={day}>
                   <h3 className="text-navy-dark font-black text-sm uppercase tracking-widest mb-3 border-b border-surface-border pb-2">{day}</h3>
                   <div className="flex flex-col gap-3">
-                    {filtered.filter(s => s.day === day).map(({ name, level, time }, i) => (
+                    {filtered.filter(s => s.day === day).map(({ name, level, time, day: d }, i) => (
                       <div
                         key={`${name}-${day}`}
                         className={`border border-surface-border border-l-4 ${ACCENT_COLORS[i % ACCENT_COLORS.length]} rounded-lg px-5 py-4 flex items-center justify-between gap-4`}
@@ -111,7 +126,7 @@ export default function MiniSeries() {
                         </div>
                         <div className="text-right flex-shrink-0">
                           <div className="text-[#7ab3e8] text-sm font-medium">{time}</div>
-                          <div className="text-brand-red text-xs font-bold mt-0.5">$145</div>
+                          <div className="text-brand-red text-xs font-bold mt-0.5">{getPrice(time)}</div>
                         </div>
                       </div>
                     ))}

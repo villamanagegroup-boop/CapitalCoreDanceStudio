@@ -138,6 +138,7 @@ export default function BirthdayForm() {
     }])
 
     if (error) {
+      console.error('Supabase insert error:', JSON.stringify(error, null, 2))
       setStatus('error')
       setErrorMsg('Something went wrong. Please try again or email us at info@capitalcoredance.com.')
     } else {

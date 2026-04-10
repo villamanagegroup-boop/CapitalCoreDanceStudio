@@ -156,6 +156,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Flyers */}
+      <section className="py-10 px-6" style={{ backgroundColor: '#ede0fa' }}>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <Link to="/mini-series">
+            <img src="/flyer-mini-series.png" alt="Mini Series – Register Now" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+          </Link>
+          <Link to="/birthdays">
+            <img src="/flyer-birthday-parties.png" alt="Birthday Parties – Starts at $199" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+          </Link>
+          <Link to="/camps">
+            <img src="/flyer-summer-camps.png" alt="Summer Camps – Early Pricing $165" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+          </Link>
+        </div>
+      </section>
+
       {/* Section intro */}
       <section className="bg-white py-12 px-6 text-center">
         <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">
