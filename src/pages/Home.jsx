@@ -138,21 +138,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* First class free banner */}
-      <section className="px-6 py-4" style={{ backgroundColor: '#daf0f7' }}>
+      {/* Recital shirt banner */}
+      <section className="px-6 py-4 bg-[#0B1F3A]">
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-center sm:text-left">
-            <p className="text-navy-dark font-black text-lg leading-snug">Your first class is always FREE.</p>
-            <p className="text-[#3a6a8a] text-sm mt-0.5">Come try us out — no commitment needed.</p>
+            <p className="text-[#C9A84C] font-black text-lg leading-snug">🎬 Official Recital Shirt Now Available</p>
+            <p className="text-white/70 text-sm mt-0.5">A Night at the Cinema — Youth $20 · Adult $25. Made to order.</p>
           </div>
-          <a
-            href="https://portal.iclasspro.com/capitalcoredance/dashboard"
-            target="_blank"
-            rel="noreferrer"
-            className="flex-shrink-0 bg-navy-dark text-white text-sm font-bold px-6 py-2 rounded-md hover:bg-navy-mid transition-colors whitespace-nowrap"
+          <Link
+            to="/recital/shirts"
+            className="flex-shrink-0 bg-[#C9A84C] text-[#0B1F3A] text-sm font-bold px-6 py-2 rounded-md hover:bg-[#d4b85a] transition-colors whitespace-nowrap"
           >
-            Register for a Trial →
-          </a>
+            Order Now →
+          </Link>
         </div>
       </section>
 
@@ -168,6 +166,24 @@ export default function Home() {
           <Link to="/camps">
             <img src="/flyer-summer-camps.png" alt="Summer Camps – Early Pricing $165" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
+        </div>
+      </section>
+
+      {/* First class free banner */}
+      <section className="px-6 py-4" style={{ backgroundColor: '#daf0f7' }}>
+        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-center sm:text-left">
+            <p className="text-navy-dark font-black text-lg leading-snug">Your first class is always FREE.</p>
+            <p className="text-[#3a6a8a] text-sm mt-0.5">Come try us out — no commitment needed.</p>
+          </div>
+          <a
+            href="https://portal.iclasspro.com/capitalcoredance/dashboard"
+            target="_blank"
+            rel="noreferrer"
+            className="flex-shrink-0 bg-navy-dark text-white text-sm font-bold px-6 py-2 rounded-md hover:bg-navy-mid transition-colors whitespace-nowrap"
+          >
+            Register for a Trial →
+          </a>
         </div>
       </section>
 

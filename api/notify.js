@@ -23,6 +23,17 @@ function buildContactEmail({ firstName, lastName, email, phone, interest, messag
   `
 }
 
+function buildRecitalOrderEmail(data) {
+  return `
+    <h2>New Recital T-Shirt Order</h2>
+    <p><strong>Contact Name:</strong> ${escapeHtml(data.name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+    <p><strong>Items Ordered:</strong> ${escapeHtml(data.lineItems)}</p>
+    <p><strong>Total Paid:</strong> $${escapeHtml(String(data.total))}</p>
+    <p><strong>PayPal Order ID:</strong> ${escapeHtml(data.paypalOrderId)}</p>
+  `
+}
+
 function buildBirthdayEmail(data) {
   return `
     <h2>New Birthday Party Booking Request</h2>
@@ -63,6 +74,9 @@ export default async function handler(req, res) {
   } else if (formType === 'birthday') {
     subject = 'New Birthday Party Booking Request'
     html = buildBirthdayEmail(data)
+  } else if (formType === 'recital_order') {
+    subject = 'New Recital T-Shirt Order'
+    html = buildRecitalOrderEmail(data)
   } else {
     return res.status(400).json({ error: 'Unknown formType' })
   }

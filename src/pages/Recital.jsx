@@ -135,6 +135,12 @@ export default function Recital() {
               🎟 Ticket Sales Coming Soon
             </span>
             <Link
+              to="/recital/shirts"
+              className="recital-cormorant bg-[#c9a84c] text-[#0d1b36] font-bold inline-block px-8 py-3 rounded text-sm tracking-widest uppercase hover:bg-[#e8c84a] transition-colors"
+            >
+              👕 Order Recital Shirts
+            </Link>
+            <Link
               to="/contact"
               className="recital-cormorant italic text-[#8a9aaa] text-sm hover:text-[#b8d4f0] transition-colors underline underline-offset-4"
             >

@@ -12,6 +12,8 @@ import BirthdayPayment from './pages/BirthdayPayment'
 import BirthdayThankYou from './pages/BirthdayThankYou'
 import Contact from './pages/Contact'
 import Recital from './pages/Recital'
+import RecitalShirts from './pages/RecitalShirts'
+import RecitalShirtThankYou from './pages/RecitalShirtThankYou'
 import FAQ from './pages/FAQ'
 
 function ScrollToTop() {
@@ -37,6 +39,8 @@ export default function App() {
         <Route path="/birthday-thankyou" element={<BirthdayThankYou />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/recital" element={<Recital />} />
+        <Route path="/recital/shirts" element={<RecitalShirts />} />
+        <Route path="/recital/shirts/thankyou" element={<RecitalShirtThankYou />} />
         <Route path="/faq" element={<FAQ />} />
       </Routes>
     </BrowserRouter>
