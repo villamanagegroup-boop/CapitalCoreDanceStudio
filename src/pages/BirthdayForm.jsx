@@ -168,7 +168,14 @@ export default function BirthdayForm() {
           notes: form.notes,
         }),
       }).catch(() => {})
-      navigate('/birthday-payment')
+      navigate('/birthday-payment', {
+        state: {
+          parentName: form.parentName,
+          email: form.email,
+          birthdayName: form.birthdayName,
+          dateFirst: form.dateFirst,
+        },
+      })
     }
   }
 

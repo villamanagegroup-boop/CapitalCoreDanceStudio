@@ -5,10 +5,10 @@ import SEO from '../components/SEO'
 
 export default function Recital() {
   return (
-    <div className="min-h-screen flex flex-col bg-navy-dark">
+    <div className="min-h-screen flex flex-col bg-[#0B1F3A]">
       <SEO
         title="Annual Recital 2026 – A Night at the Cinema | Capital Core Dance Studio"
-        description="Capital Core Dance Studio presents 'A Night at the Cinema' — our annual spring recital June 12–14, 2026. All enrolled dancers perform. Ticket info coming soon."
+        description="Capital Core Dance Studio presents 'A Night at the Cinema' — dress rehearsal June 12 &amp; recital June 13, 2026 at Richmond Christian School. All enrolled dancers perform."
         canonical="/recital"
       />
       <style>{`
@@ -31,37 +31,23 @@ export default function Recital() {
         }
 
         .curtain-accent-left {
-          position: absolute;
-          top: 0; left: 0;
-          width: 22%;
-          height: 100%;
-          background: linear-gradient(to right, rgba(130,10,10,0.75) 0%, rgba(110,10,10,0.45) 50%, transparent 100%);
+          position: absolute; top: 0; left: 0;
+          width: 18%; height: 100%;
+          background: linear-gradient(to right, rgba(130,10,10,0.8) 0%, rgba(110,10,10,0.4) 55%, transparent 100%);
           pointer-events: none;
         }
         .curtain-accent-right {
-          position: absolute;
-          top: 0; right: 0;
-          width: 22%;
-          height: 100%;
-          background: linear-gradient(to left, rgba(130,10,10,0.75) 0%, rgba(110,10,10,0.45) 50%, transparent 100%);
+          position: absolute; top: 0; right: 0;
+          width: 18%; height: 100%;
+          background: linear-gradient(to left, rgba(130,10,10,0.8) 0%, rgba(110,10,10,0.4) 55%, transparent 100%);
           pointer-events: none;
         }
-
         .spotlight-glow {
-          position: absolute;
-          top: 0; left: 50%;
+          position: absolute; top: 0; left: 50%;
           transform: translateX(-50%);
-          width: 60%;
-          height: 100%;
-          background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 65%);
+          width: 60%; height: 100%;
+          background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 65%);
           pointer-events: none;
-        }
-
-        .ticket-btn-disabled {
-          background: #12203a;
-          border: 1px solid rgba(201,168,76,0.3);
-          color: #9a8a6a;
-          cursor: default;
         }
 
         @keyframes fadeUp {
@@ -76,154 +62,132 @@ export default function Recital() {
 
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden flex flex-col items-center justify-center text-center px-6 py-20" style={{ background: 'linear-gradient(180deg, #0d1b36 0%, #0f1c2e 60%, #0d1828 100%)', minHeight: '88vh' }}>
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden flex flex-col items-center justify-center text-center px-6 py-16"
+        style={{ background: 'linear-gradient(180deg, #0d1b36 0%, #0f1c2e 60%, #0d1828 100%)', minHeight: '70vh' }}
+      >
         <div className="curtain-accent-left" />
         <div className="curtain-accent-right" />
         <div className="spotlight-glow" />
 
         <div className="relative z-10 max-w-xl mx-auto w-full">
-
-          {/* Studio presents */}
-          <p className="fu1 recital-cormorant text-[#c9a84c] text-xs tracking-[0.45em] uppercase mb-8">
+          <p className="fu1 recital-cormorant text-[#c9a84c] text-xs tracking-[0.45em] uppercase mb-6">
             Capital Core Dance Studio Presents
           </p>
 
           {/* Title card */}
-          <div className="fu2 title-card rounded px-8 py-10 mb-10">
-            {/* Visually hidden full title for screen readers / SEO */}
+          <div className="fu2 title-card rounded px-8 py-8 mb-8">
             <h1 className="sr-only">A Night at the Cinema — Capital Core Dance Studio Annual Recital 2026</h1>
-
-            {/* "A" — large and prominent, decorative (aria-hidden) */}
             <p aria-hidden="true" className="recital-playfair italic font-black gold-gradient mb-1" style={{ fontSize: 'clamp(2rem, 5vw, 2.8rem)', lineHeight: 1 }}>A</p>
-
-            {/* "Night" — decorative display */}
-            <p aria-hidden="true" className="gold-gradient recital-playfair italic font-black" style={{ fontSize: 'clamp(3.2rem, 10vw, 6rem)', lineHeight: 1.05, paddingBottom: '0.1em', marginBottom: '0.15em' }}>
-              Night
-            </p>
-
-            {/* "at the" — clear gap from Night */}
-            <p className="recital-cormorant text-[#c8b890] tracking-[0.5em] uppercase text-sm font-semibold mb-3">
-              at the
-            </p>
-
-            <p aria-hidden="true" className="gold-gradient recital-playfair italic font-black leading-none" style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)' }}>
-              Cinema
-            </p>
-
-            <div className="w-12 h-px bg-[#c9a84c] opacity-40 mx-auto my-5" />
-
+            <p aria-hidden="true" className="gold-gradient recital-playfair italic font-black" style={{ fontSize: 'clamp(3.2rem, 10vw, 6rem)', lineHeight: 1.05, paddingBottom: '0.1em', marginBottom: '0.15em' }}>Night</p>
+            <p className="recital-cormorant text-[#c8b890] tracking-[0.5em] uppercase text-sm font-semibold mb-3">at the</p>
+            <p aria-hidden="true" className="gold-gradient recital-playfair italic font-black leading-none" style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)' }}>Cinema</p>
+            <div className="w-12 h-px bg-[#c9a84c] opacity-40 mx-auto my-4" />
             <p className="recital-cormorant italic text-[#a09070] text-sm tracking-wide">
               A Celebration of Cinematic Movies, Music &amp; Dance
             </p>
           </div>
 
           {/* Date */}
-          <div className="fu3 mb-10">
-            <p className="recital-cormorant text-[#7a8aaa] text-xs tracking-[0.4em] uppercase mb-2">Weekend of</p>
-            <p className="recital-playfair text-white font-bold" style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)' }}>
-              June 12 – 14, 2026
+          <div className="fu3">
+            <p className="recital-playfair text-white font-bold" style={{ fontSize: 'clamp(1.5rem, 4vw, 2rem)' }}>
+              June 12 – 13, 2026
             </p>
-            <p className="recital-cormorant italic text-[#7a8aaa] text-sm mt-2">
+            <p className="recital-cormorant italic text-[#8a9aaa] text-sm mt-1">
               All enrolled dancers will take part in the performance
             </p>
           </div>
-
-          {/* Ticket button */}
-          <div className="fu4 flex flex-col items-center gap-4">
-            <span className="ticket-btn-disabled recital-cormorant inline-block px-8 py-3 rounded text-sm tracking-widest uppercase select-none">
-              🎟 Ticket Sales Coming Soon
-            </span>
-            <Link
-              to="/recital/shirts"
-              className="recital-cormorant bg-[#c9a84c] text-[#0d1b36] font-bold inline-block px-8 py-3 rounded text-sm tracking-widest uppercase hover:bg-[#e8c84a] transition-colors"
-            >
-              👕 Order Recital Shirts
-            </Link>
-            <Link
-              to="/contact"
-              className="recital-cormorant italic text-[#8a9aaa] text-sm hover:text-[#b8d4f0] transition-colors underline underline-offset-4"
-            >
-              Questions? Contact Us
-            </Link>
-          </div>
-
         </div>
 
-        {/* Red carpet bar at bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-1" style={{ background: 'linear-gradient(to right, transparent, #8b1a1a 20%, #c0392b 50%, #8b1a1a 80%, transparent)' }} />
       </section>
 
-      {/* Info strip */}
-      <section className="bg-[#0f1c30] border-t border-b border-[#1e2e4a] px-6 py-8">
-        <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-          {[
-            { label: 'Location', value: 'To Be Announced', sub: 'Details coming soon' },
-            { label: 'Dates', value: 'June 12–14, 2026', sub: 'Weekend performances' },
-            { label: 'Performers', value: 'All Enrolled Dancers', sub: 'Spring 2026 semester' },
-          ].map(({ label, value, sub }) => (
-            <div key={label}>
-              <p className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase mb-1">{label}</p>
-              <p className="text-white font-bold text-base">{value}</p>
-              <p className="text-[#7a8aaa] text-xs mt-1">{sub}</p>
+      {/* ── SHOW DETAILS (text only, no cards) ──────────────── */}
+      <section className="bg-[#080f1c] px-6 py-14">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="recital-cormorant text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-6">Show Details</p>
+
+          <div className="grid sm:grid-cols-2 gap-8 mb-8">
+            <div>
+              <p className="recital-cormorant text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-2">Dress Rehearsal</p>
+              <p className="recital-playfair text-white font-bold text-lg leading-tight">Friday, June 12</p>
+              <p className="text-white/60 text-sm">6:00 PM</p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Sign-up banner */}
-      <section className="bg-[#0a1525] border-b border-[#1e2e4a] px-6 py-8">
-        <div className="max-w-2xl mx-auto">
-          <p className="text-[#c9a84c] text-xs tracking-[0.4em] uppercase text-center mb-5">Now Enrolling</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-            {/* Daddy Daughter Dance */}
-            <div className="bg-[#0f1c30] border border-[#2a3a5a] rounded-lg px-5 py-5">
-              <p className="text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-1">Parent & Me</p>
-              <p className="text-white font-bold text-base mb-1">Daddy / Daughter Dance</p>
-              <p className="text-[#7a8aaa] text-sm mb-3">Apr 8 – May 27, 2026 · Open to all ages · No cost to sign up</p>
-              <a
-                href="https://portal.iclasspro.com/capitalcoredance/camps/6?sortBy=time"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block bg-[#c9a84c] text-[#0d1b36] text-xs font-bold px-4 py-2 rounded hover:bg-[#e8c84a] transition-colors tracking-wide"
-              >
-                Sign Up Now →
-              </a>
+            <div>
+              <p className="recital-cormorant text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-2">Recital</p>
+              <p className="recital-playfair text-white font-bold text-lg leading-tight">Saturday, June 13</p>
+              <p className="text-white/60 text-sm">2:00 PM</p>
             </div>
+          </div>
 
-            {/* Opening Routine */}
-            <div className="bg-[#0f1c30] border border-[#2a3a5a] rounded-lg px-5 py-5">
-              <p className="text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-1">All Dancers Welcome</p>
-              <p className="text-white font-bold text-base mb-1">Spring Recital Opening Routine</p>
-              <p className="text-[#7a8aaa] text-sm mb-3">Apr 9 – May 28, 2026 · Open to all enrolled dancers · No cost to sign up</p>
-              <a
-                href="https://portal.iclasspro.com/capitalcoredance/camps/6?sortBy=time"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block bg-[#c9a84c] text-[#0d1b36] text-xs font-bold px-4 py-2 rounded hover:bg-[#e8c84a] transition-colors tracking-wide"
-              >
-                Sign Up Now →
-              </a>
-            </div>
-
+          <div className="pt-6 border-t border-white/10">
+            <p className="recital-cormorant text-[#c9a84c] text-[10px] tracking-[0.3em] uppercase mb-2">Venue</p>
+            <p className="recital-playfair text-white font-bold text-base">Richmond Christian School</p>
+            <p className="text-white/55 text-sm">6511 Belmont Rd, Chesterfield, VA 23832</p>
           </div>
         </div>
       </section>
 
-      {/* Coming soon details */}
-      <section className="bg-navy-dark flex-1 px-6 py-16 text-center">
+      {/* ── PURCHASE CTA ─────────────────────────────────────── */}
+      <section className="bg-white px-6 py-16 text-center">
+        <div className="max-w-xl mx-auto">
+          <p className="recital-cormorant text-[#c9a84c] text-xs font-black tracking-[0.35em] uppercase mb-3">Recital Shop</p>
+          <h2 className="recital-playfair text-[#0B1F3A] text-2xl md:text-3xl font-black leading-tight mb-3">
+            Purchase your ticket, shirt, and program booklet here
+          </h2>
+          <p className="text-gray-500 text-sm mb-8 max-w-md mx-auto">
+            Adult tickets are $25 — children 3 &amp; under are free. Show programs and "A Night at the Cinema" shirts are pre-order.
+          </p>
+          <Link
+            to="/recitalshop"
+            className="recital-cormorant inline-block bg-[#c9a84c] text-[#0B1F3A] font-black px-8 py-3.5 rounded-lg text-sm tracking-widest uppercase hover:bg-[#e8c84a] transition-colors shadow-lg shadow-[#c9a84c]/20"
+          >
+            Visit the Recital Shop →
+          </Link>
+        </div>
+      </section>
+
+      {/* ── SUPPORT THE SHOW ─────────────────────────────────── */}
+      <section className="bg-[#fdf8f0] border-t border-[#C9A84C]/20 px-6 py-14 text-center">
+        <div className="max-w-xl mx-auto">
+          <p className="recital-cormorant text-[#C9A84C] text-xs font-black tracking-[0.35em] uppercase mb-3">Support the Show</p>
+          <h2 className="recital-playfair text-[#0B1F3A] text-2xl font-black mb-3">Volunteer or Reserve a Booklet Ad</h2>
+          <p className="text-gray-500 text-sm mb-8 max-w-md mx-auto">
+            Volunteers receive 20% off up to 6 adult tickets. Booklet ads are a great way to promote your business or send a personal message to your dancer.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfgwuYcj4eoHVu3PBFjyHb2itTamObqNI5f-IRha1dEPAbYgA/viewform?usp=header"
+              target="_blank"
+              rel="noreferrer"
+              className="recital-cormorant inline-block bg-[#0B1F3A] text-white font-black px-6 py-3 rounded-lg text-xs tracking-widest uppercase hover:bg-[#1a3055] transition-colors"
+            >
+              Sign Up to Volunteer
+            </a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfLPGV4kVW7_YGRp0iW8tYYSKAkMnZUIOFAj1xfhvvrWw5K4Q/viewform?usp=header"
+              target="_blank"
+              rel="noreferrer"
+              className="recital-cormorant inline-block border-2 border-[#0B1F3A] text-[#0B1F3A] font-black px-6 py-3 rounded-lg text-xs tracking-widest uppercase hover:bg-[#0B1F3A] hover:text-white transition-colors"
+            >
+              Reserve a Booklet Ad
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── STAY TUNED (compact footer note) ─────────────────── */}
+      <section className="bg-[#080f1c] px-6 py-12 text-center flex-1">
         <div className="max-w-md mx-auto">
-          <p className="recital-cormorant text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-3">More Details</p>
-          <h2 className="recital-playfair text-white font-bold italic text-2xl mb-4">Coming Soon</h2>
-          <p className="recital-cormorant text-[#8a9aaa] text-base leading-relaxed italic mb-8">
-            Showtime schedule, costume information, and ticket purchase links will be posted here as the date approaches. Stay tuned!
+          <p className="recital-cormorant italic text-white/45 text-sm leading-relaxed mb-4">
+            Costume information and additional show details will appear here as the date approaches.
           </p>
           <Link
             to="/contact"
-            className="inline-block bg-brand-red text-white text-sm font-bold px-8 py-3 rounded-md hover:bg-red-700 transition-colors"
+            className="recital-cormorant text-[#c9a84c]/70 text-xs tracking-widest uppercase font-bold hover:text-[#c9a84c] transition-colors"
           >
-            Contact Us
+            Questions? Contact Us →
           </Link>
         </div>
       </section>

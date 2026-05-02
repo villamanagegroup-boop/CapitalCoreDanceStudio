@@ -137,6 +137,22 @@ export default function Camps() {
               <span><span className="font-bold">Current dancers</span> (Fall 2025 / Spring 2026): <span className="text-brand-red font-bold">$205 / week</span></span>
               <span><span className="font-bold">Non-studio campers:</span> <span className="font-bold">$225 / week</span></span>
             </div>
+            <div className="mt-2 pt-2 border-t border-[#c8ddf4] text-xs leading-relaxed">
+              <span className="font-bold text-navy-dark">Single days and half-days available</span> — see pricing in the{' '}
+              <a
+                href="https://portal.iclasspro.com/capitalcoredance/camps/1?sortBy=time"
+                target="_blank"
+                rel="noreferrer"
+                className="text-brand-red font-semibold underline hover:text-red-700"
+              >
+                studio portal
+              </a>{' '}
+              or call{' '}
+              <a href="tel:8042344014" className="text-brand-red font-semibold underline hover:text-red-700">
+                (804) 234-4014
+              </a>{' '}
+              for custom pricing.
+            </div>
           </div>
 
           <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">

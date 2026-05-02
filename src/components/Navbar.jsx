@@ -3,14 +3,12 @@ import { Link, useLocation } from 'react-router-dom'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/about', label: 'About Us' },
   { to: '/classes', label: 'Our Classes' },
   { to: '/camps', label: 'Summer Camps' },
   { to: '/tuition', label: 'Tuition' },
   { to: '/mini-series', label: 'Mini Series' },
   { to: '/birthdays', label: 'Birthdays' },
   { to: '/recital', label: 'Recital' },
-  { to: '/faq', label: 'FAQ' },
 ]
 
 export default function Navbar() {
@@ -25,9 +23,20 @@ export default function Navbar() {
 
   return (
     <nav className="bg-navy-dark sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <style>{`
+        @keyframes nav-shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .nav-recital-btn {
+          background: linear-gradient(135deg, #C9A84C 0%, #f4d97a 45%, #ffe89c 50%, #f4d97a 55%, #C9A84C 100%);
+          background-size: 250% 250%;
+          animation: nav-shimmer 4s ease-in-out infinite;
+        }
+      `}</style>
+      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 flex-shrink-0">
           <img src="/logo.png" alt="Capital Core Dance Studio" className="h-10 w-10 object-contain flex-shrink-0" />
           <div>
             <div className="text-white font-black text-sm tracking-widest">CAPITAL CORE</div>
@@ -36,12 +45,25 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6 lg:gap-7">
           {NAV_LINKS.map(({ to, label }) => (
             <Link key={to} to={to} className={`text-sm font-medium transition-colors ${linkClass(to)}`}>
               {label}
             </Link>
           ))}
+
+          {/* Fancy Recital Shop button */}
+          <Link
+            to="/recitalshop"
+            className="relative nav-recital-btn text-[#0B1F3A] text-xs font-black px-4 py-2 rounded-md tracking-widest uppercase shadow-lg shadow-[#C9A84C]/30 hover:shadow-xl hover:shadow-[#C9A84C]/60 hover:scale-105 transition-all whitespace-nowrap"
+          >
+            <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f4a8b4] opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#f4a8b4] border border-white/40" />
+            </span>
+            Recital Shop
+          </Link>
+
           <Link
             to="/contact"
             className="bg-brand-red text-white text-sm font-bold px-5 py-2 rounded-md hover:bg-red-700 transition-colors"
@@ -62,7 +84,7 @@ export default function Navbar() {
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-navy-dark border-t border-navy-mid px-6 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-navy-dark border-t border-navy-mid px-6 py-4 flex flex-col gap-3">
           {NAV_LINKS.map(({ to, label }) => (
             <Link
               key={to}
@@ -73,6 +95,17 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+          <Link
+            to="/recitalshop"
+            onClick={() => setMenuOpen(false)}
+            className="relative nav-recital-btn text-[#0B1F3A] text-xs font-black px-5 py-3 rounded-md text-center tracking-widest uppercase shadow-lg shadow-[#C9A84C]/30 mt-1"
+          >
+            <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f4a8b4] opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#f4a8b4] border border-white/40" />
+            </span>
+            Recital Shop
+          </Link>
           <Link
             to="/contact"
             onClick={() => setMenuOpen(false)}

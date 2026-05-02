@@ -14,7 +14,11 @@ import Contact from './pages/Contact'
 import Recital from './pages/Recital'
 import RecitalShirts from './pages/RecitalShirts'
 import RecitalShirtThankYou from './pages/RecitalShirtThankYou'
+import RecitalShop from './pages/RecitalShop'
+import RecitalShopThankYou from './pages/RecitalShopThankYou'
 import FAQ from './pages/FAQ'
+import Privacy from './pages/Privacy'
+import Terms from './pages/Terms'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -41,7 +45,11 @@ export default function App() {
         <Route path="/recital" element={<Recital />} />
         <Route path="/recital/shirts" element={<RecitalShirts />} />
         <Route path="/recital/shirts/thankyou" element={<RecitalShirtThankYou />} />
+        <Route path="/recitalshop" element={<RecitalShop />} />
+        <Route path="/recitalshop/thankyou" element={<RecitalShopThankYou />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </BrowserRouter>
   )

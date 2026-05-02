@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { to: '/mini-series', label: 'Mini Series' },
   { to: '/birthdays', label: 'Birthdays' },
   { to: '/recital', label: 'Recital' },
+  { to: '/recitalshop', label: 'Recital Shop' },
   { to: '/faq', label: 'FAQ' },
   { to: '/contact', label: 'Contact Us' },
 ]
@@ -118,7 +119,9 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#5a7aaa] text-xs">© 2026 Capital Core Dance Studio. All rights reserved.</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+            <Link to="/privacy" className="text-[#5a7aaa] text-xs hover:text-white transition-colors">Privacy</Link>
+            <Link to="/terms" className="text-[#5a7aaa] text-xs hover:text-white transition-colors">Terms</Link>
             <a href="https://www.instagram.com/capitalcoredance" target="_blank" rel="noreferrer" className="text-[#5a7aaa] text-xs hover:text-[#f4a8b4] transition-colors">Instagram</a>
             <a href="https://www.facebook.com/p/Capital-Core-Dance-Challenge-61566002721661/" target="_blank" rel="noreferrer" className="text-[#5a7aaa] text-xs hover:text-[#7ab3e8] transition-colors">Facebook</a>
             <p className="text-[#3a4a6a] text-xs">Managed by Hicks Virtual Solutions LLC</p>

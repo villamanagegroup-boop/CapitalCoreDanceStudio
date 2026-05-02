@@ -138,20 +138,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Recital shirt banner */}
-      <section className="px-6 py-4 bg-[#0B1F3A]">
-        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      {/* Recital shop banner — cinema marquee */}
+      <section className="relative px-6 py-7 bg-gradient-to-r from-[#080f1c] via-[#0d1a3a] to-[#080f1c] overflow-hidden">
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&display=swap');
+          .marquee-playfair { font-family: 'Playfair Display', Georgia, serif; }
+          @keyframes marquee-shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+          }
+          .marquee-btn {
+            background: linear-gradient(135deg, #C9A84C 0%, #f4d97a 45%, #ffe89c 50%, #f4d97a 55%, #C9A84C 100%);
+            background-size: 250% 250%;
+            animation: marquee-shimmer 4s ease-in-out infinite;
+          }
+          @keyframes bulb-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.25; }
+          }
+          .marquee-bulb { animation: bulb-blink 2s ease-in-out infinite; }
+          .marquee-curtain-left {
+            position: absolute; top: 0; left: 0; bottom: 0; width: 12%;
+            background: linear-gradient(to right, rgba(130,10,10,0.5) 0%, rgba(110,10,10,0.2) 50%, transparent 100%);
+            pointer-events: none;
+          }
+          .marquee-curtain-right {
+            position: absolute; top: 0; right: 0; bottom: 0; width: 12%;
+            background: linear-gradient(to left, rgba(130,10,10,0.5) 0%, rgba(110,10,10,0.2) 50%, transparent 100%);
+            pointer-events: none;
+          }
+        `}</style>
+
+        {/* Curtains */}
+        <div className="marquee-curtain-left" />
+        <div className="marquee-curtain-right" />
+
+        {/* Top gold strip */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
+        {/* Marquee bulbs along top */}
+        <div className="absolute top-2 left-0 right-0 flex justify-center gap-2.5 pointer-events-none">
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+            <span
+              key={i}
+              className="w-1 h-1 rounded-full bg-[#C9A84C] marquee-bulb"
+              style={{ animationDelay: `${i * 0.15}s`, boxShadow: '0 0 6px rgba(201,168,76,0.8)' }}
+            />
+          ))}
+        </div>
+
+        {/* Spotlights */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-1/4 w-48 h-48 bg-[#C9A84C]/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 -translate-y-1/2 right-1/4 w-48 h-48 bg-[#f4a8b4]/8 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 pt-3">
           <div className="text-center sm:text-left">
-            <p className="text-[#C9A84C] font-black text-lg leading-snug">🎬 Official Recital Shirt Now Available</p>
-            <p className="text-white/70 text-sm mt-0.5">A Night at the Cinema — Youth $20 · Adult $25. Made to order.</p>
+            <p className="text-[#C9A84C] text-[10px] font-black tracking-[0.5em] uppercase mb-1">Now Showing</p>
+            <p className="marquee-playfair italic text-white text-2xl md:text-3xl font-black leading-tight">
+              A Night at the Cinema
+            </p>
+            <p className="text-white/55 text-xs mt-1.5 tracking-wide">
+              Annual Recital · Tickets, Programs &amp; T-Shirts
+            </p>
           </div>
           <Link
-            to="/recital/shirts"
-            className="flex-shrink-0 bg-[#C9A84C] text-[#0B1F3A] text-sm font-bold px-6 py-2 rounded-md hover:bg-[#d4b85a] transition-colors whitespace-nowrap"
+            to="/recitalshop"
+            className="relative flex-shrink-0 marquee-btn text-[#0B1F3A] text-sm font-black px-7 py-3 rounded-lg shadow-2xl shadow-[#C9A84C]/30 hover:scale-105 transition-transform tracking-widest uppercase whitespace-nowrap"
           >
-            Order Now →
+            Enter Shop →
           </Link>
         </div>
+
+        {/* Bottom gold strip */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
       </section>
 
       {/* Flyers */}
