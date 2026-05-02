@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const SECTIONS = [
   {
@@ -99,6 +100,7 @@ export default function Terms() {
         title="Terms of Service | Capital Core Dance Studio"
         description="Terms of Service for Capital Core Dance Studio in Midlothian, VA — enrollment, payments, refunds, liability, and policies."
         canonical="/terms"
+        jsonLd={simpleBreadcrumb('Terms of Service', '/terms')}
       />
       <Navbar />
       <PageHeader

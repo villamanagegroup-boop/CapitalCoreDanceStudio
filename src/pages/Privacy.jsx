@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const SECTIONS = [
   {
@@ -72,6 +73,7 @@ export default function Privacy() {
         title="Privacy Policy | Capital Core Dance Studio"
         description="Privacy Policy for Capital Core Dance Studio in Midlothian, VA — how we collect, use, and protect your information."
         canonical="/privacy"
+        jsonLd={simpleBreadcrumb('Privacy Policy', '/privacy')}
       />
       <Navbar />
       <PageHeader

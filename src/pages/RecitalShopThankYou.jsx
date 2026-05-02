@@ -20,13 +20,13 @@ export default function RecitalShopThankYou() {
   return (
     <div className="min-h-screen flex flex-col bg-[#0B1F3A]">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
         .ty-playfair { font-family: 'Playfair Display', Georgia, serif; }
       `}</style>
       <SEO
         title="Order Confirmed – Capital Core Dance Studio"
         description="Thank you for your recital order!"
         canonical="/recitalshop/thankyou"
+        noindex
       />
       <Navbar />
 

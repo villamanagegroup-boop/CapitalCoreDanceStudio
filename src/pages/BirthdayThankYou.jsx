@@ -10,6 +10,7 @@ export default function BirthdayThankYou() {
         title="Thank You | Capital Core Dance Studio"
         description="Thank you for booking a birthday party at Capital Core Dance Studio!"
         canonical="/birthday-thankyou"
+        noindex
       />
       <Navbar />
 

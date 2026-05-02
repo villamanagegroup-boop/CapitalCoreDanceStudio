@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const ACCENT_COLORS = [
   'border-brand-red',
@@ -74,9 +75,10 @@ export default function MiniSeries() {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Spring Mini Series Classes | Capital Core Dance Studio – Midlothian, VA"
-        description="Try something new with our Spring 2026 Mini Series — short-term classes combining two dance styles in one fun session. Low commitment, high energy. April–May 2026."
+        title="Spring 2026 Mini Series Dance Classes in Midlothian, VA | Capital Core Dance Studio"
+        description="Spring 2026 Mini Series at Capital Core Dance Studio — six-week dance classes combining two styles per session. Ballet, jazz, hip hop, tap, lyrical, musical theatre, and more. April 6 – May 15, 2026 in Midlothian, VA."
         canonical="/mini-series"
+        jsonLd={simpleBreadcrumb('Mini Series', '/mini-series')}
       />
       <Navbar />
       <PageHeader

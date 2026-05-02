@@ -122,6 +122,7 @@ export default function BirthdayPayment() {
         title="Pay Your Deposit | Capital Core Dance Studio"
         description="Pay your $50 birthday party deposit to secure your date."
         canonical="/birthday-payment"
+        noindex
       />
       <Navbar />
 

@@ -187,13 +187,13 @@ export default function RecitalShirts() {
   return (
     <div className="min-h-screen flex flex-col bg-[#0B1F3A]">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
         .shirt-playfair { font-family: 'Playfair Display', Georgia, serif; }
       `}</style>
       <SEO
         title="Recital T-Shirt Order – Capital Core Dance Studio"
         description="Order your official 'A Night at the Cinema' recital t-shirt. Youth $20, Adult $25. Made to order for Capital Core Dance Studio's 2026 recital."
-        canonical="/recital/shirts"
+        canonical="/recitalshop"
+        noindex
       />
       <Navbar />
 

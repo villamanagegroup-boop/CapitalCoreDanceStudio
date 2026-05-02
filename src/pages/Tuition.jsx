@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const CLASS_PRICES = [
   { duration: '30 Min', monthly: '$65' },
@@ -24,9 +25,10 @@ export default function Tuition() {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Dance Class Tuition & Fees | Capital Core Dance Studio – Midlothian, VA"
-        description="Transparent pricing for dance classes at Capital Core Dance Studio. Monthly and semester rates for 30–90 minute classes. Registration fees and recital costs explained."
+        title="Dance Class Tuition &amp; Fees | Capital Core Dance Studio – Midlothian, VA"
+        description="Transparent dance class pricing in Midlothian, VA. Monthly rates from $65 (30-min) to $150 (90-min) classes. Registration fee, sibling discounts, and recital costs explained."
         canonical="/tuition"
+        jsonLd={simpleBreadcrumb('Tuition', '/tuition')}
       />
       <Navbar />
       <PageHeader

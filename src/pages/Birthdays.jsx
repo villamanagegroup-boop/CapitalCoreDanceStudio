@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const INCLUDED = [
   'Private studio space',
@@ -38,9 +39,10 @@ export default function Birthdays() {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Dance Birthday Parties | Capital Core Dance Studio – Midlothian, VA"
-        description="Celebrate your child's birthday with a dance party at Capital Core Dance Studio in Midlothian, VA. Private studio, instructor-led fun, custom packages for all ages."
+        title="Kids Dance Birthday Parties in Midlothian, VA | Capital Core Dance Studio"
+        description="Throw a stress-free, instructor-led dance birthday party at Capital Core Dance Studio in Midlothian, VA. Packages start at $199, include up to 10 kids, custom themes available. Serving Midlothian, Chesterfield County, and Richmond."
         canonical="/birthdays"
+        jsonLd={simpleBreadcrumb('Birthday Parties', '/birthdays')}
       />
       <Navbar />
       <PageHeader
@@ -54,7 +56,7 @@ export default function Birthdays() {
         <div className="relative" style={{ maxHeight: '210px' }}>
           <img
             src="/birthday-hero.jpg"
-            alt="Birthday party balloons and gift"
+            alt="Birthday party decorations at Capital Core Dance Studio in Midlothian, VA"
             className="w-full h-full object-cover object-center"
             style={{ maxHeight: '210px' }}
           />
@@ -62,7 +64,7 @@ export default function Birthdays() {
         <div className="relative" style={{ maxHeight: '210px' }}>
           <img
             src="/birthday-party-kids.jpg"
-            alt="Kids dancing at a birthday party"
+            alt="Kids dancing at a birthday party at Capital Core Dance Studio"
             className="w-full h-full object-cover object-center"
             style={{ maxHeight: '210px' }}
           />

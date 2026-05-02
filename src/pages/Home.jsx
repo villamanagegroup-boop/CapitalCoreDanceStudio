@@ -1,37 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
-
-const JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'DanceSchool',
-  name: 'Capital Core Dance Studio',
-  url: 'https://capitalcoredance.com',
-  telephone: '804-234-4014',
-  email: 'info@capitalcoredance.com',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '13110 Midlothian Turnpike',
-    addressLocality: 'Midlothian',
-    addressRegion: 'VA',
-    postalCode: '23113',
-    addressCountry: 'US',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: '37.50376329673492',
-    longitude: '-77.64043756100419',
-  },
-  openingHours: ['Mo-Fr 15:00-20:00', 'Sa 09:00-14:00'],
-  priceRange: '$$',
-  description: 'Dance classes for all ages in Midlothian, VA. Ballet, hip hop, jazz, contemporary, acro, and more.',
-  sameAs: [
-    'https://www.instagram.com/capitalcoredance',
-    'https://www.facebook.com/p/Capital-Core-Dance-Challenge-61566002721661/',
-  ],
-}
+import { localBusinessSchema } from '../lib/schema'
 
 const SECTION_CARDS = [
   {
@@ -39,6 +10,7 @@ const SECTION_CARDS = [
     title: 'Classes',
     subtitle: 'Year-round instruction',
     photo: '/card-classes.jpg',
+    imageAlt: 'Kids dance classes at Capital Core Dance Studio in Midlothian, VA',
     description:
       'Ballet, jazz, hip hop, and more for all ages and skill levels. Weekly sessions in a supportive, energetic environment.',
     linkLabel: 'View Classes',
@@ -48,6 +20,7 @@ const SECTION_CARDS = [
     title: 'Camps',
     subtitle: 'Summer & holiday',
     photo: '/card-camps.jpg',
+    imageAlt: 'Kids participating in summer dance camp at Capital Core Dance Studio',
     description:
       'Immersive multi-day camps packed with dance, creativity, and fun. Perfect for school breaks and summer schedules.',
     linkLabel: 'View Camps',
@@ -57,6 +30,7 @@ const SECTION_CARDS = [
     title: 'Birthdays',
     subtitle: 'Party packages',
     photo: '/card-birthdays.jpg',
+    imageAlt: 'Kids dance birthday party at Capital Core Dance Studio in Midlothian',
     description:
       'Celebrate in style at the studio! Custom dance party packages for kids of all ages. Unforgettable memories guaranteed.',
     linkLabel: 'View Packages',
@@ -66,6 +40,7 @@ const SECTION_CARDS = [
     title: 'Mini Series',
     subtitle: 'Spring 2026',
     photo: '/card-mini-series.jpg',
+    imageAlt: 'Spring Mini Series dance classes at Capital Core Dance Studio',
     description:
       'Short-term class series combining two styles into one fun session. A low-commitment way to try something new this spring.',
     linkLabel: 'View Mini Series',
@@ -75,6 +50,7 @@ const SECTION_CARDS = [
     title: 'Recital',
     subtitle: 'Annual showcase',
     photo: '/card-recital.jpg',
+    imageAlt: 'Annual dance recital performance at Capital Core Dance Studio',
     description:
       'Our annual recital is the highlight of the year — a chance for every dancer to shine on stage in front of family and friends.',
     linkLabel: 'View Recital Info',
@@ -84,6 +60,7 @@ const SECTION_CARDS = [
     title: 'Contact Us',
     subtitle: 'Get in touch',
     photo: '/card-contact.png',
+    imageAlt: 'Contact Capital Core Dance Studio in Midlothian, VA',
     description:
       "Questions? Ready to enroll? Reach out and we'll get back to you quickly. We'd love to have your dancer join our family.",
     linkLabel: 'Contact Us',
@@ -95,15 +72,13 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Capital Core Dance Studio | Dance Classes in Midlothian, VA"
-        description="Capital Core Dance Studio offers ballet, hip hop, contemporary, and more in Midlothian, VA. Classes for all ages and skill levels. Enroll today!"
+        description="Capital Core Dance Studio offers ballet, hip hop, jazz, contemporary, and tap classes for kids and adults in Midlothian, VA. Year-round programs, summer camps, birthday parties, and an annual recital. Serving Chesterfield County and Richmond."
         canonical="/"
+        jsonLd={localBusinessSchema}
       />
-      <Helmet>
-        <meta name="keywords" content="dance studio Midlothian VA, dance classes Richmond VA, ballet classes, kids dance classes Chesterfield County" />
-        <script type="application/ld+json">{JSON.stringify(JSON_LD)}</script>
-      </Helmet>
       <Navbar />
 
+      <main>
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#0d1b36] via-[#1a1040] to-[#5a1020] py-24 px-6 text-center">
         <div className="absolute -top-16 -right-16 w-64 h-64 bg-brand-red opacity-[0.08] rounded-full" />
@@ -141,7 +116,6 @@ export default function Home() {
       {/* Recital shop banner — cinema marquee */}
       <section className="relative px-6 py-7 bg-gradient-to-r from-[#080f1c] via-[#0d1a3a] to-[#080f1c] overflow-hidden">
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700;1,900&display=swap');
           .marquee-playfair { font-family: 'Playfair Display', Georgia, serif; }
           @keyframes marquee-shimmer {
             0%, 100% { background-position: 0% 50%; }
@@ -216,13 +190,13 @@ export default function Home() {
       <section className="py-10 px-6" style={{ backgroundColor: '#ede0fa' }}>
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
           <Link to="/mini-series">
-            <img src="/flyer-mini-series.png" alt="Mini Series – Register Now" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+            <img src="/flyer-mini-series.png" alt="Spring 2026 Mini Series dance classes flyer — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
           <Link to="/birthdays">
-            <img src="/flyer-birthday-parties.png" alt="Birthday Parties – Starts at $199" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+            <img src="/flyer-birthday-parties.png" alt="Kids dance birthday party packages starting at $199 — Capital Core Dance Studio" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
           <Link to="/camps">
-            <img src="/flyer-summer-camps.png" alt="Summer Camps – Early Pricing $165" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+            <img src="/flyer-summer-camps.png" alt="Summer dance camps for ages 4 to 13 — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
         </div>
       </section>
@@ -259,7 +233,7 @@ export default function Home() {
       {/* Section cards */}
       <section className="bg-surface-light px-6 pb-16 flex-1">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SECTION_CARDS.map(({ to, title, subtitle, photo, description, linkLabel }) => (
+          {SECTION_CARDS.map(({ to, title, subtitle, photo, imageAlt, description, linkLabel }) => (
             <Link
               key={to}
               to={to}
@@ -268,7 +242,7 @@ export default function Home() {
               <div className="relative h-44 overflow-hidden">
                 <img
                   src={photo}
-                  alt={title}
+                  alt={imageAlt || title}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
@@ -287,6 +261,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      </main>
 
       <Footer />
     </div>

@@ -2,18 +2,41 @@ import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { eventSchema, simpleBreadcrumb } from '../lib/schema'
+
+const RECITAL_EVENT = eventSchema({
+  name: 'A Night at the Cinema — Capital Core Dance Studio Annual Recital 2026',
+  description:
+    "Capital Core Dance Studio's annual spring recital. All enrolled dancers perform in a cinema-themed evening of dance. General admission tickets are $25; children 3 and under are free.",
+  startDate: '2026-06-13T14:00:00-04:00',
+  endDate: '2026-06-13T16:00:00-04:00',
+  offerUrl: 'https://capitalcoredance.com/recitalshop',
+  offerPrice: '25.00',
+  offerName: 'General Admission Ticket',
+})
+
+const DRESS_REHEARSAL_EVENT = eventSchema({
+  name: 'Dress Rehearsal — A Night at the Cinema (Capital Core Dance Studio)',
+  description: 'Dress rehearsal for the 2026 Capital Core Dance Studio annual recital, A Night at the Cinema.',
+  startDate: '2026-06-12T18:00:00-04:00',
+  endDate: '2026-06-12T20:00:00-04:00',
+})
 
 export default function Recital() {
   return (
     <div className="min-h-screen flex flex-col bg-[#0B1F3A]">
       <SEO
-        title="Annual Recital 2026 – A Night at the Cinema | Capital Core Dance Studio"
-        description="Capital Core Dance Studio presents 'A Night at the Cinema' — dress rehearsal June 12 &amp; recital June 13, 2026 at Richmond Christian School. All enrolled dancers perform."
+        title="Annual Recital 2026 – A Night at the Cinema | Capital Core Dance Studio Midlothian VA"
+        description="Capital Core Dance Studio presents 'A Night at the Cinema' — dress rehearsal Friday June 12 and recital Saturday June 13, 2026 at Richmond Christian School in Chesterfield, VA. All enrolled dancers perform. Tickets $25 adult, free for children 3 &amp; under."
         canonical="/recital"
+        ogType="event"
+        jsonLd={[
+          RECITAL_EVENT,
+          DRESS_REHEARSAL_EVENT,
+          simpleBreadcrumb('Recital', '/recital'),
+        ]}
       />
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap');
-
         .recital-playfair { font-family: 'Playfair Display', Georgia, serif; }
         .recital-cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
 

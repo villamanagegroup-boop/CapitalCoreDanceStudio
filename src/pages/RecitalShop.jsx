@@ -4,6 +4,42 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
+import { breadcrumbSchema, productSchema } from '../lib/schema'
+
+const SHOP_JSON_LD = [
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Recital', path: '/recital' },
+    { name: 'Recital Shop', path: '/recitalshop' },
+  ]),
+  productSchema({
+    name: 'A Night at the Cinema — Recital General Admission Ticket',
+    description: 'General admission ticket for the Capital Core Dance Studio annual recital, A Night at the Cinema, on June 13, 2026 at Richmond Christian School.',
+    image: '/ticket-banner.png',
+    price: '25.00',
+    url: '/recitalshop',
+  }),
+  productSchema({
+    name: 'Capital Core Dance Studio — Adult Recital T-Shirt',
+    description: 'Official "A Night at the Cinema" adult t-shirt with full cast list on the back.',
+    image: '/kids-shirt.png',
+    price: '25.00',
+    url: '/recitalshop',
+  }),
+  productSchema({
+    name: 'Capital Core Dance Studio — Youth Recital T-Shirt',
+    description: 'Official "A Night at the Cinema" youth t-shirt with full cast list on the back.',
+    image: '/womens-shirt.png',
+    price: '20.00',
+    url: '/recitalshop',
+  }),
+  productSchema({
+    name: 'Capital Core Dance Studio — Recital Show Program',
+    description: 'Official printed program for A Night at the Cinema. Pre-order $10, day-of $15.',
+    price: '10.00',
+    url: '/recitalshop',
+  }),
+]
 
 // ── Pricing ──────────────────────────────────────────────────
 const SHOW_DATE = new Date('2026-06-12T00:00:00')
@@ -346,13 +382,13 @@ export default function RecitalShop() {
   return (
     <div className="min-h-screen flex flex-col bg-[#0B1F3A]">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
         .shop-playfair { font-family: 'Playfair Display', Georgia, serif; }
       `}</style>
       <SEO
-        title="Recital Shop – A Night at the Cinema | Capital Core Dance Studio"
-        description="Order tickets, show programs, and official recital t-shirts for Capital Core Dance Studio's 2026 spring recital, A Night at the Cinema."
+        title="Recital Tickets, Programs &amp; Shirts | Capital Core Dance Studio – Midlothian, VA"
+        description="Buy tickets ($25 adult, free for children 3 &amp; under), pre-order show programs, and order official t-shirts for Capital Core Dance Studio's 2026 recital, A Night at the Cinema. Saturday, June 13, 2026 at Richmond Christian School."
         canonical="/recitalshop"
+        jsonLd={SHOP_JSON_LD}
       />
       <Navbar />
 

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const FAQS = [
   {
@@ -196,12 +196,10 @@ export default function FAQ() {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="FAQ | Capital Core Dance Studio – Midlothian, VA"
-        description="Answers to common questions about classes, enrollment, tuition, recitals, summer camps, birthday parties, and more at Capital Core Dance Studio in Midlothian, VA."
+        description="Answers to common questions about classes, enrollment, tuition, summer camps, birthday parties, and our annual recital at Capital Core Dance Studio in Midlothian, VA. Serving Chesterfield County and Richmond."
         canonical="/faq"
+        jsonLd={[JSON_LD, simpleBreadcrumb('FAQ', '/faq')]}
       />
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(JSON_LD)}</script>
-      </Helmet>
 
       <Navbar />
       <PageHeader

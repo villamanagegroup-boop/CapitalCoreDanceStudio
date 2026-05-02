@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const PILLARS = [
   {
@@ -41,9 +42,10 @@ export default function About() {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="About Us | Capital Core Dance Studio"
-        description="Learn about Capital Core Dance Studio's mission, instructors, and our commitment to building confident, skilled dancers in the Richmond/Midlothian area."
+        title="About Us | Capital Core Dance Studio – Midlothian, VA"
+        description="Capital Core Dance Studio is a family-focused dance school in Midlothian, VA, building confident, skilled dancers through ballet, jazz, hip hop, tap, and more. Serving Chesterfield County and the Richmond area."
         canonical="/about"
+        jsonLd={simpleBreadcrumb('About', '/about')}
       />
       <Navbar />
       <PageHeader

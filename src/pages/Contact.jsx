@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const INITIAL_FORM = {
   firstName: '',
@@ -66,9 +67,10 @@ export default function Contact() {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Enroll Now | Capital Core Dance Studio – Midlothian, VA"
-        description="Ready to start dancing? Contact Capital Core Dance Studio to enroll in classes or schedule a trial. Serving Midlothian, Chesterfield, and Richmond, VA."
+        title="Contact Capital Core Dance Studio | Midlothian, VA Dance Classes"
+        description="Get in touch with Capital Core Dance Studio at 13110 Midlothian Turnpike, Midlothian, VA. Call (804) 234-4014, email info@capitalcoredance.com, or send us a message. Free trial classes available."
         canonical="/contact"
+        jsonLd={simpleBreadcrumb('Contact', '/contact')}
       />
       <Navbar />
       <PageHeader

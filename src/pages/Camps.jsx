@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { simpleBreadcrumb } from '../lib/schema'
 
 const ACCENT_COLORS = [
   'border-brand-red',
@@ -73,9 +74,10 @@ export default function Camps() {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Summer Dance Camps 2026 | Capital Core Dance Studio – Midlothian, VA"
-        description="Immersive summer dance camps for kids ages 4–13 in Midlothian, VA. Eight themed weeks of dance, creativity, and fun. Monday–Friday, June through August 2026."
+        title="Summer Dance Camps 2026 in Midlothian, VA | Capital Core Dance Studio"
+        description="Eight themed weeks of summer dance camps for kids ages 4–13 in Midlothian, VA. Monday–Friday, 9:30 AM–3:30 PM, June through August 2026. Single days, half-days, and before/aftercare available. Serving Chesterfield County and Richmond."
         canonical="/camps"
+        jsonLd={simpleBreadcrumb('Summer Camps', '/camps')}
       />
       <Navbar />
       <PageHeader
@@ -89,7 +91,7 @@ export default function Camps() {
         <div className="relative" style={{ maxHeight: '210px' }}>
           <img
             src="/camp-hero-1.jpg"
-            alt="Happy kids and counselors at summer camp"
+            alt="Happy kids at Capital Core Dance Studio summer dance camp in Midlothian, VA"
             className="w-full h-full object-cover object-center"
             style={{ maxHeight: '210px' }}
           />
@@ -97,10 +99,9 @@ export default function Camps() {
         <div className="relative" style={{ maxHeight: '210px' }}>
           <img
             src="/camp-hero-2.jpg"
-            alt="Kids dancing in a dance studio"
+            alt="Kids dancing during summer dance camp at Capital Core Dance Studio"
             className="w-full h-full object-cover"
             style={{ maxHeight: '210px', objectPosition: 'center 25%' }}
-            style={{ maxHeight: '210px' }}
           />
         </div>
       </div>

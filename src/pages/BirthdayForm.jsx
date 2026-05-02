@@ -190,6 +190,7 @@ export default function BirthdayForm() {
         title="Book a Birthday Party | Capital Core Dance Studio – Midlothian, VA"
         description="Request a birthday party booking at Capital Core Dance Studio in Midlothian, VA. Fill out our form and we'll be in touch to confirm your date."
         canonical="/birthday-booking"
+        noindex
       />
       <Navbar />
       <PageHeader

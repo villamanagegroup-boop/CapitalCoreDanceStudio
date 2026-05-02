@@ -4,6 +4,27 @@ import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { courseListSchema, simpleBreadcrumb } from '../lib/schema'
+
+const DANCE_STYLES = [
+  'Ballet',
+  'Jazz',
+  'Hip Hop',
+  'Contemporary',
+  'Tap',
+  'Acro & Tumbling',
+  'Lyrical',
+  'Musical Theatre',
+  'Irish Dance',
+  'Pom & Cheer',
+  'Preschool Creative Movement',
+  'Adult Fitness',
+]
+
+const CLASSES_JSON_LD = [
+  courseListSchema(DANCE_STYLES),
+  simpleBreadcrumb('Classes', '/classes'),
+]
 
 const ACCENT_COLORS = [
   'border-brand-red',
@@ -161,9 +182,10 @@ export default function Classes() {
   return (
     <div className="min-h-screen flex flex-col">
       <SEO
-        title="Dance Classes | Capital Core Dance Studio – Midlothian, VA"
-        description="Explore our full class schedule including ballet, jazz, hip hop, and contemporary. Classes for toddlers through adults in Midlothian, VA."
+        title="Dance Classes in Midlothian, VA | Ballet, Hip Hop, Jazz &amp; More – Capital Core Dance Studio"
+        description="Year-round dance classes for ages 2 through adult at Capital Core Dance Studio in Midlothian, VA. Ballet, jazz, hip hop, contemporary, tap, acro, lyrical, musical theatre, Irish dance, and pom/cheer. First class is always free."
         canonical="/classes"
+        jsonLd={CLASSES_JSON_LD}
       />
       <Navbar />
       <PageHeader
@@ -177,7 +199,7 @@ export default function Classes() {
         <div className="relative" style={{ maxHeight: '210px' }}>
           <img
             src="/classes-hero-1.jpg"
-            alt="Girls in tutus dancing in class"
+            alt="Young ballet dancers in tutus during class at Capital Core Dance Studio in Midlothian, VA"
             className="w-full h-full object-cover"
             style={{ maxHeight: '210px', objectPosition: 'center 25%' }}
           />
@@ -185,7 +207,7 @@ export default function Classes() {
         <div className="relative" style={{ maxHeight: '210px' }}>
           <img
             src="/classes-hero-2.jpg"
-            alt="Child dancers sitting in a circle in tutus"
+            alt="Kids ballet class sitting in a circle at Capital Core Dance Studio"
             className="w-full h-full object-cover"
             style={{ maxHeight: '210px', objectPosition: 'center 25%' }}
           />
