@@ -188,15 +188,18 @@ export default function Home() {
 
       {/* Flyers */}
       <section className="py-10 px-6" style={{ backgroundColor: '#ede0fa' }}>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <Link to="/mini-series">
-            <img src="/flyer-mini-series.png" alt="Spring 2026 Mini Series dance classes flyer — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Link to="/recitalshop">
+            <img src="/flyer-night-at-the-cinema.png" alt="A Night at the Cinema — Spring Recital tickets on sale, June 13 2026 at Richmond Christian School — Capital Core Dance Studio" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
           <Link to="/birthdays">
             <img src="/flyer-birthday-parties.png" alt="Kids dance birthday party packages starting at $199 — Capital Core Dance Studio" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
           <Link to="/camps">
-            <img src="/flyer-summer-camps.png" alt="Summer dance camps for ages 4 to 13 — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+            <img src="/flyer-summer-camps.png" alt="Summer 2026 dance camps — eight themed weeks for ages 4–13, $50 deposit reserves your spot — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+          </Link>
+          <Link to="/classes">
+            <img src="/flyer-summer-dance-classes.png" alt="Summer dance classes June 23 to July 30 — ballet, tap, hip hop, jazz, Irish, contemporary — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
         </div>
       </section>

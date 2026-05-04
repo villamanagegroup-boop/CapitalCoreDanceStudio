@@ -47,6 +47,16 @@ export default function Recital() {
           background-clip: text;
         }
 
+        @keyframes recital-shop-shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .recital-shop-btn {
+          background: linear-gradient(135deg, #C9A84C 0%, #f4d97a 45%, #ffe89c 50%, #f4d97a 55%, #C9A84C 100%);
+          background-size: 250% 250%;
+          animation: recital-shop-shimmer 4s ease-in-out infinite;
+        }
+
         .title-card {
           background: linear-gradient(160deg, #12203a 0%, #0f1c30 60%, #0d1828 100%);
           border: 1px solid rgba(201,168,76,0.35);
@@ -164,8 +174,12 @@ export default function Recital() {
           </p>
           <Link
             to="/recitalshop"
-            className="recital-cormorant inline-block bg-[#c9a84c] text-[#0B1F3A] font-black px-8 py-3.5 rounded-lg text-sm tracking-widest uppercase hover:bg-[#e8c84a] transition-colors shadow-lg shadow-[#c9a84c]/20"
+            className="recital-cormorant relative inline-block recital-shop-btn text-[#0B1F3A] font-black px-8 py-3.5 rounded-lg text-sm tracking-widest uppercase hover:scale-105 transition-transform shadow-lg shadow-[#c9a84c]/40 hover:shadow-xl hover:shadow-[#c9a84c]/60"
           >
+            <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f4a8b4] opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#f4a8b4] border border-white/40" />
+            </span>
             Visit the Recital Shop →
           </Link>
         </div>

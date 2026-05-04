@@ -113,14 +113,12 @@ export default function Camps() {
             <p className="text-navy-dark font-black text-lg leading-snug">Save $40–$60 on summer camp with CertifiKid — for each week!</p>
             <p className="text-navy-dark/70 text-sm mt-0.5">Exclusive deals available for our families.</p>
           </div>
-          <a
-            href="https://www.certifikid.com/deal/78855/capital-core-dance-summer-camp"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/camp-registration?promo=CKSummer26"
             className="flex-shrink-0 bg-navy-dark text-white text-sm font-bold px-6 py-2 rounded-md hover:bg-navy-mid transition-colors whitespace-nowrap"
           >
             Get the Deal →
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -128,31 +126,51 @@ export default function Camps() {
         <div className="max-w-3xl mx-auto">
 
           {/* Info bar */}
-          <div className="bg-[#f0f6ff] border border-[#c8ddf4] rounded-lg px-5 py-4 mb-8 flex flex-col gap-2 text-sm text-[#3a4a6a]">
+          <div className="bg-[#f0f6ff] border border-[#c8ddf4] rounded-lg px-5 py-4 mb-8 flex flex-col gap-3 text-sm text-[#3a4a6a]">
             <div className="flex flex-wrap gap-x-6 gap-y-1">
               <span><span className="font-bold">Schedule:</span> M–F, 9:30 AM – 3:30 PM</span>
               <span><span className="font-bold">Ages:</span> 4–13</span>
               <span><span className="font-bold">Before &amp; Aftercare</span> available ($15/hr per day)</span>
             </div>
-            <div className="flex flex-wrap gap-x-6 gap-y-1 mt-1">
-              <span><span className="font-bold">Current dancers</span> (Fall 2025 / Spring 2026): <span className="text-brand-red font-bold">$205 / week</span></span>
-              <span><span className="font-bold">Non-studio campers:</span> <span className="font-bold">$225 / week</span></span>
-            </div>
-            <div className="mt-2 pt-2 border-t border-[#c8ddf4] text-xs leading-relaxed">
-              <span className="font-bold text-navy-dark">Single days and half-days available</span> — see pricing in the{' '}
-              <a
-                href="https://portal.iclasspro.com/capitalcoredance/camps/1?sortBy=time"
-                target="_blank"
-                rel="noreferrer"
-                className="text-brand-red font-semibold underline hover:text-red-700"
-              >
-                studio portal
-              </a>{' '}
-              or call{' '}
-              <a href="tel:8042344014" className="text-brand-red font-semibold underline hover:text-red-700">
-                (804) 234-4014
-              </a>{' '}
-              for custom pricing.
+
+            <div className="pt-3 border-t border-[#c8ddf4]">
+              <p className="font-bold text-navy-dark mb-2">Camp Rates</p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="text-left text-[#5a6a8a]">
+                      <th className="py-1 pr-3 font-semibold"></th>
+                      <th className="py-1 pr-3 font-semibold">Current dancer</th>
+                      <th className="py-1 font-semibold">Non-studio</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-[#3a4a6a]">
+                    <tr className="border-t border-[#c8ddf4]/60">
+                      <td className="py-1 pr-3 font-bold">Full week (M–F)</td>
+                      <td className="py-1 pr-3 text-brand-red font-bold">$205</td>
+                      <td className="py-1 font-bold">$225</td>
+                    </tr>
+                    <tr className="border-t border-[#c8ddf4]/60">
+                      <td className="py-1 pr-3 font-bold">Half-day full week</td>
+                      <td className="py-1 pr-3 text-brand-red font-bold">$155</td>
+                      <td className="py-1 font-bold">$175</td>
+                    </tr>
+                    <tr className="border-t border-[#c8ddf4]/60">
+                      <td className="py-1 pr-3 font-bold">Single full day</td>
+                      <td className="py-1 pr-3 text-brand-red font-bold">$50</td>
+                      <td className="py-1 font-bold">$55</td>
+                    </tr>
+                    <tr className="border-t border-[#c8ddf4]/60">
+                      <td className="py-1 pr-3 font-bold">Single half day</td>
+                      <td className="py-1 pr-3 text-brand-red font-bold">$35</td>
+                      <td className="py-1 font-bold">$40</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-xs text-[#5a6a8a] mt-2">
+                "Current dancer" rates apply to families enrolled in Fall 2025 / Spring 2026 classes. Mix and match weeks, days, and half-days during registration.
+              </p>
             </div>
           </div>
 
@@ -181,14 +199,12 @@ export default function Camps() {
             ))}
           </div>
 
-          <a
-            href="https://portal.iclasspro.com/capitalcoredance/camps/1?sortBy=time"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/camp-registration"
             className="mt-8 block w-full bg-brand-red text-white text-center font-bold py-3 rounded-md hover:bg-red-700 transition-colors"
           >
             Register Now
-          </a>
+          </Link>
         </div>
       </section>
 

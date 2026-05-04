@@ -383,6 +383,20 @@ export default function RecitalShop() {
     <div className="min-h-screen flex flex-col bg-[#0B1F3A]">
       <style>{`
         .shop-playfair { font-family: 'Playfair Display', Georgia, serif; }
+        @keyframes shop-tab-shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        .shop-tabbar {
+          background: linear-gradient(135deg, #C9A84C 0%, #f4d97a 45%, #ffe89c 50%, #f4d97a 55%, #C9A84C 100%);
+          background-size: 250% 250%;
+          animation: shop-tab-shimmer 4s ease-in-out infinite;
+          box-shadow: 0 4px 18px rgba(201,168,76,0.35), 0 1px 0 rgba(255,255,255,0.4) inset;
+        }
+        .shop-tab-text {
+          color: #0B1F3A;
+          text-shadow: 0 1px 0 rgba(255,255,255,0.45);
+        }
       `}</style>
       <SEO
         title="Recital Tickets, Programs &amp; Shirts | Capital Core Dance Studio – Midlothian, VA"
@@ -415,17 +429,17 @@ export default function RecitalShop() {
           </div>
         </section>
 
-        {/* Sticky tab bar — gold */}
-        <nav className="sticky top-0 z-40 bg-[#C9A84C] border-y border-[#0B1F3A]/15 shadow-md">
-          <div className="max-w-3xl mx-auto px-6 flex gap-1 overflow-x-auto">
+        {/* Sticky tab bar — shimmering gold */}
+        <nav className="sticky top-0 z-40 shop-tabbar border-y border-[#0B1F3A]/25">
+          <div className="max-w-3xl mx-auto px-6 flex justify-center gap-1 overflow-x-auto">
             {TABS.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id)}
-                className={`shop-playfair text-sm font-bold tracking-wide py-4 px-5 whitespace-nowrap transition-all border-b-2 ${
+                className={`shop-playfair shop-tab-text text-sm tracking-wide py-4 px-5 whitespace-nowrap transition-all border-b-2 ${
                   activeTab === t.id
-                    ? 'text-white border-white'
-                    : 'text-white/65 border-transparent hover:text-white hover:border-white/40'
+                    ? 'font-black border-[#0B1F3A]'
+                    : 'font-bold opacity-70 border-transparent hover:opacity-100 hover:border-[#0B1F3A]/40'
                 }`}
               >
                 {t.label}
