@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
 
-const DEPOSIT_AMOUNT = 50
+const STANDARD_DEPOSIT = 50
 
 export default function CampPayment() {
   const navigate = useNavigate()
@@ -20,7 +20,9 @@ export default function CampPayment() {
   const promoCode = state?.promoCode || null
   const promoDiscount = state?.promoDiscount || 0
   const estimatedTotal = state?.estimatedTotal || 0
-  const balanceDue = Math.max(0, estimatedTotal - DEPOSIT_AMOUNT)
+  const isFullyComped = estimatedTotal <= 0
+  const depositAmount = isFullyComped ? 0 : STANDARD_DEPOSIT
+  const balanceDue = Math.max(0, estimatedTotal - depositAmount)
 
   const firstName = parentName ? parentName.split(' ')[0] : ''
 
@@ -47,7 +49,7 @@ export default function CampPayment() {
   }, [])
 
   useEffect(() => {
-    if (!paypalReady || paypalRendered) return
+    if (!paypalReady || paypalRendered || isFullyComped) return
     const container = document.getElementById('pp-camp-deposit')
     if (!container) return
     window.paypal.Buttons({
@@ -55,7 +57,7 @@ export default function CampPayment() {
       createOrder: (_d, actions) => actions.order.create({
         purchase_units: [{
           description: 'Capital Core Dance Studio – Summer Camp Deposit',
-          amount: { value: DEPOSIT_AMOUNT.toFixed(2), currency_code: 'USD' },
+          amount: { value: depositAmount.toFixed(2), currency_code: 'USD' },
         }],
       }),
       onApprove: async (_d, actions) => {
@@ -69,7 +71,11 @@ export default function CampPayment() {
       },
     }).render('#pp-camp-deposit')
     setPaypalRendered(true)
-  }, [paypalReady, paypalRendered])
+  }, [paypalReady, paypalRendered, isFullyComped])
+
+  async function confirmFreeRegistration() {
+    await onPaymentSuccess(null)
+  }
 
   async function onPaymentSuccess(order) {
     setStatus('submitting')
@@ -80,9 +86,9 @@ export default function CampPayment() {
         const { error } = await supabase
           .from('camp_registrations')
           .update({
-            paypal_order_id: order.id,
+            paypal_order_id: order?.id || null,
             deposit_paid: true,
-            deposit_amount: DEPOSIT_AMOUNT,
+            deposit_amount: depositAmount,
             deposit_paid_at: new Date().toISOString(),
           })
           .eq('id', d.registrationId)
@@ -104,8 +110,8 @@ export default function CampPayment() {
           items: d.items,
           careItems: d.careItems,
           estimatedTotal: d.estimatedTotal,
-          amount: DEPOSIT_AMOUNT,
-          paypalOrderId: order.id,
+          amount: depositAmount,
+          paypalOrderId: order?.id || null,
           registrationId: d.registrationId,
         }),
       })
@@ -136,15 +142,21 @@ export default function CampPayment() {
               {firstName ? `Registration received, ${firstName}!` : 'Registration received!'}
             </p>
             <p className="text-[#3a4a6a] text-sm leading-relaxed">
-              Pay your $50 deposit below to lock in {camperName ? `${camperName}'s` : 'your camper\'s'} spot.
+              {isFullyComped
+                ? `Confirm below to lock in ${camperName ? `${camperName}'s` : 'your camper\'s'} spot.`
+                : `Pay your $50 deposit below to lock in ${camperName ? `${camperName}'s` : 'your camper\'s'} spot.`}
             </p>
           </div>
 
           <div className="bg-[#fff5f8] border border-[#f4c8d4] rounded-lg px-6 py-6">
             <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">Hold Your Spot</p>
-            <h2 className="text-navy-dark text-xl font-black mb-2">Pay your $50 deposit</h2>
+            <h2 className="text-navy-dark text-xl font-black mb-2">
+              {isFullyComped ? 'Confirm your free registration' : 'Pay your $50 deposit'}
+            </h2>
             <p className="text-[#5a6a8a] text-sm leading-relaxed mb-5">
-              Your $50 non-refundable deposit secures your camper's spot. The remaining balance is due before camp begins.
+              {isFullyComped
+                ? `Your promo code covers the entire registration — no payment required. Click below to confirm and lock in ${camperName ? `${camperName}'s` : 'your camper\'s'} spot.`
+                : 'Your $50 non-refundable deposit secures your camper\'s spot. The remaining balance is due before camp begins.'}
             </p>
 
             <div className="bg-white rounded-lg border border-[#f4c8d4] px-4 py-3 mb-4">
@@ -183,7 +195,7 @@ export default function CampPayment() {
                     {camperName ? `For ${camperName}` : 'Non-refundable · Holds your spot'}
                   </p>
                 </div>
-                <span className="text-navy-dark font-black text-2xl">${DEPOSIT_AMOUNT}</span>
+                <span className="text-navy-dark font-black text-2xl">${depositAmount}</span>
               </div>
               {balanceDue > 0 && (
                 <p className="text-[#8a9aaa] text-xs mt-2 pt-2 border-t border-[#f4c8d4]">
@@ -204,9 +216,20 @@ export default function CampPayment() {
               </div>
             )}
 
-            <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-              <div id="pp-camp-deposit" className="min-h-[50px]" />
-            </div>
+            {isFullyComped ? (
+              <button
+                type="button"
+                onClick={confirmFreeRegistration}
+                disabled={status === 'submitting'}
+                className="w-full bg-brand-red text-white font-bold py-3.5 rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mb-4"
+              >
+                Confirm Free Registration
+              </button>
+            ) : (
+              <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+                <div id="pp-camp-deposit" className="min-h-[50px]" />
+              </div>
+            )}
 
             <Link
               to="/camps"

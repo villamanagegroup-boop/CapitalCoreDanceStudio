@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
 
-const DEPOSIT_AMOUNT = 50
+const STANDARD_DEPOSIT = 50
 
 export default function BirthdayPayment() {
   const navigate = useNavigate()
@@ -16,6 +16,9 @@ export default function BirthdayPayment() {
   const parentEmail = state?.email || ''
   const birthdayName = state?.birthdayName || ''
   const dateFirst = state?.dateFirst || ''
+  const promoCode = state?.promoCode || null
+  const isFullyComped = !!state?.isFullyComped
+  const depositAmount = isFullyComped ? 0 : STANDARD_DEPOSIT
 
   const firstName = parentName ? parentName.split(' ')[0] : ''
 
@@ -44,7 +47,7 @@ export default function BirthdayPayment() {
 
   // Render PayPal Buttons
   useEffect(() => {
-    if (!paypalReady || paypalRendered) return
+    if (!paypalReady || paypalRendered || isFullyComped) return
     const container = document.getElementById('pp-deposit')
     if (!container) return
     window.paypal.Buttons({
@@ -52,7 +55,7 @@ export default function BirthdayPayment() {
       createOrder: (_d, actions) => actions.order.create({
         purchase_units: [{
           description: 'Capital Core Dance Studio – Birthday Party Deposit',
-          amount: { value: DEPOSIT_AMOUNT.toFixed(2), currency_code: 'USD' },
+          amount: { value: depositAmount.toFixed(2), currency_code: 'USD' },
         }],
       }),
       onApprove: async (_d, actions) => {
@@ -66,7 +69,11 @@ export default function BirthdayPayment() {
       },
     }).render('#pp-deposit')
     setPaypalRendered(true)
-  }, [paypalReady, paypalRendered])
+  }, [paypalReady, paypalRendered, isFullyComped])
+
+  async function confirmFreeBooking() {
+    await onPaymentSuccess(null)
+  }
 
   async function onPaymentSuccess(order) {
     setStatus('submitting')
@@ -79,9 +86,9 @@ export default function BirthdayPayment() {
         const { error } = await supabase
           .from('birthday_bookings')
           .update({
-            paypal_order_id: order.id,
+            paypal_order_id: order?.id || null,
             deposit_paid: true,
-            deposit_amount: DEPOSIT_AMOUNT,
+            deposit_amount: depositAmount,
             deposit_paid_at: new Date().toISOString(),
           })
           .eq('id', d.bookingId)
@@ -102,8 +109,8 @@ export default function BirthdayPayment() {
           email: d.parentEmail,
           birthdayName: d.birthdayName,
           dateFirst: d.dateFirst,
-          amount: DEPOSIT_AMOUNT,
-          paypalOrderId: order.id,
+          amount: depositAmount,
+          paypalOrderId: order?.id || null,
           bookingId: d.bookingId,
         }),
       })
@@ -142,9 +149,13 @@ export default function BirthdayPayment() {
           {/* Deposit section */}
           <div className="bg-[#fff5f8] border border-[#f4c8d4] rounded-lg px-6 py-6">
             <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">Secure Your Date</p>
-            <h2 className="text-navy-dark text-xl font-black mb-2">Pay your $50 deposit</h2>
+            <h2 className="text-navy-dark text-xl font-black mb-2">
+              {isFullyComped ? 'Confirm your free booking' : 'Pay your $50 deposit'}
+            </h2>
             <p className="text-[#5a6a8a] text-sm leading-relaxed mb-5">
-              Your $50 non-refundable deposit secures your party date. You're welcome to wait until you hear from us first — totally up to you!
+              {isFullyComped
+                ? `Your promo code ${promoCode ? `(${promoCode}) ` : ''}covers the deposit — no payment required. Click below to confirm and lock in your date.`
+                : 'Your $50 non-refundable deposit secures your party date. You\'re welcome to wait until you hear from us first — totally up to you!'}
             </p>
 
             {/* Order summary */}
@@ -155,7 +166,7 @@ export default function BirthdayPayment() {
                   {birthdayName ? `For ${birthdayName}'s party` : 'Non-refundable · Secures your date'}
                 </p>
               </div>
-              <span className="text-navy-dark font-black text-2xl">${DEPOSIT_AMOUNT}</span>
+              <span className="text-navy-dark font-black text-2xl">${depositAmount}</span>
             </div>
 
             {/* Status messages */}
@@ -171,10 +182,21 @@ export default function BirthdayPayment() {
               </div>
             )}
 
-            {/* Embedded PayPal */}
-            <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-              <div id="pp-deposit" className="min-h-[50px]" />
-            </div>
+            {isFullyComped ? (
+              <button
+                type="button"
+                onClick={confirmFreeBooking}
+                disabled={status === 'submitting'}
+                className="w-full bg-brand-red text-white font-bold py-3.5 rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors mb-4"
+              >
+                Confirm Free Booking
+              </button>
+            ) : (
+              /* Embedded PayPal */
+              <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+                <div id="pp-deposit" className="min-h-[50px]" />
+              </div>
+            )}
 
             <Link
               to="/birthdays"

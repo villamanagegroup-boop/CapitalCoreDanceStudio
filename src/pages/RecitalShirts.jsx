@@ -16,6 +16,17 @@ function fmtPrice(n) {
   return n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`
 }
 
+// Promo codes — case-insensitive. CGADMIN100 fully comps the order (admin testing only).
+const PROMO_CODES = {
+  CGADMIN100: { label: 'Admin · 100% off entire order (testing only)', rate: 1.00 },
+}
+
+function validatePromo(code) {
+  const upper = (code || '').trim().toUpperCase()
+  if (!upper) return null
+  return PROMO_CODES[upper] ? { code: upper, ...PROMO_CODES[upper] } : null
+}
+
 const initQty = (sizes) => Object.fromEntries(sizes.map((s) => [s, 0]))
 
 function SizeControl({ size, qty, onInc, onDec }) {
@@ -51,6 +62,9 @@ export default function RecitalShirts() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [ack, setAck] = useState(false)
+  const [promoInput, setPromoInput] = useState('')
+  const [promo, setPromo] = useState(null)
+  const [promoError, setPromoError] = useState('')
   const [paypalReady, setPaypalReady] = useState(false)
   const [paypalRendered, setPaypalRendered] = useState(false)
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
@@ -62,14 +76,16 @@ export default function RecitalShirts() {
 
   const youthSubtotal = YOUTH_SIZES.reduce((sum, s) => sum + youthQty[s] * YOUTH_PRICE, 0)
   const adultSubtotal = ADULT_SIZES.reduce((sum, s) => sum + adultQty[s] * ADULT_PRICE, 0)
-  const total = youthSubtotal + adultSubtotal
-  const hasItems = total > 0
+  const subtotal = youthSubtotal + adultSubtotal
+  const discount = promo ? Math.round(subtotal * promo.rate * 100) / 100 : 0
+  const total = Math.max(0, +(subtotal - discount).toFixed(2))
+  const hasItems = subtotal > 0
   const formValid = hasItems && name.trim().length > 0 && email.trim().includes('@') && ack
 
   // Keep refs in sync with latest values for PayPal callbacks
   useEffect(() => {
     totalRef.current = total
-    formDataRef.current = { name, email, youthQty, adultQty, total }
+    formDataRef.current = { name, email, youthQty, adultQty, total, promo, discount, subtotal }
   })
 
   // Load PayPal JS SDK once
@@ -87,7 +103,7 @@ export default function RecitalShirts() {
 
   // Render PayPal buttons when SDK is ready and form is valid
   useEffect(() => {
-    if (!paypalReady || !formValid || paypalRendered) return
+    if (!paypalReady || !formValid || paypalRendered || total <= 0) return
     const container = document.getElementById('paypal-btn')
     if (!container) return
 
@@ -118,7 +134,7 @@ export default function RecitalShirts() {
       .render('#paypal-btn')
 
     setPaypalRendered(true)
-  }, [paypalReady, formValid, paypalRendered])
+  }, [paypalReady, formValid, paypalRendered, total])
 
   function clearPaypal() {
     if (paypalRendered) {
@@ -136,6 +152,29 @@ export default function RecitalShirts() {
   function updateAdult(size, delta) {
     setAdultQty((prev) => ({ ...prev, [size]: Math.max(0, prev[size] + delta) }))
     clearPaypal()
+  }
+
+  function applyPromo() {
+    const result = validatePromo(promoInput)
+    if (result) {
+      setPromo(result)
+      setPromoError('')
+      clearPaypal()
+    } else {
+      setPromo(null)
+      setPromoError('Invalid code')
+    }
+  }
+
+  function removePromo() {
+    setPromo(null)
+    setPromoInput('')
+    setPromoError('')
+    clearPaypal()
+  }
+
+  async function confirmFreeOrder() {
+    await onPaymentSuccess(null)
   }
 
   async function onPaymentSuccess(order) {
@@ -157,9 +196,10 @@ export default function RecitalShirts() {
         youth_sizes: fd.youthQty,
         adult_sizes: fd.adultQty,
         total_amount: fd.total,
-        paypal_order_id: order.id,
+        paypal_order_id: order?.id || null,
         line_items: lineItems,
-        status: 'paid',
+        status: order ? 'paid' : 'free',
+        promo_code: fd.promo?.code || null,
       },
     ])
     if (error) console.error('DB error:', error)
@@ -174,7 +214,8 @@ export default function RecitalShirts() {
           email: fd.email,
           lineItems,
           total: fd.total,
-          paypalOrderId: order.id,
+          paypalOrderId: order?.id || null,
+          promoCode: fd.promo?.code || null,
         }),
       })
     } catch (e) {
@@ -440,10 +481,56 @@ export default function RecitalShirts() {
                     <span className="text-white font-medium">{fmtPrice(adultQty[s] * ADULT_PRICE)}</span>
                   </div>
                 ))}
-                <div className="border-t border-white/10 pt-3 mt-3 flex justify-between items-center">
+                <div className="border-t border-white/10 pt-3 mt-3 flex justify-between items-center text-sm">
+                  <span className="text-white/70">Subtotal</span>
+                  <span className="text-white">{fmtPrice(subtotal)}</span>
+                </div>
+                {promo && discount > 0 && (
+                  <div className="flex justify-between items-center text-sm text-green-300">
+                    <span>{promo.code} ({Math.round(promo.rate * 100)}% off)</span>
+                    <span>−{fmtPrice(discount)}</span>
+                  </div>
+                )}
+                <div className="border-t border-white/10 pt-3 mt-2 flex justify-between items-center">
                   <span className="text-white font-semibold">Total Due</span>
                   <span className="text-[#C9A84C] text-2xl font-black">{fmtPrice(total)}</span>
                 </div>
+              </div>
+
+              {/* Promo code */}
+              <div className="mb-6">
+                <p className="text-white text-sm font-bold mb-2">Promo Code <span className="text-white/50 font-normal">(optional)</span></p>
+                {promo ? (
+                  <div className="bg-green-900/30 border border-green-500/30 rounded-lg px-4 py-3 flex justify-between items-center">
+                    <div>
+                      <p className="text-green-200 font-bold text-sm">Code applied: {promo.code}</p>
+                      <p className="text-green-300 text-xs">{promo.label}</p>
+                    </div>
+                    <button onClick={removePromo} className="text-green-200 hover:text-green-100 text-xs font-bold underline">Remove</button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={promoInput}
+                        onChange={(e) => setPromoInput(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), applyPromo())}
+                        placeholder="Promo code"
+                        className="flex-1 bg-white border border-gray-300 text-gray-900 rounded-lg px-4 py-2.5 text-sm placeholder:text-gray-400 focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/30 uppercase"
+                      />
+                      <button
+                        type="button"
+                        onClick={applyPromo}
+                        disabled={!promoInput.trim()}
+                        className="bg-[#C9A84C] text-[#0B1F3A] text-sm font-bold px-5 rounded-lg hover:bg-[#d4b85a] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                    {promoError && <p className="text-red-300 text-xs mt-1">{promoError}</p>}
+                  </>
+                )}
               </div>
 
               {!formValid && (
@@ -472,9 +559,20 @@ export default function RecitalShirts() {
                       <code className="font-mono">VITE_PAYPAL_CLIENT_ID</code> to your .env file.
                     </div>
                   )}
-                  <div className="bg-white rounded-xl p-4 mt-2">
-                    <div id="paypal-btn" className="min-h-[50px]" />
-                  </div>
+                  {total > 0 ? (
+                    <div className="bg-white rounded-xl p-4 mt-2">
+                      <div id="paypal-btn" className="min-h-[50px]" />
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={confirmFreeOrder}
+                      disabled={status === 'submitting'}
+                      className="w-full bg-[#C9A84C] text-[#0B1F3A] font-black py-3.5 rounded-lg hover:bg-[#d4b85a] disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm tracking-widest uppercase"
+                    >
+                      Confirm Free Order
+                    </button>
+                  )}
                 </div>
               )}
             </div>

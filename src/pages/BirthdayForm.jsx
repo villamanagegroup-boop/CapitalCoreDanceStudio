@@ -44,6 +44,17 @@ const UPGRADES = [
   'Other',
 ]
 
+// Promo codes — case-insensitive. CGADMIN100 fully comps the deposit (admin testing only).
+const PROMO_CODES = {
+  CGADMIN100: { label: 'Admin · 100% off deposit (testing only)', type: 'comp_deposit' },
+}
+
+function validatePromo(code) {
+  const upper = (code || '').trim().toUpperCase()
+  if (!upper) return null
+  return PROMO_CODES[upper] ? { code: upper, ...PROMO_CODES[upper] } : null
+}
+
 const REFERRAL_OPTIONS = [
   'Social Media (Instagram, TikTok, Facebook, X)',
   'Studio Website',
@@ -168,12 +179,15 @@ export default function BirthdayForm() {
           notes: form.notes,
         }),
       }).catch(() => {})
+      const validatedPromo = validatePromo(form.promoCode)
       navigate('/birthday-payment', {
         state: {
           parentName: form.parentName,
           email: form.email,
           birthdayName: form.birthdayName,
           dateFirst: form.dateFirst,
+          promoCode: validatedPromo?.code || null,
+          isFullyComped: validatedPromo?.type === 'comp_deposit',
         },
       })
     }

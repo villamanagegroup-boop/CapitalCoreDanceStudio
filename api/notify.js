@@ -171,6 +171,63 @@ function buildRecitalCombinedCustomerEmail(data) {
   `
 }
 
+function buildCampRegistrationEmail(data) {
+  const selectionLines = (data.selection || [])
+    .map((item) => `<li>${escapeHtml(item.weekLabel)} — ${escapeHtml(item.description)} — $${escapeHtml(String(item.price))}</li>`)
+    .join('')
+  const careLines = (data.careItems || [])
+    .map((item) => `<li>${escapeHtml(item.description)} — $${escapeHtml(item.price.toFixed(2))}</li>`)
+    .join('')
+  const before = data.beforeCare
+    ? `${escapeHtml(data.beforeCare.time || '')} drop-off, days: ${(data.beforeCare.days || []).map((d) => escapeHtml(d)).join(', ') || '—'}`
+    : 'None'
+  const after = data.afterCare
+    ? `${escapeHtml(data.afterCare.time || '')} pickup, days: ${(data.afterCare.days || []).map((d) => escapeHtml(d)).join(', ') || '—'}`
+    : 'None'
+  return `
+    <h2>New Summer Camp Registration</h2>
+    <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
+    <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
+    <hr />
+    <p><strong>Camper:</strong> ${escapeHtml(data.camperName)} (age ${escapeHtml(String(data.camperAge))}, DOB ${escapeHtml(data.camperBirthdate) || 'N/A'}, ${escapeHtml(data.camperGender)})</p>
+    <p><strong>Current Studio Student:</strong> ${escapeHtml(data.currentStudent)}</p>
+    <hr />
+    <p><strong>Weeks &amp; Attendance:</strong></p>
+    <ul>${selectionLines || '<li>None</li>'}</ul>
+    ${careLines ? `<p><strong>Before/After Care charges:</strong></p><ul>${careLines}</ul>` : ''}
+    <p><strong>Before Care:</strong> ${before}</p>
+    <p><strong>After Care:</strong> ${after}</p>
+    <hr />
+    <p><strong>Promo Code:</strong> ${escapeHtml(data.promoCode) || 'None'}</p>
+    <p><strong>Promo Discount:</strong> $${escapeHtml(String(data.promoDiscount || 0))}</p>
+    <p><strong>Gross Subtotal:</strong> $${escapeHtml(String(data.grossSubtotal || 0))}</p>
+    <p><strong>Estimated Total:</strong> $${escapeHtml(String(data.estimatedTotal || 0))}</p>
+    <p><strong>Notes:</strong> ${escapeHtml(data.notes) || 'None'}</p>
+  `
+}
+
+function buildCampDepositEmail(data) {
+  const selectionLines = (data.items || [])
+    .map((item) => `<li>${escapeHtml(item.weekLabel)} — ${escapeHtml(item.description)} — $${escapeHtml(String(item.price))}</li>`)
+    .join('')
+  const careLines = (data.careItems || [])
+    .map((item) => `<li>${escapeHtml(item.description)} — $${escapeHtml(item.price.toFixed(2))}</li>`)
+    .join('')
+  return `
+    <h2>Summer Camp Deposit Received</h2>
+    <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
+    <p><strong>Camper:</strong> ${escapeHtml(data.camperName)}</p>
+    <p><strong>Amount Paid:</strong> $${escapeHtml(String(data.amount))}</p>
+    <p><strong>Estimated Total:</strong> $${escapeHtml(String(data.estimatedTotal || 0))}</p>
+    <p><strong>PayPal Order ID:</strong> ${escapeHtml(data.paypalOrderId)}</p>
+    <p><strong>Registration Record ID:</strong> ${escapeHtml(data.registrationId) || 'N/A'}</p>
+    <hr />
+    <p><strong>Weeks &amp; Attendance:</strong></p>
+    <ul>${selectionLines || '<li>None</li>'}</ul>
+    ${careLines ? `<p><strong>Before/After Care:</strong></p><ul>${careLines}</ul>` : ''}
+  `
+}
+
 function buildBirthdayDepositEmail(data) {
   return `
     <h2>Birthday Party Deposit Received</h2>
@@ -226,6 +283,12 @@ export default async function handler(req, res) {
   } else if (formType === 'birthday_deposit') {
     subject = 'Birthday Party Deposit Received'
     html = buildBirthdayDepositEmail(data)
+  } else if (formType === 'camp_registration') {
+    subject = 'New Summer Camp Registration'
+    html = buildCampRegistrationEmail(data)
+  } else if (formType === 'camp_deposit') {
+    subject = 'Summer Camp Deposit Received'
+    html = buildCampDepositEmail(data)
   } else if (formType === 'recital_order') {
     subject = 'New Recital T-Shirt Order'
     html = buildRecitalOrderEmail(data)

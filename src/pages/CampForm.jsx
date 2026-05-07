@@ -67,6 +67,11 @@ const PROMO_CODES = {
     currentRate: 40,
     nonRate: 60,
   },
+  CGADMIN100: {
+    label: 'Admin · 100% off entire order (testing only)',
+    type: 'percent_off_all',
+    rate: 1.00,
+  },
 }
 
 // Case-insensitive lookup that preserves the canonical key casing for display.
@@ -227,6 +232,8 @@ export default function CampForm() {
       }
       // Cap so total never goes below zero
       discount = Math.min(grossSubtotal, rate * promoQualifyingWeeks)
+    } else if (promo && promo.type === 'percent_off_all') {
+      discount = Math.round(grossSubtotal * promo.rate * 100) / 100
     }
 
     const subtotal = Math.max(0, Math.round((grossSubtotal - discount) * 100) / 100)
@@ -729,7 +736,7 @@ export default function CampForm() {
                     <div>
                       <p className="text-green-800 font-bold text-sm">Code applied: {promo.code}</p>
                       <p className="text-green-700 text-xs">{promo.label}</p>
-                      {totals.promoQualifyingWeeks === 0 && (
+                      {promo.type === 'per_full_week' && totals.promoQualifyingWeeks === 0 && (
                         <p className="text-green-700 text-xs italic mt-1">
                           Discount applies to full-week or half-day-full-week selections — single-day picks don't qualify.
                         </p>
@@ -783,8 +790,13 @@ export default function CampForm() {
                   {promo && totals.discount > 0 && (
                     <div className="flex justify-between text-xs text-green-700 mb-2">
                       <span>
-                        {promo.code} · {totals.promoQualifyingWeeks} week{totals.promoQualifyingWeeks !== 1 ? 's' : ''} ×
-                        ${isCurrent ? promo.currentRate : promo.nonRate} off
+                        {promo.code}
+                        {promo.type === 'per_full_week' && (
+                          <> · {totals.promoQualifyingWeeks} week{totals.promoQualifyingWeeks !== 1 ? 's' : ''} × ${isCurrent ? promo.currentRate : promo.nonRate} off</>
+                        )}
+                        {promo.type === 'percent_off_all' && (
+                          <> · {Math.round(promo.rate * 100)}% off entire order</>
+                        )}
                       </span>
                       <span className="font-semibold">−${totals.discount.toFixed(2)}</span>
                     </div>
