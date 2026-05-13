@@ -28,7 +28,7 @@ const FAQS = [
       },
       {
         q: 'What is the Mini Series?',
-        a: 'The Mini Series is a short-term spring program where each class combines two dance styles into one fun session. It runs April 6 – May 15, 2026 and is a low-commitment way for dancers to try something new. Classes are $145 per series and are capped at 20 students.',
+        a: 'The Mini Series is a short-term program where each class combines two dance styles into one fun session. A low-commitment way for dancers to try something new — typically offered in spring and fall.',
       },
     ],
   },
@@ -37,7 +37,7 @@ const FAQS = [
     items: [
       {
         q: 'Is there a free trial class?',
-        a: 'Yes — your first class is always free. No commitment required. You can register for a trial through our iClassPro portal.',
+        a: 'Yes — your first class is always free, no commitment required. Just fill out our Contact form, choose "Register for a Free Trial" from the interest dropdown, and we\'ll match your dancer with the right class within 1–2 business days.',
       },
       {
         q: 'How do I enroll my child?',
@@ -83,23 +83,69 @@ const FAQS = [
     ],
   },
   {
-    category: 'Summer Camps & Classes',
+    category: 'Summer Classes',
+    items: [
+      {
+        q: 'Do you offer summer dance classes?',
+        a: 'Yes! Our 6-week summer session runs June 23 – July 30, 2026 with classes on Tuesday, Wednesday, and Thursday evenings. We have classes for dancers ages 2 through teen including Tiny Ballet & Tumble, Beginner Ballet & Hip Hop, Tumble Techniques, Beginner Ballet & Tap, Hip Hop, Ballet & Contemporary Technique, Beginner Jazz & Tumble, and a Tik Tok Hip Hop workshop.',
+      },
+      {
+        q: 'How much do summer classes cost?',
+        a: 'We offer three pricing options: per-class enrollment for the full 6 weeks ($120–$180 each depending on length), a Summer Flex Pass ($329 for unlimited classes all summer — best value), or single drop-ins ($25 per class per week).',
+      },
+      {
+        q: 'How do I sign up for summer classes?',
+        a: 'Sign-ups go through the Summer Class form on our website. A $50 deposit reserves your dancer\'s spot and applies toward tuition (drop-ins are paid in full at signup). You can also choose to pay tuition in full at signup if you prefer.',
+      },
+      {
+        q: 'Can I sign up multiple dancers at once?',
+        a: 'Yes — the summer class signup lets you add as many dancers as you\'d like. Each dancer picks their own classes (or Flex Pass, or drop-in) and the deposit scales accordingly ($50 per dancer for per-class and Flex Pass enrollments; drop-ins are $25 each).',
+      },
+      {
+        q: 'My dancer is already enrolled at Capital Core — do I have to re-enter their info?',
+        a: 'No! Just mark them as a "Returning Dancer" on the signup form and provide their name. We\'ll pull age, gender, and other details from our records.',
+      },
+    ],
+  },
+  {
+    category: 'Summer Camps',
     items: [
       {
         q: 'Do you offer summer camps?',
         a: 'Yes! We offer 8 themed summer camp weeks for dancers ages 4–13. Camps run Monday through Friday, 9:30 AM to 3:30 PM, from June through August 2026. Each week has a different creative theme packed with dance, games, and activities.',
       },
       {
-        q: 'How do I register for a summer camp?',
-        a: 'Camp registration is handled through our iClassPro portal. Visit the Summer Camps page for the full schedule and available weeks, then register online.',
+        q: 'How much do summer camps cost?',
+        a: 'Full week (M–F): $205 for current dancers, $225 for non-studio campers. Half-day full week: $155 / $175. Single full day: $50 / $55. Single half day: $35 / $40. Before-care and after-care available at $15/hour.',
       },
       {
-        q: 'Do you offer summer dance classes?',
-        a: 'Yes! Our summer classes run from mid-June through early August — approximately 7 weeks. They follow a full-semester pay scale and cover a range of genres, giving dancers a great way to keep training and explore new styles over the summer. Details on specific classes and scheduling are coming soon.',
+        q: 'How do I register for a summer camp?',
+        a: 'Camp registration happens through the form on our Summer Camps page. A $50 deposit per camper holds the spot, and you can register multiple campers in one transaction — each camper picks their own weeks, attendance type, and before/after care.',
       },
       {
         q: 'Can my dancer do both a summer camp week and a summer class?',
         a: 'Absolutely — dancers are welcome to participate in both! However, they cannot be left at the studio between camp and their class. Families would need to pick up their dancer after camp ends and bring them back when their class begins.',
+      },
+    ],
+  },
+  {
+    category: 'Adult Summer Series',
+    items: [
+      {
+        q: 'What is the Adult Summer Series?',
+        a: 'It\'s a boutique 6-week movement series for women — three rotating themes (Calm Confidence, Throwback Flow, Femme Flow) offered once a week. Beginner friendly, no experience needed, in a supportive community space.',
+      },
+      {
+        q: 'When and where does it meet?',
+        a: 'Class times are being finalized based on interest-list responses. Available options include Monday or Friday 5–9 PM, Tuesday/Wednesday/Thursday after 8 PM, and Sunday mornings 10 AM – 1 PM. All classes are at our studio in Midlothian, VA.',
+      },
+      {
+        q: 'How do I sign up?',
+        a: 'We\'re currently collecting interest-list signups so we can finalize day, time, and pricing. Visit the Adult Summer Series page and submit the interest form — you\'ll get a confirmation email and be first to know when registration opens.',
+      },
+      {
+        q: 'What are the three classes?',
+        a: 'Calm Confidence is a graceful movement class with mindful movement, breathwork, and confidence-building exercises. Throwback Flow is a feel-good cardio dance class to throwback hits. Femme Flow blends grace, strength, and feminine expression into an empowering movement experience.',
       },
     ],
   },

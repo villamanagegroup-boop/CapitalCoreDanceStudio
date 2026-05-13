@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
@@ -12,13 +13,25 @@ const INITIAL_FORM = {
   email: '',
   phone: '',
   interest: '',
+  dancerName: '',
+  dancerAge: '',
   message: '',
 }
 
 export default function Contact() {
+  const [searchParams] = useSearchParams()
   const [form, setForm] = useState(INITIAL_FORM)
   const [status, setStatus] = useState('idle') // idle | submitting | success | error
   const [errorMsg, setErrorMsg] = useState('')
+  const [trialFromLink, setTrialFromLink] = useState(false)
+
+  // Pre-select "trial" interest when arriving from a /contact?interest=trial link.
+  useEffect(() => {
+    if (searchParams.get('interest') === 'trial') {
+      setForm((prev) => ({ ...prev, interest: 'trial' }))
+      setTrialFromLink(true)
+    }
+  }, [searchParams])
 
   function handleChange(e) {
     setForm((prev) => ({ ...prev, [e.target.id]: e.target.value }))
@@ -36,6 +49,8 @@ export default function Contact() {
         email: form.email,
         phone: form.phone || null,
         interest: form.interest || null,
+        dancer_name: form.dancerName || null,
+        dancer_age: form.dancerAge || null,
         message: form.message,
       },
     ])
@@ -54,6 +69,8 @@ export default function Contact() {
           email: form.email,
           phone: form.phone,
           interest: form.interest,
+          dancerName: form.dancerName,
+          dancerAge: form.dancerAge,
           message: form.message,
         }),
       }).catch(() => {})
@@ -81,6 +98,20 @@ export default function Contact() {
 
       <section className="bg-white flex-1 px-6 py-12">
         <div className="max-w-xl mx-auto">
+
+          {trialFromLink && status !== 'success' && (
+            <div className="mb-6 bg-[#daf0f7] border border-[#7ab3e8] rounded-lg px-5 py-4 flex items-start gap-3">
+              <span className="text-2xl flex-shrink-0">🩰</span>
+              <div>
+                <p className="text-navy-dark font-black text-base leading-snug">
+                  Let's set up your free trial!
+                </p>
+                <p className="text-[#3a4a6a] text-sm mt-1 leading-relaxed">
+                  Fill out the form below — include your dancer's name and age and we'll match them with the right class and follow up within 1–2 business days.
+                </p>
+              </div>
+            </div>
+          )}
 
           {status === 'success' ? (
             <div className="text-center py-16">
@@ -173,12 +204,53 @@ export default function Contact() {
                   className={`${inputClass} text-[#3a4a6a]`}
                 >
                   <option value="">Select an option</option>
-                  <option value="classes">Classes</option>
-                  <option value="camps">Camps</option>
+                  <option value="trial">Register for a Free Trial</option>
+                  <option value="classes">Year-Round Classes</option>
+                  <option value="summer-classes">Summer Classes</option>
+                  <option value="camps">Summer Camps</option>
+                  <option value="adult-series">Adult Summer Series</option>
                   <option value="birthdays">Birthdays / Parties</option>
                   <option value="general">General Inquiry</option>
                 </select>
               </div>
+
+              {/* Dancer details — show when registering for trial */}
+              {form.interest === 'trial' && (
+                <div className="bg-[#daf0f7]/40 border border-[#c8ddf4] rounded-lg px-4 py-4 flex flex-col gap-4">
+                  <p className="text-navy-dark text-xs font-bold tracking-[0.3em] uppercase">Free Trial Details</p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex-1 flex flex-col gap-1.5">
+                      <label className="text-navy-dark text-sm font-semibold" htmlFor="dancerName">
+                        Dancer's Name
+                      </label>
+                      <input
+                        id="dancerName"
+                        type="text"
+                        placeholder="Dancer's name"
+                        value={form.dancerName}
+                        onChange={handleChange}
+                        className={inputClass}
+                      />
+                    </div>
+                    <div className="flex-1 flex flex-col gap-1.5">
+                      <label className="text-navy-dark text-sm font-semibold" htmlFor="dancerAge">
+                        Age
+                      </label>
+                      <input
+                        id="dancerAge"
+                        type="text"
+                        placeholder="e.g. 7"
+                        value={form.dancerAge}
+                        onChange={handleChange}
+                        className={inputClass}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-[#5a6a8a] text-xs italic">
+                    Tell us about your dancer in the message below — preferred class style, any prior experience, scheduling preferences. We'll pair them with the best fit.
+                  </p>
+                </div>
+              )}
 
               {/* Message */}
               <div className="flex flex-col gap-1.5">

@@ -6,14 +6,14 @@ import { localBusinessSchema } from '../lib/schema'
 
 const SECTION_CARDS = [
   {
-    to: '/classes',
+    to: '/summer-classes',
     title: 'Classes',
-    subtitle: 'Year-round instruction',
+    subtitle: 'Summer 2026 · June 23 – July 30',
     photo: '/card-classes.jpg',
     imageAlt: 'Kids dance classes at Capital Core Dance Studio in Midlothian, VA',
     description:
-      'Ballet, jazz, hip hop, and more for all ages and skill levels. Weekly sessions in a supportive, energetic environment.',
-    linkLabel: 'View Classes',
+      'Six weeks of summer ballet, hip hop, jazz, tap, contemporary, and tumble for ages 2 through teen. Per-class, Flex Pass, or drop-in.',
+    linkLabel: 'View Summer Classes',
   },
   {
     to: '/camps',
@@ -36,14 +36,14 @@ const SECTION_CARDS = [
     linkLabel: 'View Packages',
   },
   {
-    to: '/mini-series',
-    title: 'Mini Series',
-    subtitle: 'Spring 2026',
-    photo: '/card-mini-series.jpg',
-    imageAlt: 'Spring Mini Series dance classes at Capital Core Dance Studio',
+    to: '/adult-summer-series',
+    title: 'Adult Dance',
+    subtitle: 'Move For Confidence',
+    photo: '/card-adult-dance.jpg',
+    imageAlt: 'Women dancing together in an adult movement class at Capital Core Dance Studio',
     description:
-      'Short-term class series combining two styles into one fun session. A low-commitment way to try something new this spring.',
-    linkLabel: 'View Mini Series',
+      'A boutique summer movement series for women — Calm Confidence, Throwback Flow, and Femme Flow. Beginner friendly, supportive community.',
+    linkLabel: 'View Adult Series',
   },
   {
     to: '/recital',
@@ -189,30 +189,69 @@ export default function Home() {
       {/* Flyers */}
       <section className="py-10 px-6" style={{ backgroundColor: '#ede0fa' }}>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-          <Link to="/recitalshop">
-            <img src="/flyer-night-at-the-cinema.png" alt="A Night at the Cinema — Spring Recital tickets on sale, June 13 2026 at Richmond Christian School — Capital Core Dance Studio" className="w-full aspect-square object-cover rounded-xl shadow-md hover:shadow-lg transition-shadow" />
-          </Link>
-          <Link to="/birthdays">
-            <img src="/flyer-birthday-parties.png" alt="Kids dance birthday party packages starting at $199 — Capital Core Dance Studio" className="w-full aspect-square object-cover rounded-xl shadow-md hover:shadow-lg transition-shadow" />
-          </Link>
-          <Link to="/camps">
-            <img src="/flyer-summer-camps.png" alt="Summer 2026 dance camps — eight themed weeks for ages 4–13, $50 deposit reserves your spot — Capital Core Dance Studio Midlothian VA" className="w-full aspect-square object-cover rounded-xl shadow-md hover:shadow-lg transition-shadow" />
-          </Link>
-          <Link to="/summer-classes">
-            <img
-              src="/flyer-summer-dance-classes.png"
-              alt="Summer dance classes June 23 to July 30, 6 weeks — ballet, tap, hip hop, jazz, contemporary, tumble — Capital Core Dance Studio Midlothian VA"
-              className="w-full aspect-square object-contain rounded-xl shadow-md hover:shadow-lg transition-shadow"
-              style={{ background: 'linear-gradient(to bottom, #ffffff 50%, #0d1b36 50%)' }}
-            />
-          </Link>
-          <Link to="/adult-summer-series">
-            <img
-              src="/flyer-adult-summer-series.png"
-              alt="Adult Summer Series — Move for Confidence, Connection & Community — Calm Confidence, Throwback Flow, Femme Flow — Capital Core Dance Studio Midlothian VA"
-              className="w-full aspect-square object-cover object-top rounded-xl shadow-md hover:shadow-lg transition-shadow"
-            />
-          </Link>
+          {[
+            {
+              to: '/recitalshop',
+              img: '/flyer-night-at-the-cinema.png',
+              alt: 'A Night at the Cinema — Spring Recital tickets on sale, June 13 2026 at Richmond Christian School — Capital Core Dance Studio',
+              imgClass: 'object-cover',
+              title: 'Recital Shop',
+              subtitle: 'A Night at the Cinema · June 13',
+              accent: 'text-[#C9A84C]',
+            },
+            {
+              to: '/birthdays',
+              img: '/flyer-birthday-parties.png',
+              alt: 'Kids dance birthday party packages starting at $199 — Capital Core Dance Studio',
+              imgClass: 'object-cover',
+              title: 'Birthday Parties',
+              subtitle: 'Private packages from $199',
+              accent: 'text-[#c0392b]',
+            },
+            {
+              to: '/camps',
+              img: '/flyer-summer-camps.png',
+              alt: 'Summer 2026 dance camps — eight themed weeks for ages 4–13, $50 deposit reserves your spot — Capital Core Dance Studio Midlothian VA',
+              imgClass: 'object-cover',
+              title: 'Summer Camps',
+              subtitle: '8 themed weeks · ages 4–13',
+              accent: 'text-[#7a4ed8]',
+            },
+            {
+              to: '/summer-classes',
+              img: '/flyer-summer-dance-classes.png',
+              alt: 'Summer dance classes June 23 to July 30, 6 weeks — ballet, tap, hip hop, jazz, contemporary, tumble — Capital Core Dance Studio Midlothian VA',
+              imgClass: 'object-contain',
+              imgStyle: { background: 'linear-gradient(to bottom, #ffffff 50%, #0d1b36 50%)' },
+              title: 'Summer Classes',
+              subtitle: '6 weeks · June 23 – July 30',
+              accent: 'text-[#c0392b]',
+            },
+            {
+              to: '/adult-summer-series',
+              img: '/flyer-adult-summer-series.png',
+              alt: 'Adult Summer Series — Move for Confidence, Connection & Community — Calm Confidence, Throwback Flow, Femme Flow — Capital Core Dance Studio Midlothian VA',
+              imgClass: 'object-cover object-top',
+              title: 'Adult Summer Series',
+              subtitle: 'For women · interest list open',
+              accent: 'text-[#7a3e42]',
+            },
+          ].map(({ to, img, alt, imgClass, imgStyle, title, subtitle, accent }) => (
+            <Link key={to} to={to} className="group flex flex-col">
+              <img
+                src={img}
+                alt={alt}
+                className={`w-full aspect-square ${imgClass} rounded-xl shadow-md group-hover:shadow-lg transition-shadow`}
+                style={imgStyle}
+              />
+              <div className="text-center mt-3 px-1">
+                <p className={`font-black text-sm tracking-wide uppercase leading-tight ${accent}`}>
+                  {title}
+                </p>
+                <p className="text-navy-dark/70 text-xs mt-1 leading-snug">{subtitle}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
@@ -223,14 +262,12 @@ export default function Home() {
             <p className="text-navy-dark font-black text-lg leading-snug">Your first class is always FREE.</p>
             <p className="text-[#3a6a8a] text-sm mt-0.5">Come try us out — no commitment needed.</p>
           </div>
-          <a
-            href="https://portal.iclasspro.com/capitalcoredance/dashboard"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/contact?interest=trial"
             className="flex-shrink-0 bg-navy-dark text-white text-sm font-bold px-6 py-2 rounded-md hover:bg-navy-mid transition-colors whitespace-nowrap"
           >
             Register for a Trial →
-          </a>
+          </Link>
         </div>
       </section>
 

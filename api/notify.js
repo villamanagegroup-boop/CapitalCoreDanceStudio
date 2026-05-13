@@ -11,13 +11,18 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;')
 }
 
-function buildContactEmail({ firstName, lastName, email, phone, interest, message }) {
+function buildContactEmail({ firstName, lastName, email, phone, interest, dancerName, dancerAge, message }) {
+  const isTrial = interest === 'trial'
+  const trialBlock = isTrial
+    ? `<p><strong>Free Trial · Dancer:</strong> ${escapeHtml(dancerName) || 'Not provided'}${dancerAge ? ` (age ${escapeHtml(dancerAge)})` : ''}</p>`
+    : ''
   return `
-    <h2>New Contact Form Submission</h2>
+    <h2>${isTrial ? 'New Free Trial Request' : 'New Contact Form Submission'}</h2>
     <p><strong>Name:</strong> ${escapeHtml(firstName)} ${escapeHtml(lastName)}</p>
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(phone) || 'Not provided'}</p>
     <p><strong>Interest:</strong> ${escapeHtml(interest) || 'Not specified'}</p>
+    ${trialBlock}
     <p><strong>Message:</strong></p>
     <p>${escapeHtml(message)}</p>
   `
@@ -529,7 +534,7 @@ export default async function handler(req, res) {
 
   let subject, html
   if (formType === 'contact') {
-    subject = 'New Contact Form Submission'
+    subject = data.interest === 'trial' ? 'New Free Trial Request' : 'New Contact Form Submission'
     html = buildContactEmail(data)
   } else if (formType === 'birthday') {
     subject = 'New Birthday Party Booking Request'
