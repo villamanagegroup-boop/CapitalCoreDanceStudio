@@ -296,21 +296,35 @@ export default function AdultSummerSeries() {
 
         {/* ── Details ──────────────────────────────────────────────────────── */}
         <section className="bg-warm-cream py-14 px-6">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-8 md:gap-y-0 md:divide-x divide-warm-border/70">
-            <div className="md:pr-10 text-center md:text-left">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-y-0 md:divide-x divide-warm-border/70">
+            <div className="md:px-6 text-center">
               <p className="text-warm-burgundy font-serif italic tracking-[0.3em] uppercase text-xs mb-3">
-                Summer Series Details
+                The Format
               </p>
-              <p className="font-serif text-warm-ink font-bold text-2xl">6 Weeks · Once a Week</p>
+              <p className="font-serif text-warm-ink font-bold text-xl sm:text-2xl">6 Weeks · Once a Week</p>
               <p className="text-warm-ink/80 text-sm mt-2 leading-relaxed">
-                Three rotating classes spread across the summer. Come every week, or just when you can.
+                One-hour classes. Three rotating themes. Come every week, or just when you can.
               </p>
             </div>
-            <div className="md:pl-10 text-center md:text-left">
+            <div className="md:px-6 text-center">
+              <p className="text-warm-burgundy font-serif italic tracking-[0.3em] uppercase text-xs mb-3">
+                Pricing
+              </p>
+              <p className="font-serif text-warm-ink font-bold text-xl sm:text-2xl">
+                $110 – $145 <span className="font-normal text-warm-taupe text-base">full series</span>
+              </p>
+              <p className="font-serif text-warm-ink font-bold text-base sm:text-lg mt-1">
+                $20 – $25 <span className="font-normal text-warm-taupe text-sm">per drop-in</span>
+              </p>
+              <p className="text-warm-ink/70 text-xs mt-2 italic">
+                Final pricing finalized once class times are confirmed.
+              </p>
+            </div>
+            <div className="md:px-6 text-center">
               <p className="text-warm-burgundy font-serif italic tracking-[0.3em] uppercase text-xs mb-3">
                 Capital Core Dance
               </p>
-              <p className="font-serif text-warm-ink font-bold text-2xl">A Stronger You</p>
+              <p className="font-serif text-warm-ink font-bold text-xl sm:text-2xl">A Stronger You</p>
               <p className="text-warm-ink/80 text-sm mt-2 leading-relaxed">
                 A community that moves — boutique movement experiences for women in Midlothian, VA.
               </p>
@@ -451,7 +465,7 @@ export default function AdultSummerSeries() {
                       Which day works best for you? <span className="text-[#8a9aaa] text-xs font-normal">(select any)</span>
                     </span>
                     <p className="text-[#8a9aaa] text-xs italic">
-                      Tues / Wed / Thurs run after 8 PM. Mon &amp; Fri are flexible 5–9 PM. Sunday mornings available too.
+                      These are <span className="font-semibold not-italic text-navy-dark">possible</span> class times — your feedback helps us pick the slot most of you can make. Tues / Wed / Thurs would run after 8 PM, Mon &amp; Fri are flexible 5–9 PM, and Sunday mornings 10 AM – 1 PM are an option too.
                     </p>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
                       {TIME_OPTIONS.map((t) => {
