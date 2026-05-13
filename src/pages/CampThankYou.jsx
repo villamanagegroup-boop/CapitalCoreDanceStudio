@@ -5,7 +5,11 @@ import SEO from '../components/SEO'
 
 export default function CampThankYou() {
   const { state } = useLocation()
-  const camperName = state?.camperName || ''
+  const campers = state?.campers || []
+  const camperCount = Number(state?.camperCount || campers.length || 0)
+  const camperLabel = campers.length
+    ? campers.map((c) => c.name || 'Camper').join(' & ')
+    : ''
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -26,7 +30,9 @@ export default function CampThankYou() {
 
           <div className="flex flex-col gap-2">
             <p className="text-navy-dark text-lg font-black">
-              {camperName ? `${camperName}'s spot is secured!` : 'Your spot is secured!'}
+              {camperLabel
+                ? `${camperLabel}'s spot${camperCount > 1 ? 's are' : ' is'} secured!`
+                : 'Your spot is secured!'}
             </p>
             <p className="text-[#5a6a8a] text-sm leading-relaxed">
               Your deposit has been received. We'll be in touch within 1–2 business days with next steps,

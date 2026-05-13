@@ -9,6 +9,10 @@ import CampForm from './pages/CampForm'
 import CampPayment from './pages/CampPayment'
 import CampThankYou from './pages/CampThankYou'
 import MiniSeries from './pages/MiniSeries'
+import SummerClasses from './pages/SummerClasses'
+import SummerClassesForm from './pages/SummerClassesForm'
+import SummerClassesPayment from './pages/SummerClassesPayment'
+import SummerClassesThankYou from './pages/SummerClassesThankYou'
 import Birthdays from './pages/Birthdays'
 import BirthdayForm from './pages/BirthdayForm'
 import BirthdayPayment from './pages/BirthdayPayment'
@@ -43,6 +47,10 @@ export default function App() {
         <Route path="/camp-payment" element={<CampPayment />} />
         <Route path="/camp-thankyou" element={<CampThankYou />} />
         <Route path="/mini-series" element={<MiniSeries />} />
+        <Route path="/summer-classes" element={<SummerClasses />} />
+        <Route path="/summer-classes/signup" element={<SummerClassesForm />} />
+        <Route path="/summer-classes/payment" element={<SummerClassesPayment />} />
+        <Route path="/summer-classes/thankyou" element={<SummerClassesThankYou />} />
         <Route path="/birthdays" element={<Birthdays />} />
         <Route path="/birthday-booking" element={<BirthdayForm />} />
         <Route path="/birthday-payment" element={<BirthdayPayment />} />

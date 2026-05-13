@@ -171,60 +171,217 @@ function buildRecitalCombinedCustomerEmail(data) {
   `
 }
 
+function renderCampersBlock(campers = []) {
+  if (!campers.length) return '<li>None</li>'
+  return campers.map((c, i) => {
+    const head = c.isReturning === 'Yes'
+      ? `<strong>${escapeHtml(c.name || `Camper ${i + 1}`)}</strong> · returning (current-dancer rate) — pull info from records`
+      : `<strong>${escapeHtml(c.name || `Camper ${i + 1}`)}</strong> · new (age ${escapeHtml(String(c.age || '—'))}, DOB ${escapeHtml(c.birthdate || '—')}, ${escapeHtml(c.gender || '—')}) — non-studio rate`
+    const weekLines = (c.weekItems || [])
+      .map((w) => `<li>${escapeHtml(w.weekLabel)} — ${escapeHtml(w.description)} — $${escapeHtml(String(w.price))}</li>`)
+      .join('')
+    const careLines = (c.careItems || [])
+      .map((ci) => `<li>${escapeHtml(ci.description)} — $${escapeHtml(Number(ci.price).toFixed(2))}</li>`)
+      .join('')
+    const before = c.beforeCare
+      ? `${escapeHtml(c.beforeCare.time || '')} drop-off, days: ${(c.beforeCare.days || []).map((d) => escapeHtml(d)).join(', ') || '—'}`
+      : 'None'
+    const after = c.afterCare
+      ? `${escapeHtml(c.afterCare.time || '')} pickup, days: ${(c.afterCare.days || []).map((d) => escapeHtml(d)).join(', ') || '—'}`
+      : 'None'
+    return `
+      <li style="margin-bottom:12px;">
+        ${head}
+        <ul>${weekLines || '<li>No weeks</li>'}</ul>
+        ${careLines ? `<p style="margin:4px 0 0 0;"><em>Care charges:</em></p><ul>${careLines}</ul>` : ''}
+        <p style="margin:4px 0 0 0;font-size:12px;"><em>Before care:</em> ${before} · <em>After care:</em> ${after}</p>
+        <p style="margin:4px 0 0 0;font-size:12px;"><em>Camper subtotal:</em> $${escapeHtml(Number(c.subtotal || 0).toFixed(2))}</p>
+      </li>`
+  }).join('')
+}
+
 function buildCampRegistrationEmail(data) {
-  const selectionLines = (data.selection || [])
-    .map((item) => `<li>${escapeHtml(item.weekLabel)} — ${escapeHtml(item.description)} — $${escapeHtml(String(item.price))}</li>`)
-    .join('')
-  const careLines = (data.careItems || [])
-    .map((item) => `<li>${escapeHtml(item.description)} — $${escapeHtml(item.price.toFixed(2))}</li>`)
-    .join('')
-  const before = data.beforeCare
-    ? `${escapeHtml(data.beforeCare.time || '')} drop-off, days: ${(data.beforeCare.days || []).map((d) => escapeHtml(d)).join(', ') || '—'}`
-    : 'None'
-  const after = data.afterCare
-    ? `${escapeHtml(data.afterCare.time || '')} pickup, days: ${(data.afterCare.days || []).map((d) => escapeHtml(d)).join(', ') || '—'}`
-    : 'None'
   return `
     <h2>New Summer Camp Registration</h2>
     <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
     <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
+    <p><strong>Camper count:</strong> ${escapeHtml(String(data.camperCount || (data.campers || []).length || 1))}</p>
     <hr />
-    <p><strong>Camper:</strong> ${escapeHtml(data.camperName)} (age ${escapeHtml(String(data.camperAge))}, DOB ${escapeHtml(data.camperBirthdate) || 'N/A'}, ${escapeHtml(data.camperGender)})</p>
-    <p><strong>Current Studio Student:</strong> ${escapeHtml(data.currentStudent)}</p>
-    <hr />
-    <p><strong>Weeks &amp; Attendance:</strong></p>
-    <ul>${selectionLines || '<li>None</li>'}</ul>
-    ${careLines ? `<p><strong>Before/After Care charges:</strong></p><ul>${careLines}</ul>` : ''}
-    <p><strong>Before Care:</strong> ${before}</p>
-    <p><strong>After Care:</strong> ${after}</p>
+    <p><strong>Campers:</strong></p>
+    <ul>${renderCampersBlock(data.campers)}</ul>
     <hr />
     <p><strong>Promo Code:</strong> ${escapeHtml(data.promoCode) || 'None'}</p>
     <p><strong>Promo Discount:</strong> $${escapeHtml(String(data.promoDiscount || 0))}</p>
     <p><strong>Gross Subtotal:</strong> $${escapeHtml(String(data.grossSubtotal || 0))}</p>
     <p><strong>Estimated Total:</strong> $${escapeHtml(String(data.estimatedTotal || 0))}</p>
+    <p><strong>Deposit Due:</strong> $${escapeHtml(String(data.depositTotal || 0))}</p>
     <p><strong>Notes:</strong> ${escapeHtml(data.notes) || 'None'}</p>
   `
 }
 
 function buildCampDepositEmail(data) {
-  const selectionLines = (data.items || [])
-    .map((item) => `<li>${escapeHtml(item.weekLabel)} — ${escapeHtml(item.description)} — $${escapeHtml(String(item.price))}</li>`)
-    .join('')
-  const careLines = (data.careItems || [])
-    .map((item) => `<li>${escapeHtml(item.description)} — $${escapeHtml(item.price.toFixed(2))}</li>`)
-    .join('')
   return `
     <h2>Summer Camp Deposit Received</h2>
     <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
-    <p><strong>Camper:</strong> ${escapeHtml(data.camperName)}</p>
+    <p><strong>Camper count:</strong> ${escapeHtml(String(data.camperCount || (data.campers || []).length || 1))}</p>
     <p><strong>Amount Paid:</strong> $${escapeHtml(String(data.amount))}</p>
     <p><strong>Estimated Total:</strong> $${escapeHtml(String(data.estimatedTotal || 0))}</p>
     <p><strong>PayPal Order ID:</strong> ${escapeHtml(data.paypalOrderId)}</p>
     <p><strong>Registration Record ID:</strong> ${escapeHtml(data.registrationId) || 'N/A'}</p>
     <hr />
-    <p><strong>Weeks &amp; Attendance:</strong></p>
-    <ul>${selectionLines || '<li>None</li>'}</ul>
-    ${careLines ? `<p><strong>Before/After Care:</strong></p><ul>${careLines}</ul>` : ''}
+    <p><strong>Campers:</strong></p>
+    <ul>${renderCampersBlock(data.campers)}</ul>
+  `
+}
+
+const SIGNUP_TYPE_LABELS = {
+  classes: 'Per-class (6-week)',
+  flex_pass: 'Summer Flex Pass ($329)',
+  drop_in: 'Drop-in ($25)',
+}
+
+function renderDancersBlock(dancers = []) {
+  if (!dancers.length) return '<li>None</li>'
+  return dancers.map((d, i) => {
+    const head = d.isReturning === 'Yes'
+      ? `<strong>${escapeHtml(d.name || `Dancer ${i + 1}`)}</strong> · returning — pull info from records`
+      : `<strong>${escapeHtml(d.name || `Dancer ${i + 1}`)}</strong> · new (age ${escapeHtml(String(d.age || '—'))}, ${escapeHtml(d.gender || '—')})`
+    const type = escapeHtml(SIGNUP_TYPE_LABELS[d.signupType] || d.signupType || '—')
+    const detail = (() => {
+      if (d.signupType === 'classes' && Array.isArray(d.classes) && d.classes.length) {
+        return `classes: ${d.classes.map((c) => escapeHtml(c)).join(', ')}`
+      }
+      if (d.signupType === 'drop_in') {
+        return `drop-in: ${escapeHtml(d.dropInClass || '—')} · week ${escapeHtml(d.dropInWeek || '—')}`
+      }
+      return ''
+    })()
+    return `<li>${head} — ${type}${detail ? ` (${detail})` : ''} — $${escapeHtml(String(d.tuition || 0))}</li>`
+  }).join('')
+}
+
+function buildSummerClassCustomerEmail(data) {
+  const firstName = (data.parentName || '').split(' ')[0] || 'there'
+  const isPaid = !!data.paypalOrderId
+  const dancerCount = data.dancerCount || (data.dancers || []).length || 1
+  const dancerNames = (data.dancers || []).map((d) => d.name || 'Dancer').join(' & ')
+
+  const dancerCards = (data.dancers || []).map((d, i) => {
+    const isReturning = d.isReturning === 'Yes'
+    const typeLabel = SIGNUP_TYPE_LABELS[d.signupType] || d.signupType || '—'
+    let pickRows = ''
+    if (d.signupType === 'classes' && Array.isArray(d.classes) && d.classes.length) {
+      pickRows = `<p style="margin:6px 0 0 0;font-size:13px;color:#3a4a6a;"><strong>Classes:</strong> ${d.classes.map((c) => escapeHtml(c)).join(', ')}</p>`
+    } else if (d.signupType === 'drop_in') {
+      pickRows = `<p style="margin:6px 0 0 0;font-size:13px;color:#3a4a6a;"><strong>Drop-in:</strong> ${escapeHtml(d.dropInClass || '—')} · ${escapeHtml(d.dropInWeek || '—')}</p>`
+    }
+    return `
+      <div style="border:1px solid #f4c8d4;border-radius:10px;padding:14px 16px;margin:0 0 12px 0;background:#fff8fb;">
+        <p style="margin:0;font-size:15px;color:#0B1F3A;font-weight:bold;">
+          ${escapeHtml(d.name || `Dancer ${i + 1}`)}
+          <span style="color:#8a9aaa;font-weight:normal;font-size:12px;"> · ${isReturning ? 'returning' : 'new'} dancer</span>
+        </p>
+        <p style="margin:4px 0 0 0;font-size:13px;color:#5a6a8a;">${escapeHtml(typeLabel)}</p>
+        ${pickRows}
+        <p style="margin:8px 0 0 0;font-size:13px;color:#0B1F3A;"><strong>Tuition:</strong> $${escapeHtml(String(d.tuition || 0))}</p>
+      </div>
+    `
+  }).join('')
+
+  const balanceLine = (data.balanceDue || 0) > 0
+    ? `<tr><td style="padding:6px 0;color:#666;">Balance due before first class</td><td style="padding:6px 0;text-align:right;color:#666;">$${escapeHtml(String(data.balanceDue))}</td></tr>`
+    : ''
+
+  return `
+    <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;color:#333;">
+      <div style="text-align:center;padding:24px 0;border-bottom:3px solid #f4a8b4;">
+        <h1 style="margin:0;color:#0B1F3A;font-size:24px;">Capital Core Dance Studio</h1>
+        <p style="margin:6px 0 0 0;color:#f4a8b4;font-style:italic;font-size:14px;">Summer 2026 · June 23 – July 30</p>
+      </div>
+
+      <div style="padding:24px 0;">
+        <h2 style="color:#0B1F3A;margin:0 0 12px 0;">Thanks for signing up, ${escapeHtml(firstName)}!</h2>
+        <p style="font-size:15px;line-height:1.6;margin:0 0 18px 0;">
+          ${isPaid
+            ? `We've received your payment of <strong>$${escapeHtml(String(data.amountPaid || data.amountDueToday || 0))}</strong> — ${dancerCount > 1 ? `${escapeHtml(dancerNames)}'s spots are` : `${escapeHtml(dancerNames)}'s spot is`} locked in.`
+            : `We've got ${dancerCount > 1 ? `${escapeHtml(dancerNames)}'s` : `${escapeHtml(dancerNames)}'s`} registration. Your $${escapeHtml(String(data.amountDueToday || 0))} payment will finalize the reservation.`}
+        </p>
+
+        <h3 style="color:#0B1F3A;margin:18px 0 8px 0;font-size:16px;">Here's what you signed up for:</h3>
+        ${dancerCards}
+
+        <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+          <tr><td style="padding:6px 0;color:#666;">Tuition total</td><td style="padding:6px 0;text-align:right;">$${escapeHtml(String(data.tuitionTotal || 0))}</td></tr>
+          <tr><td style="padding:6px 0;color:#666;">${isPaid ? 'Amount paid' : 'Amount due today'}</td><td style="padding:6px 0;text-align:right;color:#0a7c3e;font-weight:bold;">$${escapeHtml(String(isPaid ? (data.amountPaid || data.amountDueToday) : data.amountDueToday || 0))}</td></tr>
+          ${balanceLine}
+        </table>
+
+        <h3 style="color:#0B1F3A;margin:24px 0 8px 0;font-size:16px;">What's next?</h3>
+        <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#555;">
+          ${isPaid
+            ? '<li>We\'ll be in touch within 1–2 business days with what to wear and bring on the first day.</li>'
+            : '<li>Complete your payment to lock in the spot. The button on the website opens a secure PayPal checkout.</li>'}
+          ${(data.balanceDue || 0) > 0 ? `<li>Your remaining balance of <strong>$${escapeHtml(String(data.balanceDue))}</strong> is due before the first class (June 23).</li>` : ''}
+          <li>If you haven't already, complete a waiver for each dancer before their first class.</li>
+        </ul>
+
+        <p style="font-size:13px;color:#888;margin:24px 0 0 0;line-height:1.6;">
+          Need to change something? Reply to this email or contact us at
+          <a href="mailto:info@capitalcoredance.com" style="color:#f4a8b4;">info@capitalcoredance.com</a>
+          or call (804) 234-4014.
+        </p>
+      </div>
+
+      <div style="text-align:center;padding:16px 0;border-top:1px solid #eee;color:#999;font-size:12px;">
+        Capital Core Dance Studio · 13110 Midlothian Turnpike, Midlothian, VA 23113
+      </div>
+    </div>
+  `
+}
+
+function buildSummerClassRegistrationEmail(data) {
+  const itemLines = (data.items || [])
+    .map((item) => `<li>${escapeHtml(item.label)} — $${escapeHtml(String(item.price))}</li>`)
+    .join('')
+  return `
+    <h2>New Summer Class Registration</h2>
+    <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
+    <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
+    <p><strong>Dancer count:</strong> ${escapeHtml(String(data.dancerCount || (data.dancers || []).length || 1))}</p>
+    <hr />
+    <p><strong>Dancers:</strong></p>
+    <ul>${renderDancersBlock(data.dancers)}</ul>
+    <hr />
+    <p><strong>Line items:</strong></p>
+    <ul>${itemLines || '<li>None</li>'}</ul>
+    <p><strong>Tuition Total:</strong> $${escapeHtml(String(data.tuitionTotal || 0))}</p>
+    <p><strong>Payment Choice:</strong> ${escapeHtml(data.paymentChoice)}</p>
+    <p><strong>Amount Due Today:</strong> $${escapeHtml(String(data.amountDueToday || 0))}</p>
+    <p><strong>Balance Due Before First Class:</strong> $${escapeHtml(String(data.balanceDue || 0))}</p>
+    <p><strong>Notes:</strong> ${escapeHtml(data.notes) || 'None'}</p>
+  `
+}
+
+function buildSummerClassDepositEmail(data) {
+  const itemLines = (data.items || [])
+    .map((item) => `<li>${escapeHtml(item.label)} — $${escapeHtml(String(item.price))}</li>`)
+    .join('')
+  return `
+    <h2>Summer Class Payment Received</h2>
+    <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
+    <p><strong>Dancer count:</strong> ${escapeHtml(String(data.dancerCount || (data.dancers || []).length || 1))}</p>
+    <p><strong>Payment Choice:</strong> ${escapeHtml(data.paymentChoice)}</p>
+    <p><strong>Amount Paid:</strong> $${escapeHtml(String(data.amountPaid || 0))}</p>
+    <p><strong>Tuition Total:</strong> $${escapeHtml(String(data.tuitionTotal || 0))}</p>
+    <p><strong>Balance Due Before First Class:</strong> $${escapeHtml(String(data.balanceDue || 0))}</p>
+    <p><strong>PayPal Order ID:</strong> ${escapeHtml(data.paypalOrderId) || 'N/A'}</p>
+    <p><strong>Registration Record ID:</strong> ${escapeHtml(data.registrationId) || 'N/A'}</p>
+    <hr />
+    <p><strong>Dancers:</strong></p>
+    <ul>${renderDancersBlock(data.dancers)}</ul>
+    <hr />
+    <p><strong>Line items:</strong></p>
+    <ul>${itemLines || '<li>None</li>'}</ul>
   `
 }
 
@@ -289,6 +446,12 @@ export default async function handler(req, res) {
   } else if (formType === 'camp_deposit') {
     subject = 'Summer Camp Deposit Received'
     html = buildCampDepositEmail(data)
+  } else if (formType === 'summer_class_registration') {
+    subject = 'New Summer Class Registration'
+    html = buildSummerClassRegistrationEmail(data)
+  } else if (formType === 'summer_class_deposit') {
+    subject = 'Summer Class Payment Received'
+    html = buildSummerClassDepositEmail(data)
   } else if (formType === 'recital_order') {
     subject = 'New Recital T-Shirt Order'
     html = buildRecitalOrderEmail(data)
@@ -322,6 +485,23 @@ export default async function handler(req, res) {
           to: data.email,
           subject: 'Your Recital Order Confirmation – Capital Core Dance Studio',
           html: buildRecitalCombinedCustomerEmail(data),
+        })
+      } catch (custErr) {
+        console.error('Customer email error (non-fatal):', custErr)
+      }
+    }
+
+    // Send customer confirmation for summer class registration and payment
+    if ((formType === 'summer_class_registration' || formType === 'summer_class_deposit') && data.email) {
+      try {
+        const subjectLine = formType === 'summer_class_deposit'
+          ? 'Payment Received · Summer Class Confirmation – Capital Core Dance Studio'
+          : 'Summer Class Registration Received – Capital Core Dance Studio'
+        await resend.emails.send({
+          from: process.env.FROM_EMAIL,
+          to: data.email,
+          subject: subjectLine,
+          html: buildSummerClassCustomerEmail(data),
         })
       } catch (custErr) {
         console.error('Customer email error (non-fatal):', custErr)

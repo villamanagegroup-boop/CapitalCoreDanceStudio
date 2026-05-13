@@ -4,6 +4,7 @@ const NAV_LINKS = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
   { to: '/classes', label: 'Our Classes' },
+  { to: '/summer-classes', label: 'Summer Classes' },
   { to: '/camps', label: 'Summer Camps' },
   { to: '/tuition', label: 'Tuition' },
   { to: '/birthdays', label: 'Birthdays' },

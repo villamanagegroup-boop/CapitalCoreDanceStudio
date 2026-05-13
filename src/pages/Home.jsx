@@ -198,8 +198,13 @@ export default function Home() {
           <Link to="/camps">
             <img src="/flyer-summer-camps.png" alt="Summer 2026 dance camps — eight themed weeks for ages 4–13, $50 deposit reserves your spot — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
-          <Link to="/classes">
-            <img src="/flyer-summer-dance-classes.png" alt="Summer dance classes June 23 to July 30 — ballet, tap, hip hop, jazz, Irish, contemporary — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+          <Link to="/summer-classes">
+            <img
+              src="/flyer-summer-dance-classes.png"
+              alt="Summer dance classes June 23 to July 30, 6 weeks — ballet, tap, hip hop, jazz, contemporary, tumble — Capital Core Dance Studio Midlothian VA"
+              className="w-full aspect-square object-contain rounded-xl shadow-md hover:shadow-lg transition-shadow"
+              style={{ background: 'linear-gradient(to bottom, #ffffff 50%, #0d1b36 50%)' }}
+            />
           </Link>
         </div>
       </section>
