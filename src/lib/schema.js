@@ -71,7 +71,9 @@ export const localBusinessSchema = {
     name: 'Capital Core Dance Studio Programs',
     itemListElement: [
       { '@type': 'Offer', name: 'Year-Round Dance Classes', url: `${SITE_URL}/classes` },
+      { '@type': 'Offer', name: 'Summer Dance Classes', url: `${SITE_URL}/summer-classes` },
       { '@type': 'Offer', name: 'Summer Dance Camps', url: `${SITE_URL}/camps` },
+      { '@type': 'Offer', name: 'Adult Summer Series', url: `${SITE_URL}/adult-summer-series` },
       { '@type': 'Offer', name: 'Mini Series Spring Classes', url: `${SITE_URL}/mini-series` },
       { '@type': 'Offer', name: 'Birthday Party Packages', url: `${SITE_URL}/birthdays` },
       { '@type': 'Offer', name: 'Annual Recital', url: `${SITE_URL}/recital` },

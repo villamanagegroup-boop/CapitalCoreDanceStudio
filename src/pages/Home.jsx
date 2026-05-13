@@ -188,15 +188,15 @@ export default function Home() {
 
       {/* Flyers */}
       <section className="py-10 px-6" style={{ backgroundColor: '#ede0fa' }}>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
           <Link to="/recitalshop">
-            <img src="/flyer-night-at-the-cinema.png" alt="A Night at the Cinema — Spring Recital tickets on sale, June 13 2026 at Richmond Christian School — Capital Core Dance Studio" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+            <img src="/flyer-night-at-the-cinema.png" alt="A Night at the Cinema — Spring Recital tickets on sale, June 13 2026 at Richmond Christian School — Capital Core Dance Studio" className="w-full aspect-square object-cover rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
           <Link to="/birthdays">
-            <img src="/flyer-birthday-parties.png" alt="Kids dance birthday party packages starting at $199 — Capital Core Dance Studio" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+            <img src="/flyer-birthday-parties.png" alt="Kids dance birthday party packages starting at $199 — Capital Core Dance Studio" className="w-full aspect-square object-cover rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
           <Link to="/camps">
-            <img src="/flyer-summer-camps.png" alt="Summer 2026 dance camps — eight themed weeks for ages 4–13, $50 deposit reserves your spot — Capital Core Dance Studio Midlothian VA" className="w-full rounded-xl shadow-md hover:shadow-lg transition-shadow" />
+            <img src="/flyer-summer-camps.png" alt="Summer 2026 dance camps — eight themed weeks for ages 4–13, $50 deposit reserves your spot — Capital Core Dance Studio Midlothian VA" className="w-full aspect-square object-cover rounded-xl shadow-md hover:shadow-lg transition-shadow" />
           </Link>
           <Link to="/summer-classes">
             <img
@@ -204,6 +204,13 @@ export default function Home() {
               alt="Summer dance classes June 23 to July 30, 6 weeks — ballet, tap, hip hop, jazz, contemporary, tumble — Capital Core Dance Studio Midlothian VA"
               className="w-full aspect-square object-contain rounded-xl shadow-md hover:shadow-lg transition-shadow"
               style={{ background: 'linear-gradient(to bottom, #ffffff 50%, #0d1b36 50%)' }}
+            />
+          </Link>
+          <Link to="/adult-summer-series">
+            <img
+              src="/flyer-adult-summer-series.png"
+              alt="Adult Summer Series — Move for Confidence, Connection & Community — Calm Confidence, Throwback Flow, Femme Flow — Capital Core Dance Studio Midlothian VA"
+              className="w-full aspect-square object-cover object-top rounded-xl shadow-md hover:shadow-lg transition-shadow"
             />
           </Link>
         </div>

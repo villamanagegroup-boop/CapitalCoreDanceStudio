@@ -13,6 +13,7 @@ import SummerClasses from './pages/SummerClasses'
 import SummerClassesForm from './pages/SummerClassesForm'
 import SummerClassesPayment from './pages/SummerClassesPayment'
 import SummerClassesThankYou from './pages/SummerClassesThankYou'
+import AdultSummerSeries from './pages/AdultSummerSeries'
 import Birthdays from './pages/Birthdays'
 import BirthdayForm from './pages/BirthdayForm'
 import BirthdayPayment from './pages/BirthdayPayment'
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/summer-classes/signup" element={<SummerClassesForm />} />
         <Route path="/summer-classes/payment" element={<SummerClassesPayment />} />
         <Route path="/summer-classes/thankyou" element={<SummerClassesThankYou />} />
+        <Route path="/adult-summer-series" element={<AdultSummerSeries />} />
         <Route path="/birthdays" element={<Birthdays />} />
         <Route path="/birthday-booking" element={<BirthdayForm />} />
         <Route path="/birthday-payment" element={<BirthdayPayment />} />

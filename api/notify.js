@@ -385,6 +385,103 @@ function buildSummerClassDepositEmail(data) {
   `
 }
 
+const PASS_LABELS = {
+  full_series: 'Full Series Pass (all 6 weeks)',
+  drop_in: 'Drop-in (pay per class)',
+  vip: 'VIP Pass (priority + perks)',
+  not_sure: 'Not sure yet — keep me in the loop',
+}
+
+const TIME_LABELS = {
+  mon_5_9: 'Monday — 5 to 9 PM',
+  tue_after8: 'Tuesday — after 8 PM',
+  wed_after8: 'Wednesday — after 8 PM',
+  thu_after8: 'Thursday — after 8 PM',
+  fri_5_9: 'Friday — 5 to 9 PM',
+  sun_morning: 'Sunday morning — 10 AM to 1 PM',
+}
+
+function buildAdultSeriesInterestAdminEmail(data) {
+  const classList = (data.classInterest || []).map((c) => escapeHtml(c)).join(', ') || 'No preference indicated'
+  const timeList = (data.preferredTimes || [])
+    .map((t) => escapeHtml(TIME_LABELS[t] || t))
+    .join(', ') || 'No preference indicated'
+  const passLabel = data.passInterest
+    ? escapeHtml(PASS_LABELS[data.passInterest] || data.passInterest)
+    : 'Not specified'
+  return `
+    <h2>New Adult Summer Series Interest</h2>
+    <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+    <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(data.phone) || 'Not provided'}</p>
+    <p><strong>Classes interested in:</strong> ${classList}</p>
+    <p><strong>Preferred day/time:</strong> ${timeList}</p>
+    <p><strong>Pricing interest:</strong> ${passLabel}</p>
+    <p><strong>Notes:</strong> ${escapeHtml(data.notes) || 'None'}</p>
+  `
+}
+
+function buildAdultSeriesInterestCustomerEmail(data) {
+  const firstName = (data.name || '').split(' ')[0] || 'friend'
+  const classChips = (data.classInterest || [])
+    .map((c) => `<span style="display:inline-block;border:1px solid #d9c7b8;border-radius:2px;padding:4px 10px;margin:2px 4px 2px 0;font-size:12px;color:#6b4a3e;background:#faf3eb;">${escapeHtml(c)}</span>`)
+    .join('')
+  const timeChips = (data.preferredTimes || [])
+    .map((t) => `<span style="display:inline-block;border:1px solid #d9c7b8;border-radius:2px;padding:4px 10px;margin:2px 4px 2px 0;font-size:12px;color:#6b4a3e;background:#faf3eb;">${escapeHtml(TIME_LABELS[t] || t)}</span>`)
+    .join('')
+  return `
+    <div style="font-family:'Cormorant Garamond', Georgia, serif;max-width:560px;margin:0 auto;color:#3d2828;background:#faf3eb;">
+      <div style="text-align:center;padding:32px 24px 24px;border-bottom:1px solid #d9c7b8;">
+        <p style="margin:0;color:#7a3e42;font-style:italic;font-size:13px;letter-spacing:4px;text-transform:uppercase;">Adult Summer Series</p>
+        <h1 style="margin:14px 0 0;color:#3d2828;font-size:32px;font-family:'Playfair Display', Georgia, serif;font-weight:900;letter-spacing:-1px;">Move For Confidence,</h1>
+        <p style="margin:6px 0 0;color:#7a3e42;font-size:38px;font-family:'Allura', cursive;font-weight:normal;line-height:1;">Connection &amp; Community</p>
+      </div>
+
+      <div style="padding:28px 28px 8px;">
+        <p style="font-size:24px;font-family:'Allura', cursive;color:#7a3e42;margin:0;">You're on the list ♡</p>
+        <h2 style="color:#3d2828;margin:8px 0 14px 0;font-size:20px;font-family:'Playfair Display', Georgia, serif;">Welcome, ${escapeHtml(firstName)}.</h2>
+        <p style="font-size:15px;line-height:1.7;margin:0 0 18px;">
+          Thank you for raising your hand for our boutique movement series. We'll send registration dates, class times, and a few early-bird perks straight to this inbox — no spam, just the good stuff.
+        </p>
+        ${classChips ? `
+          <p style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#7a3e42;margin:18px 0 6px;font-style:italic;">You're interested in</p>
+          <div style="margin-bottom:6px;">${classChips}</div>
+        ` : ''}
+        ${timeChips ? `
+          <p style="font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#7a3e42;margin:18px 0 6px;font-style:italic;">Days/times that work for you</p>
+          <div style="margin-bottom:6px;">${timeChips}</div>
+        ` : ''}
+        ${data.passInterest ? `
+          <p style="font-size:14px;color:#6b4a3e;margin:14px 0 0;"><strong>Pricing preference:</strong> ${escapeHtml(PASS_LABELS[data.passInterest] || data.passInterest)}</p>
+        ` : ''}
+      </div>
+
+      <div style="background:#f4ebe2;border-top:1px solid #d9c7b8;border-bottom:1px solid #d9c7b8;padding:22px 28px;margin-top:18px;">
+        <p style="margin:0 0 8px;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#7a3e42;font-style:italic;">The Series</p>
+        <p style="margin:0;font-size:15px;color:#3d2828;line-height:1.7;">
+          Three rotating themes — <em>Calm Confidence</em>, <em>Throwback Flow</em>, and <em>Femme Flow</em> — once a week for six weeks. Beginner friendly. No experience required. Just you, the music, and a community that moves.
+        </p>
+      </div>
+
+      <div style="padding:22px 28px;text-align:center;">
+        <p style="font-family:'Allura', cursive;color:#7a3e42;font-size:28px;line-height:1.3;margin:0;">
+          Your summer. Your movement. Your confidence.
+        </p>
+      </div>
+
+      <div style="padding:16px 28px 28px;border-top:1px solid #d9c7b8;text-align:center;">
+        <p style="font-size:13px;color:#9c7e6e;margin:0;">
+          Questions? Reply to this email or reach us at
+          <a href="mailto:info@capitalcoredance.com" style="color:#7a3e42;">info@capitalcoredance.com</a>.
+        </p>
+        <p style="font-size:11px;color:#9c7e6e;margin:14px 0 0;">
+          Capital Core Dance Studio · 13110 Midlothian Turnpike, Midlothian, VA 23113
+        </p>
+      </div>
+    </div>
+  `
+}
+
 function buildBirthdayDepositEmail(data) {
   return `
     <h2>Birthday Party Deposit Received</h2>
@@ -452,6 +549,9 @@ export default async function handler(req, res) {
   } else if (formType === 'summer_class_deposit') {
     subject = 'Summer Class Payment Received'
     html = buildSummerClassDepositEmail(data)
+  } else if (formType === 'adult_series_interest') {
+    subject = 'New Adult Summer Series Interest'
+    html = buildAdultSeriesInterestAdminEmail(data)
   } else if (formType === 'recital_order') {
     subject = 'New Recital T-Shirt Order'
     html = buildRecitalOrderEmail(data)
@@ -485,6 +585,20 @@ export default async function handler(req, res) {
           to: data.email,
           subject: 'Your Recital Order Confirmation – Capital Core Dance Studio',
           html: buildRecitalCombinedCustomerEmail(data),
+        })
+      } catch (custErr) {
+        console.error('Customer email error (non-fatal):', custErr)
+      }
+    }
+
+    // Send customer confirmation for Adult Summer Series interest signups
+    if (formType === 'adult_series_interest' && data.email) {
+      try {
+        await resend.emails.send({
+          from: process.env.FROM_EMAIL,
+          to: data.email,
+          subject: 'You\'re on the list · Adult Summer Series – Capital Core Dance Studio',
+          html: buildAdultSeriesInterestCustomerEmail(data),
         })
       } catch (custErr) {
         console.error('Customer email error (non-fatal):', custErr)
