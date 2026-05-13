@@ -98,10 +98,10 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/classes"
+              to="/summer-classes"
               className="bg-brand-red text-white font-bold px-8 py-3 rounded-md hover:bg-red-700 transition-colors"
             >
-              Explore Classes
+              Explore Summer Classes
             </Link>
             <Link
               to="/birthdays"
