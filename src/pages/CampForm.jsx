@@ -54,7 +54,7 @@ const GENDER_OPTIONS = ['Female', 'Male', 'Non-binary', 'Prefer not to say']
 
 const PROMO_CODES = {
   CKSummer26: {
-    label: 'CertifiKid · $40 off per week (current dancer) or $60 off per week (non-studio)',
+    label: 'CertifiKid · $40 off (current) / $60 off (non-studio) per full week or half-week. 2+ single days: each day after the first is 50% off. Pick all 5 single days and you\'re auto-upgraded to full-week pricing + the weekly discount.',
     type: 'per_full_week',
     currentRate: 40,
     nonRate: 60,
@@ -110,6 +110,56 @@ function calcWeekPrice(selection, isCurrent) {
     case 'single_half_days': return tier.single_half_day * (selection.days?.length || 0)
     default: return 0
   }
+}
+
+// CertifiKid (per_full_week) discount per individual week selection.
+//
+//   full_week / half_week  → flat weekly rate ($40 current / $60 non).
+//   single_days, 1 day     → no discount.
+//   single_days, 2–4 days  → first day full price, remaining days 50% off.
+//   single_days, all 5     → auto-upgrade to full_week pricing AND apply the
+//                            weekly discount on top.
+//   single_half_days       → same logic as single_days, using half-day rates
+//                            and the half_week tier when all 5 are picked.
+//
+// Returns the dollar amount to subtract from the *base* week price computed
+// by calcWeekPrice — so the rest of the totals math stays a simple
+// `subtotal − discount` everywhere it's already used.
+function weekPromoDiscount(selection, isCurrent, promo) {
+  if (!selection || !selection.type || !promo || promo.type !== 'per_full_week') return 0
+  const tier = isCurrent ? RATES.current : RATES.non
+  const rate = isCurrent ? promo.currentRate : promo.nonRate
+  const N = selection.days?.length || 0
+
+  if (selection.type === 'full_week' || selection.type === 'half_week') {
+    return rate
+  }
+
+  if (selection.type === 'single_days') {
+    if (N >= 5) {
+      const base = tier.single_day * N
+      const promoPrice = Math.max(0, tier.full_week - rate)
+      return Math.max(0, base - promoPrice)
+    }
+    if (N >= 2) {
+      return Math.round((N - 1) * tier.single_day * 0.5 * 100) / 100
+    }
+    return 0
+  }
+
+  if (selection.type === 'single_half_days') {
+    if (N >= 5) {
+      const base = tier.single_half_day * N
+      const promoPrice = Math.max(0, tier.half_week - rate)
+      return Math.max(0, base - promoPrice)
+    }
+    if (N >= 2) {
+      return Math.round((N - 1) * tier.single_half_day * 0.5 * 100) / 100
+    }
+    return 0
+  }
+
+  return 0
 }
 
 function describeSelection(selection) {
@@ -225,10 +275,17 @@ export default function CampForm() {
     let promoQualifyingWeeks = 0
     if (promo && promo.type === 'per_full_week') {
       for (const c of perCamper) {
-        const rate = c.isCurrent ? promo.currentRate : promo.nonRate
-        const qualifying = c.weekItems.filter((w) => w.type === 'full_week' || w.type === 'half_week').length
-        promoQualifyingWeeks += qualifying
-        discount += rate * qualifying
+        for (const w of c.weekItems) {
+          const weekDiscount = weekPromoDiscount(
+            { type: w.type, days: w.days },
+            c.isCurrent,
+            promo,
+          )
+          if (weekDiscount > 0) {
+            promoQualifyingWeeks += 1
+            discount += weekDiscount
+          }
+        }
       }
       discount = Math.min(grossSubtotal, discount)
     } else if (promo && promo.type === 'percent_off_all') {
@@ -822,7 +879,7 @@ export default function CampForm() {
                     <p className="text-green-700 text-xs">{promo.label}</p>
                     {promo.type === 'per_full_week' && totals.promoQualifyingWeeks === 0 && (
                       <p className="text-green-700 text-xs italic mt-1">
-                        Applies to full-week or half-day-full-week selections — single-day picks don't qualify.
+                        No qualifying weeks yet — pick a full week, a half-day full week, or at least 2 single days in a week to unlock the discount.
                       </p>
                     )}
                   </div>
@@ -886,7 +943,7 @@ export default function CampForm() {
                     <span>
                       {promo.code}
                       {promo.type === 'per_full_week' && (
-                        <> · {totals.promoQualifyingWeeks} qualifying week{totals.promoQualifyingWeeks !== 1 ? 's' : ''}</>
+                        <> · {totals.promoQualifyingWeeks} qualifying week{totals.promoQualifyingWeeks !== 1 ? 's' : ''} (full week, half-week, or 2+ single days)</>
                       )}
                       {promo.type === 'percent_off_all' && (
                         <> · {Math.round(promo.rate * 100)}% off entire order</>
