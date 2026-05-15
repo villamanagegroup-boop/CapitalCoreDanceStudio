@@ -16,8 +16,11 @@ function fmtPrice(n) {
   return n % 1 === 0 ? `$${n}` : `$${n.toFixed(2)}`
 }
 
-// Promo codes — case-insensitive. CGADMIN100 fully comps the order (admin testing only).
+// Promo codes — case-insensitive.
+//   VOLUNTEER · $5 off each t-shirt item
+//   CGADMIN100 · 100% off entire order (admin testing only)
 const PROMO_CODES = {
+  VOLUNTEER:  { label: 'Volunteer · $5 off each t-shirt', perShirtOff: 5 },
   CGADMIN100: { label: 'Admin · 100% off entire order (testing only)', rate: 1.00 },
 }
 
@@ -28,6 +31,7 @@ function validatePromo(code) {
 }
 
 const initQty = (sizes) => Object.fromEntries(sizes.map((s) => [s, 0]))
+const sumQty = (obj) => Object.values(obj).reduce((a, b) => a + b, 0)
 
 function SizeControl({ size, qty, onInc, onDec }) {
   return (
@@ -77,7 +81,12 @@ export default function RecitalShirts() {
   const youthSubtotal = YOUTH_SIZES.reduce((sum, s) => sum + youthQty[s] * YOUTH_PRICE, 0)
   const adultSubtotal = ADULT_SIZES.reduce((sum, s) => sum + adultQty[s] * ADULT_PRICE, 0)
   const subtotal = youthSubtotal + adultSubtotal
-  const discount = promo ? Math.round(subtotal * promo.rate * 100) / 100 : 0
+  const shirtCount = sumQty(youthQty) + sumQty(adultQty)
+  const discount = promo
+    ? (promo.perShirtOff
+        ? Math.min(subtotal, +(shirtCount * promo.perShirtOff).toFixed(2))
+        : Math.round(subtotal * (promo.rate || 0) * 100) / 100)
+    : 0
   const total = Math.max(0, +(subtotal - discount).toFixed(2))
   const hasItems = subtotal > 0
   const formValid = hasItems && name.trim().length > 0 && email.trim().includes('@') && ack
@@ -487,7 +496,12 @@ export default function RecitalShirts() {
                 </div>
                 {promo && discount > 0 && (
                   <div className="flex justify-between items-center text-sm text-green-300">
-                    <span>{promo.code} ({Math.round(promo.rate * 100)}% off)</span>
+                    <span>
+                      {promo.code}
+                      {promo.perShirtOff
+                        ? ` (${fmtPrice(promo.perShirtOff)} off each of ${shirtCount} shirt${shirtCount !== 1 ? 's' : ''})`
+                        : ` (${Math.round(promo.rate * 100)}% off)`}
+                    </span>
                     <span>−{fmtPrice(discount)}</span>
                   </div>
                 )}

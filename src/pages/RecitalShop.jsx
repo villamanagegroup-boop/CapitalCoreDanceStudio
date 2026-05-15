@@ -64,9 +64,12 @@ const SHOW_INFO = {
 }
 
 // ── Promo codes (case-insensitive) ──────────────────────────
-// appliesTo: 'tickets' (rate × min(adultQty, maxQty)) or 'all' (rate × subtotal)
+// appliesTo:
+//   'tickets'   rate × min(adultQty, maxQty)
+//   'volunteer' same ticket discount + $perShirtOff off each t-shirt
+//   'all'       rate × subtotal
 const PROMO_CODES = {
-  VOLUNTEER:  { label: 'Volunteer · 20% off adult tickets (up to 6)', appliesTo: 'tickets', rate: 0.20, maxQty: 6 },
+  VOLUNTEER:  { label: 'Volunteer · 20% off adult tickets (up to 6) + $5 off each t-shirt', appliesTo: 'volunteer', rate: 0.20, maxQty: 6, perShirtOff: 5 },
   CGADMIN100: { label: 'Admin · 100% off entire order (testing)',     appliesTo: 'all',     rate: 1.00 },
 }
 
@@ -183,18 +186,26 @@ export default function RecitalShop() {
   const shirtSubtotal = youthShirtSubtotal + adultShirtSubtotal
   const subtotal = ticketSubtotal + programSubtotal + shirtSubtotal
 
-  const ticketDiscountedQty = promo?.appliesTo === 'tickets' ? Math.min(adultQty, promo.maxQty) : 0
+  const ticketCount = adultQty + childQty
+  const shirtCount = sumQty(youthQty) + sumQty(adultSizeQty)
+
+  const usesTicketDiscount = promo?.appliesTo === 'tickets' || promo?.appliesTo === 'volunteer'
+  const ticketDiscountedQty = usesTicketDiscount ? Math.min(adultQty, promo.maxQty || 0) : 0
+  const ticketDiscount = usesTicketDiscount
+    ? +(ticketDiscountedQty * TICKET_ADULT_PRICE * promo.rate).toFixed(2)
+    : 0
+  const shirtDiscount = (promo?.appliesTo === 'volunteer' && promo.perShirtOff)
+    ? Math.min(shirtSubtotal, +(shirtCount * promo.perShirtOff).toFixed(2))
+    : 0
+
   let discount = 0
-  if (promo?.appliesTo === 'tickets') {
-    discount = +(ticketDiscountedQty * TICKET_ADULT_PRICE * promo.rate).toFixed(2)
-  } else if (promo?.appliesTo === 'all') {
+  if (promo?.appliesTo === 'all') {
     discount = +(subtotal * promo.rate).toFixed(2)
+  } else {
+    discount = +(ticketDiscount + shirtDiscount).toFixed(2)
   }
 
   const total = Math.max(0, +(subtotal - discount).toFixed(2))
-
-  const ticketCount = adultQty + childQty
-  const shirtCount = sumQty(youthQty) + sumQty(adultSizeQty)
   const totalItemCount = ticketCount + programQty + shirtCount
   const hasItems = totalItemCount > 0
 
@@ -678,6 +689,13 @@ export default function RecitalShop() {
                             <span>
                               {promo.code}
                               {promo.appliesTo === 'tickets' && ` (${Math.round(promo.rate * 100)}% off ${ticketDiscountedQty} of ${adultQty})`}
+                              {promo.appliesTo === 'volunteer' && (
+                                <>
+                                  {ticketDiscount > 0 && shirtDiscount > 0 && ` (${Math.round(promo.rate * 100)}% off ${ticketDiscountedQty} ticket${ticketDiscountedQty !== 1 ? 's' : ''} + ${fmtPrice(promo.perShirtOff)} × ${shirtCount} shirt${shirtCount !== 1 ? 's' : ''})`}
+                                  {ticketDiscount > 0 && shirtDiscount === 0 && ` (${Math.round(promo.rate * 100)}% off ${ticketDiscountedQty} of ${adultQty})`}
+                                  {ticketDiscount === 0 && shirtDiscount > 0 && ` (${fmtPrice(promo.perShirtOff)} off each of ${shirtCount} shirt${shirtCount !== 1 ? 's' : ''})`}
+                                </>
+                              )}
                               {promo.appliesTo === 'all' && ` (${Math.round(promo.rate * 100)}% off order)`}
                             </span>
                             <span>−{fmtPrice(discount)}</span>
