@@ -8,22 +8,30 @@ import { simpleBreadcrumb } from '../lib/schema'
 const PILLARS = [
   {
     accent: 'border-brand-red',
-    label: 'We Focus on the Whole Dancer',
+    titleColor: 'text-brand-red',
+    eyebrow: 'Whole Dancer',
+    label: 'We focus on more than choreography',
     body: 'Our goal is not just to teach choreography. We develop coordination, musicality, athleticism, confidence, and creativity in every dancer.',
   },
   {
     accent: 'border-[#7ab3e8]',
-    label: 'We Create a Positive Studio Environment',
+    titleColor: 'text-[#3a7ab3]',
+    eyebrow: 'Studio Culture',
+    label: 'We create a positive environment',
     body: 'Every dancer deserves to feel welcome and supported. Our studio culture is built on encouragement, respect, and teamwork.',
   },
   {
     accent: 'border-[#f4a8b4]',
-    label: 'We Offer Opportunities to Grow',
+    titleColor: 'text-[#c0506e]',
+    eyebrow: 'Growth',
+    label: 'We offer many ways to grow',
     body: 'From technique classes and performances to camps, workshops, and community events — dancers have many ways to develop and express themselves.',
   },
   {
     accent: 'border-[#f4a060]',
-    label: 'We Build a Strong Community',
+    titleColor: 'text-[#c47830]',
+    eyebrow: 'Community',
+    label: 'We build a strong community',
     body: 'Capital Core Dance is more than a studio — it is a place where dancers and families connect, celebrate milestones, and grow together.',
   },
 ]
@@ -88,12 +96,15 @@ export default function About() {
             <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">What Makes Us Different</p>
             <h2 className="text-navy-dark text-2xl font-black mb-6">Four things we stand by</h2>
             <div className="flex flex-col gap-4">
-              {PILLARS.map(({ accent, label, body }) => (
+              {PILLARS.map(({ accent, titleColor, eyebrow, label, body }) => (
                 <div
                   key={label}
                   className={`border border-surface-border border-l-4 ${accent} rounded-lg px-5 py-4`}
                 >
-                  <div className="font-bold text-navy-dark text-base mb-1">{label}</div>
+                  <p className={`${titleColor} text-[10px] font-bold tracking-[0.3em] uppercase mb-1`}>
+                    {eyebrow}
+                  </p>
+                  <div className={`font-black ${titleColor} text-base mb-1.5`}>{label}</div>
                   <p className="text-[#3a4a6a] text-sm leading-relaxed">{body}</p>
                 </div>
               ))}

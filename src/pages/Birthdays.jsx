@@ -118,7 +118,8 @@ export default function Birthdays() {
 
             {/* What's Included */}
             <div className="border border-surface-border border-l-4 border-l-[#f4a8b4] rounded-lg px-5 py-5">
-              <h3 className="font-black text-navy-dark text-base mb-3">What's Included</h3>
+              <p className="text-[#c0506e] text-[10px] font-bold tracking-[0.3em] uppercase mb-1">Package</p>
+              <h3 className="font-black text-[#c0506e] text-base mb-3">What's Included</h3>
               <ul className="flex flex-col gap-1.5">
                 {INCLUDED.map((item) => (
                   <li key={item} className="text-[#3a4a6a] text-sm flex gap-2">
@@ -134,7 +135,8 @@ export default function Birthdays() {
 
             {/* Themes */}
             <div className="border border-surface-border border-l-4 border-l-[#f4a060] rounded-lg px-5 py-5">
-              <h3 className="font-black text-navy-dark text-base mb-3">Exciting Themes</h3>
+              <p className="text-[#c47830] text-[10px] font-bold tracking-[0.3em] uppercase mb-1">Pick Your Vibe</p>
+              <h3 className="font-black text-[#c47830] text-base mb-3">Exciting Themes</h3>
               <ul className="flex flex-col gap-1.5">
                 {THEMES.map((theme) => (
                   <li key={theme} className="text-[#3a4a6a] text-sm flex gap-2">
@@ -150,7 +152,8 @@ export default function Birthdays() {
 
             {/* Party Details */}
             <div className="border border-surface-border border-l-4 border-l-brand-red rounded-lg px-5 py-5">
-              <h3 className="font-black text-navy-dark text-base mb-3">Party Details</h3>
+              <p className="text-brand-red text-[10px] font-bold tracking-[0.3em] uppercase mb-1">The Basics</p>
+              <h3 className="font-black text-brand-red text-base mb-3">Party Details</h3>
               <ul className="flex flex-col gap-1.5">
                 {[
                   '90-minute private party',
