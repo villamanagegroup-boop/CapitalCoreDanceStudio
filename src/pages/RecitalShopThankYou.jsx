@@ -8,10 +8,11 @@ export default function RecitalShopThankYou() {
   const firstName = state?.name?.split(' ')[0] || null
 
   const adultQty = state?.adultQty || 0
+  const kidQty = state?.kidQty || 0
   const childQty = state?.childQty || 0
   const programQty = state?.programQty || 0
   const shirtLineItems = state?.shirtLineItems || ''
-  const hasTickets = adultQty + childQty > 0
+  const hasTickets = adultQty + kidQty + childQty > 0
   const hasPrograms = programQty > 0
   const hasShirts = !!shirtLineItems
   const showDate = state?.showDate || 'Saturday, June 13, 2026'
@@ -66,7 +67,11 @@ export default function RecitalShopThankYou() {
                   <span className="mt-0.5 w-6 h-6 rounded-full bg-[#C9A84C] flex-shrink-0 flex items-center justify-center text-[#0B1F3A] text-xs font-black">T</span>
                   <div className="flex-1">
                     <p className="text-[#0B1F3A] font-bold text-sm">
-                      {adultQty} adult ticket{adultQty === 1 ? '' : 's'}{childQty > 0 && ` + ${childQty} child${childQty === 1 ? '' : 'ren'} (free)`}
+                      {[
+                        adultQty > 0 && `${adultQty} adult ticket${adultQty === 1 ? '' : 's'}`,
+                        kidQty > 0 && `${kidQty} kid ticket${kidQty === 1 ? '' : 's'} (4–11)`,
+                        childQty > 0 && `${childQty} child${childQty === 1 ? '' : 'ren'} (3 & under, free)`,
+                      ].filter(Boolean).join(' + ')}
                     </p>
                     <p className="text-gray-500 text-xs">{showDate} · {showTime}</p>
                   </div>

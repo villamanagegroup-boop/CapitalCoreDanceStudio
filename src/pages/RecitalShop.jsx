@@ -46,7 +46,8 @@ const SHOW_DATE = new Date('2026-06-12T00:00:00')
 const isAfterShow = new Date() >= SHOW_DATE
 
 const TICKET_ADULT_PRICE = 25
-// Children 3 & under are free
+const TICKET_KID_PRICE = 15
+// Kids 4–11: $15 · Children 3 & under: free
 
 const PROGRAM_PRICE = isAfterShow ? 15 : 10
 
@@ -153,6 +154,7 @@ export default function RecitalShop() {
   // ── Cart state (one cart, all products) ───────────────────
   // Tickets
   const [adultQty, setAdultQty] = useState(0)
+  const [kidQty, setKidQty] = useState(0)
   const [childQty, setChildQty] = useState(0)
   // Programs
   const [programQty, setProgramQty] = useState(0)
@@ -179,14 +181,16 @@ export default function RecitalShop() {
   const formRef = useRef({})
 
   // ── Derived ───────────────────────────────────────────────
-  const ticketSubtotal = adultQty * TICKET_ADULT_PRICE
+  const adultTicketSubtotal = adultQty * TICKET_ADULT_PRICE
+  const kidTicketSubtotal = kidQty * TICKET_KID_PRICE
+  const ticketSubtotal = adultTicketSubtotal + kidTicketSubtotal
   const programSubtotal = programQty * PROGRAM_PRICE
   const youthShirtSubtotal = YOUTH_SIZES.reduce((sum, s) => sum + youthQty[s] * YOUTH_PRICE, 0)
   const adultShirtSubtotal = ADULT_SIZES.reduce((sum, s) => sum + adultSizeQty[s] * ADULT_PRICE, 0)
   const shirtSubtotal = youthShirtSubtotal + adultShirtSubtotal
   const subtotal = ticketSubtotal + programSubtotal + shirtSubtotal
 
-  const ticketCount = adultQty + childQty
+  const ticketCount = adultQty + kidQty + childQty
   const shirtCount = sumQty(youthQty) + sumQty(adultSizeQty)
 
   const usesTicketDiscount = promo?.appliesTo === 'tickets' || promo?.appliesTo === 'volunteer'
@@ -219,10 +223,11 @@ export default function RecitalShop() {
     const shirtLineItems = [...youthLines, ...adultLines].join(', ')
     formRef.current = {
       name, email,
-      adultQty, childQty,
+      adultQty, kidQty, childQty,
       programQty,
       youthQty, adultSizeQty,
       shirtLineItems,
+      adultTicketSubtotal, kidTicketSubtotal,
       ticketSubtotal, programSubtotal, shirtSubtotal,
       subtotal, discount, total,
       promo,
@@ -323,6 +328,7 @@ export default function RecitalShop() {
       contact_name: fd.name,
       email: fd.email,
       ticket_adult_qty: fd.adultQty,
+      ticket_kid_qty: fd.kidQty,
       ticket_child_qty: fd.childQty,
       ticket_subtotal: fd.ticketSubtotal,
       program_qty: fd.programQty,
@@ -349,9 +355,12 @@ export default function RecitalShop() {
           name: fd.name,
           email: fd.email,
           adultQty: fd.adultQty,
+          kidQty: fd.kidQty,
           childQty: fd.childQty,
           programQty: fd.programQty,
           shirtLineItems: fd.shirtLineItems,
+          adultTicketSubtotal: fd.adultTicketSubtotal,
+          kidTicketSubtotal: fd.kidTicketSubtotal,
           ticketSubtotal: fd.ticketSubtotal,
           programSubtotal: fd.programSubtotal,
           shirtSubtotal: fd.shirtSubtotal,
@@ -375,6 +384,7 @@ export default function RecitalShop() {
       state: {
         name: fd.name,
         adultQty: fd.adultQty,
+        kidQty: fd.kidQty,
         childQty: fd.childQty,
         programQty: fd.programQty,
         shirtLineItems: fd.shirtLineItems,
@@ -411,7 +421,7 @@ export default function RecitalShop() {
       `}</style>
       <SEO
         title="Recital Tickets, Programs &amp; Shirts | Capital Core Dance Studio – Midlothian, VA"
-        description="Buy tickets ($25 adult, free for children 3 &amp; under), pre-order show programs, and order official t-shirts for Capital Core Dance Studio's 2026 recital, A Night at the Cinema. Saturday, June 13, 2026 at Richmond Christian School."
+        description="Buy tickets ($25 adult, $15 kids 4&ndash;11, free for children 3 &amp; under), pre-order show programs, and order official t-shirts for Capital Core Dance Studio's 2026 recital, A Night at the Cinema. Saturday, June 13, 2026 at Richmond Christian School."
         canonical="/recitalshop"
         jsonLd={SHOP_JSON_LD}
       />
@@ -476,7 +486,7 @@ export default function RecitalShop() {
               <div className="mb-8">
                 <p className="text-[#C9A84C] text-xs font-black tracking-[0.3em] uppercase mb-1">Reserve Your Seats</p>
                 <h2 className="shop-playfair text-[#0B1F3A] text-3xl font-black leading-tight">Tickets</h2>
-                <p className="text-gray-500 text-sm mt-1">General admission · Children 3 &amp; under are free</p>
+                <p className="text-gray-500 text-sm mt-1">General admission · Kids 4&ndash;11 are {fmtPrice(TICKET_KID_PRICE)} · Children 3 &amp; under are free</p>
               </div>
 
               {/* Show info card */}
@@ -493,10 +503,18 @@ export default function RecitalShop() {
               <div className="bg-gray-50 rounded-xl p-5 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-[#0B1F3A] font-bold text-sm">Adult Tickets</p>
+                    <p className="text-[#0B1F3A] font-bold text-sm">Adult Tickets <span className="text-gray-400 font-normal">(12 &amp; up)</span></p>
                     <p className="text-gray-400 text-xs">{fmtPrice(TICKET_ADULT_PRICE)} each</p>
                   </div>
                   <Stepper qty={adultQty} onInc={() => inc(setAdultQty)} onDec={() => dec(setAdultQty)} />
+                </div>
+                <div className="border-t border-gray-200" />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-[#0B1F3A] font-bold text-sm">Kids Tickets <span className="text-gray-400 font-normal">(4&ndash;11)</span></p>
+                    <p className="text-gray-400 text-xs">{fmtPrice(TICKET_KID_PRICE)} each</p>
+                  </div>
+                  <Stepper qty={kidQty} onInc={() => inc(setKidQty)} onDec={() => dec(setKidQty)} />
                 </div>
                 <div className="border-t border-gray-200" />
                 <div className="flex items-center justify-between">
@@ -631,13 +649,19 @@ export default function RecitalShop() {
                     <p className="text-[#C9A84C] text-xs font-black tracking-[0.3em] uppercase mb-3">Your Order</p>
                     <div className="bg-[#0B1F3A] border border-[#C9A84C]/30 rounded-xl p-6">
                       <div className="space-y-3 mb-4">
-                        {(adultQty > 0 || childQty > 0) && (
+                        {(adultQty > 0 || kidQty > 0 || childQty > 0) && (
                           <div>
                             <p className="text-[#C9A84C] text-[10px] font-black tracking-widest uppercase mb-1.5">Tickets — {SHOW_INFO.label}</p>
                             {adultQty > 0 && (
                               <div className="flex justify-between text-white/85 text-sm">
                                 <span>{adultQty} Adult{adultQty !== 1 ? 's' : ''} × {fmtPrice(TICKET_ADULT_PRICE)}</span>
-                                <span>{fmtPrice(ticketSubtotal)}</span>
+                                <span>{fmtPrice(adultTicketSubtotal)}</span>
+                              </div>
+                            )}
+                            {kidQty > 0 && (
+                              <div className="flex justify-between text-white/85 text-sm">
+                                <span>{kidQty} Kid{kidQty !== 1 ? 's' : ''} (4&ndash;11) × {fmtPrice(TICKET_KID_PRICE)}</span>
+                                <span>{fmtPrice(kidTicketSubtotal)}</span>
                               </div>
                             )}
                             {childQty > 0 && (

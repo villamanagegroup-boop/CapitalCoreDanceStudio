@@ -7,7 +7,7 @@ import { eventSchema, simpleBreadcrumb } from '../lib/schema'
 const RECITAL_EVENT = eventSchema({
   name: 'A Night at the Cinema — Capital Core Dance Studio Annual Recital 2026',
   description:
-    "Capital Core Dance Studio's annual spring recital. All enrolled dancers perform in a cinema-themed evening of dance. General admission tickets are $25; children 3 and under are free.",
+    "Capital Core Dance Studio's annual spring recital. All enrolled dancers perform in a cinema-themed evening of dance. Adult tickets are $25, kids 4–11 are $15, and children 3 and under are free.",
   startDate: '2026-06-13T14:00:00-04:00',
   endDate: '2026-06-13T16:00:00-04:00',
   offerUrl: 'https://capitalcoredance.com/recitalshop',
@@ -27,7 +27,7 @@ export default function Recital() {
     <div className="min-h-screen flex flex-col bg-[#0B1F3A]">
       <SEO
         title="Annual Recital 2026 – A Night at the Cinema | Capital Core Dance Studio Midlothian VA"
-        description="Capital Core Dance Studio presents 'A Night at the Cinema' — dress rehearsal Friday June 12 and recital Saturday June 13, 2026 at Richmond Christian School in Chesterfield, VA. All enrolled dancers perform. Tickets $25 adult, free for children 3 &amp; under."
+        description="Capital Core Dance Studio presents 'A Night at the Cinema' — dress rehearsal Friday June 12 and recital Saturday June 13, 2026 at Richmond Christian School in Chesterfield, VA. All enrolled dancers perform. Tickets $25 adult, $15 kids 4&ndash;11, free for children 3 &amp; under."
         canonical="/recital"
         ogType="event"
         jsonLd={[
@@ -170,7 +170,7 @@ export default function Recital() {
             Purchase your ticket, shirt, and program booklet here
           </h2>
           <p className="text-gray-500 text-sm mb-8 max-w-md mx-auto">
-            Adult tickets are $25 — children 3 &amp; under are free. Show programs and "A Night at the Cinema" shirts are pre-order.
+            Adult tickets are $25, kids 4&ndash;11 are $15, and children 3 &amp; under are free. Show programs and "A Night at the Cinema" shirts are pre-order.
           </p>
           <Link
             to="/recitalshop"

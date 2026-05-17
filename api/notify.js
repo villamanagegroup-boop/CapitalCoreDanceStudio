@@ -46,7 +46,8 @@ function buildRecitalTicketEmail(data) {
     <p><strong>Contact Name:</strong> ${escapeHtml(data.name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
     <p><strong>Show:</strong> ${escapeHtml(data.show)}${data.showDate ? ` — ${escapeHtml(data.showDate)} at ${escapeHtml(data.showTime)}` : ''}</p>
-    <p><strong>Adult Tickets:</strong> ${escapeHtml(String(data.adultQty))}</p>
+    <p><strong>Adult Tickets (12 &amp; up):</strong> ${escapeHtml(String(data.adultQty))}</p>
+    <p><strong>Kids Tickets (4&ndash;11, $15):</strong> ${escapeHtml(String(data.kidQty || 0))}</p>
     <p><strong>Child Tickets (3 &amp; under, free):</strong> ${escapeHtml(String(data.childQty))}</p>
     <p><strong>Subtotal:</strong> $${escapeHtml(String(data.subtotal))}</p>
     <p><strong>Discount:</strong> $${escapeHtml(String(data.discount))}</p>
@@ -72,8 +73,12 @@ function buildRecitalProgramEmail(data) {
 }
 
 function buildRecitalCombinedAdminEmail(data) {
-  const ticketLine = (data.adultQty || 0) + (data.childQty || 0) > 0
-    ? `<p><strong>Tickets:</strong> ${escapeHtml(String(data.adultQty))} adult${data.childQty ? ` + ${escapeHtml(String(data.childQty))} child (free)` : ''} for ${escapeHtml(data.showLabel || '')} (${escapeHtml(data.showDate || '')} ${escapeHtml(data.showTime || '')}) — $${escapeHtml(String(data.ticketSubtotal))}</p>`
+  const ticketParts = []
+  if (data.adultQty > 0) ticketParts.push(`${escapeHtml(String(data.adultQty))} adult`)
+  if (data.kidQty > 0) ticketParts.push(`${escapeHtml(String(data.kidQty))} kid (4–11)`)
+  if (data.childQty > 0) ticketParts.push(`${escapeHtml(String(data.childQty))} child (free)`)
+  const ticketLine = ticketParts.length > 0
+    ? `<p><strong>Tickets:</strong> ${ticketParts.join(' + ')} for ${escapeHtml(data.showLabel || '')} (${escapeHtml(data.showDate || '')} ${escapeHtml(data.showTime || '')}) — $${escapeHtml(String(data.ticketSubtotal))}</p>`
     : ''
   const programLine = data.programQty > 0
     ? `<p><strong>Programs:</strong> ${escapeHtml(String(data.programQty))} × — $${escapeHtml(String(data.programSubtotal))}</p>`
@@ -104,10 +109,12 @@ function buildRecitalCombinedCustomerEmail(data) {
   const showTime = escapeHtml(data.showTime || '2:00 PM')
 
   const items = []
-  if ((data.adultQty || 0) + (data.childQty || 0) > 0) {
-    let line = `${data.adultQty} adult ticket${data.adultQty === 1 ? '' : 's'}`
-    if (data.childQty > 0) line += ` + ${data.childQty} child${data.childQty === 1 ? '' : 'ren'} (3 & under, free)`
-    items.push(`<li>🎟 <strong>${escapeHtml(line)}</strong> — ${showDate} at ${showTime}</li>`)
+  if ((data.adultQty || 0) + (data.kidQty || 0) + (data.childQty || 0) > 0) {
+    const parts = []
+    if (data.adultQty > 0) parts.push(`${data.adultQty} adult ticket${data.adultQty === 1 ? '' : 's'}`)
+    if (data.kidQty > 0) parts.push(`${data.kidQty} kid ticket${data.kidQty === 1 ? '' : 's'} (4–11)`)
+    if (data.childQty > 0) parts.push(`${data.childQty} child${data.childQty === 1 ? '' : 'ren'} (3 & under, free)`)
+    items.push(`<li>🎟 <strong>${escapeHtml(parts.join(' + '))}</strong> — ${showDate} at ${showTime}</li>`)
   }
   if (data.programQty > 0) {
     items.push(`<li>📖 <strong>${escapeHtml(String(data.programQty))} show program${data.programQty === 1 ? '' : 's'}</strong> — pickup at the show</li>`)
@@ -116,13 +123,17 @@ function buildRecitalCombinedCustomerEmail(data) {
     items.push(`<li>👕 <strong>T-shirts:</strong> ${escapeHtml(data.shirtLineItems)} — pickup at the studio (date TBA)</li>`)
   }
 
-  const ticketBox = (data.adultQty || 0) + (data.childQty || 0) > 0 ? `
+  const ticketBoxParts = []
+  if (data.adultQty > 0) ticketBoxParts.push(`${escapeHtml(String(data.adultQty))} adult${data.adultQty === 1 ? '' : 's'}`)
+  if (data.kidQty > 0) ticketBoxParts.push(`${escapeHtml(String(data.kidQty))} kid${data.kidQty === 1 ? '' : 's'} (4–11)`)
+  if (data.childQty > 0) ticketBoxParts.push(`${escapeHtml(String(data.childQty))} child${data.childQty === 1 ? '' : 'ren'}`)
+  const ticketBox = (data.adultQty || 0) + (data.kidQty || 0) + (data.childQty || 0) > 0 ? `
     <div style="margin:24px 0;border:2px solid #C9A84C;border-radius:12px;overflow:hidden;">
       <img src="https://capitalcoredance.com/ticket-banner.png" alt="A Night at the Cinema — Spring Show Ticket" style="display:block;width:100%;height:auto;" />
       <div style="background:#fdf8f0;padding:20px;">
         <p style="margin:0 0 8px 0;color:#C9A84C;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;">Your Ticket Confirmation</p>
         <p style="margin:0 0 4px 0;font-size:18px;font-weight:bold;color:#0B1F3A;">${escapeHtml(data.name)}</p>
-        <p style="margin:0 0 12px 0;font-size:14px;color:#555;">${escapeHtml(String(data.adultQty))} adult${data.adultQty === 1 ? '' : 's'}${data.childQty ? ` + ${escapeHtml(String(data.childQty))} child${data.childQty === 1 ? '' : 'ren'}` : ''}</p>
+        <p style="margin:0 0 12px 0;font-size:14px;color:#555;">${ticketBoxParts.join(' + ')}</p>
         <p style="margin:0;font-size:14px;color:#0B1F3A;"><strong>${showDate} · ${showTime}</strong></p>
         <p style="margin:4px 0 12px 0;font-size:13px;color:#666;">${venue} · ${address}</p>
         <p style="margin:0;padding-top:12px;border-top:1px solid #C9A84C;font-size:13px;color:#0B1F3A;font-weight:bold;">Show this email at the door for entry.</p>
@@ -157,7 +168,7 @@ function buildRecitalCombinedCustomerEmail(data) {
 
         <h3 style="color:#0B1F3A;margin:24px 0 8px 0;font-size:16px;">What's next?</h3>
         <ul style="font-size:14px;line-height:1.8;padding-left:20px;color:#555;">
-          ${(data.adultQty || 0) + (data.childQty || 0) > 0 ? `<li><strong>Tickets:</strong> Show this email at the door on show day. Children 3 &amp; under are free and don't need a ticket.</li>` : ''}
+          ${(data.adultQty || 0) + (data.kidQty || 0) + (data.childQty || 0) > 0 ? `<li><strong>Tickets:</strong> Show this email at the door on show day. Kids 4&ndash;11 are $15. Children 3 &amp; under are free and don't need a ticket.</li>` : ''}
           ${data.programQty > 0 ? `<li><strong>Programs:</strong> Pick up your program at the show — ${venue}.</li>` : ''}
           ${data.shirtLineItems ? `<li><strong>T-shirts:</strong> Made to order. We'll email you when they're ready for pickup at the studio.</li>` : ''}
         </ul>
