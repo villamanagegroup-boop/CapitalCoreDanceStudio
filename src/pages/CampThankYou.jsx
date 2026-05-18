@@ -7,6 +7,7 @@ export default function CampThankYou() {
   const { state } = useLocation()
   const campers = state?.campers || []
   const camperCount = Number(state?.camperCount || campers.length || 0)
+  const paidInFull = !!state?.paidInFull
   const camperLabel = campers.length
     ? campers.map((c) => c.name || 'Camper').join(' & ')
     : ''
@@ -35,8 +36,9 @@ export default function CampThankYou() {
                 : 'Your spot is secured!'}
             </p>
             <p className="text-[#5a6a8a] text-sm leading-relaxed">
-              Your deposit has been received. We'll be in touch within 1–2 business days with next steps,
-              including the remaining balance and what to bring on the first day.
+              {paidInFull
+                ? `Your full camp payment has been received — you're all set! We'll be in touch within 1–2 business days with what to bring on the first day.`
+                : `Your deposit has been received. We'll be in touch within 1–2 business days with next steps, including the remaining balance and what to bring on the first day.`}
             </p>
           </div>
 

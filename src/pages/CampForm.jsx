@@ -96,6 +96,7 @@ const INITIAL_FORM = {
   phone: '',
   campers: [newCamper()],
   notes: '',
+  paymentChoice: 'deposit', // 'deposit' | 'full'
   policyDeposit: false,
   policyConfirm: false,
 }
@@ -297,8 +298,9 @@ export default function CampForm() {
     const camperCount = form.campers.length
     const depositTotal = DEPOSIT_PER_CAMPER * camperCount
 
-    return { perCamper, grossSubtotal, discount, promoQualifyingWeeks, total, camperCount, depositTotal }
-  }, [form.campers, promo])
+    const amountDueToday = form.paymentChoice === 'full' ? total : depositTotal
+    return { perCamper, grossSubtotal, discount, promoQualifyingWeeks, total, camperCount, depositTotal, amountDueToday }
+  }, [form.campers, promo, form.paymentChoice])
 
   function updateParent(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -443,6 +445,7 @@ export default function CampForm() {
         promo_code: promo?.code || null,
         promo_discount: totals.discount || 0,
         estimated_total: totals.total,
+        payment_choice: form.paymentChoice,
         additional_notes: form.notes || null,
       }])
       .select()
@@ -487,6 +490,7 @@ export default function CampForm() {
         grossSubtotal: totals.grossSubtotal,
         estimatedTotal: totals.total,
         depositTotal: totals.depositTotal,
+        paymentChoice: form.paymentChoice,
       },
     })
   }
@@ -1010,6 +1014,64 @@ export default function CampForm() {
               </div>
             </div>
 
+            <hr className="border-surface-border" />
+
+            {/* Payment Choice */}
+            <div className="flex flex-col gap-4">
+              <div>
+                <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-1">Step 4</p>
+                <h2 className="text-navy-dark text-lg font-black">How would you like to pay today?</h2>
+                <p className="text-[#5a6a8a] text-sm mt-1">
+                  You can pay just the deposit now to hold the spot, or pay the full balance up front. Either way, you'll check out with PayPal on the next page.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {[
+                  {
+                    value: 'deposit',
+                    title: `Pay the deposit · $${totals.depositTotal}`,
+                    desc: `$${DEPOSIT_PER_CAMPER} per camper now. Remaining balance${totals.total - totals.depositTotal > 0 ? ` of $${(totals.total - totals.depositTotal).toFixed(2)}` : ''} due before camp begins.`,
+                  },
+                  {
+                    value: 'full',
+                    title: `Pay in full · $${totals.total.toFixed(2)}`,
+                    desc: 'Pay the full camp balance today — no follow-up payment needed.',
+                  },
+                ].map((opt) => {
+                  const active = form.paymentChoice === opt.value
+                  const disabled = opt.value === 'full' && totals.total <= 0
+                  return (
+                    <label
+                      key={opt.value}
+                      className={`border rounded-lg px-3 py-3 transition-colors ${
+                        disabled
+                          ? 'border-surface-border bg-surface-light/30 opacity-50 cursor-not-allowed'
+                          : active
+                            ? 'border-[#f4a8b4] bg-[#fff5f8] cursor-pointer'
+                            : 'border-surface-border bg-white hover:border-[#c8ddf4] cursor-pointer'
+                      }`}
+                    >
+                      <div className="flex items-start gap-2.5">
+                        <input
+                          type="radio"
+                          name="paymentChoice"
+                          value={opt.value}
+                          checked={active}
+                          disabled={disabled}
+                          onChange={() => updateParent('paymentChoice', opt.value)}
+                          className="mt-1 flex-shrink-0"
+                        />
+                        <div>
+                          <p className="font-semibold text-navy-dark text-sm">{opt.title}</p>
+                          <p className="text-[#5a6a8a] text-xs mt-0.5 leading-snug">{opt.desc}</p>
+                        </div>
+                      </div>
+                    </label>
+                  )
+                })}
+              </div>
+            </div>
+
             {status === 'error' && (
               <p className="text-brand-red text-sm">{errorMsg}</p>
             )}
@@ -1019,7 +1081,11 @@ export default function CampForm() {
               disabled={status === 'submitting'}
               className="bg-brand-red text-white font-bold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {status === 'submitting' ? 'Submitting…' : `Continue to Deposit · $${totals.depositTotal} →`}
+              {status === 'submitting'
+                ? 'Submitting…'
+                : form.paymentChoice === 'full'
+                  ? `Continue to Full Payment · $${totals.amountDueToday.toFixed(2)} →`
+                  : `Continue to Deposit · $${totals.amountDueToday} →`}
             </button>
 
             <p className="text-[#8a9aaa] text-xs text-center">

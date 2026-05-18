@@ -236,12 +236,19 @@ function buildCampRegistrationEmail(data) {
 }
 
 function buildCampDepositEmail(data) {
+  const paidInFull = !!data.paidInFull
+  const paymentLabel = paidInFull ? 'Paid in full' : 'Deposit'
+  const balanceRemaining = paidInFull
+    ? 0
+    : Math.max(0, Number(data.estimatedTotal || 0) - Number(data.amount || 0))
   return `
-    <h2>Summer Camp Deposit Received</h2>
+    <h2>Summer Camp ${paidInFull ? 'Full Payment' : 'Deposit'} Received</h2>
     <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
     <p><strong>Camper count:</strong> ${escapeHtml(String(data.camperCount || (data.campers || []).length || 1))}</p>
+    <p><strong>Payment Type:</strong> ${paymentLabel}</p>
     <p><strong>Amount Paid:</strong> $${escapeHtml(String(data.amount))}</p>
     <p><strong>Estimated Total:</strong> $${escapeHtml(String(data.estimatedTotal || 0))}</p>
+    <p><strong>Balance Remaining:</strong> $${balanceRemaining.toFixed(2)}</p>
     <p><strong>PayPal Order ID:</strong> ${escapeHtml(data.paypalOrderId)}</p>
     <p><strong>Registration Record ID:</strong> ${escapeHtml(data.registrationId) || 'N/A'}</p>
     <hr />
@@ -557,7 +564,7 @@ export default async function handler(req, res) {
     subject = 'New Summer Camp Registration'
     html = buildCampRegistrationEmail(data)
   } else if (formType === 'camp_deposit') {
-    subject = 'Summer Camp Deposit Received'
+    subject = data.paidInFull ? 'Summer Camp Full Payment Received' : 'Summer Camp Deposit Received'
     html = buildCampDepositEmail(data)
   } else if (formType === 'summer_class_registration') {
     subject = 'New Summer Class Registration'

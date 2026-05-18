@@ -20,10 +20,16 @@ export default function CampPayment() {
   const promoDiscount = Number(state?.promoDiscount || 0)
   const estimatedTotal = Number(state?.estimatedTotal || 0)
   const depositTotal = Number(state?.depositTotal || DEPOSIT_PER_CAMPER * camperCount)
+  const paymentChoice = state?.paymentChoice === 'full' ? 'full' : 'deposit'
+  const payInFull = paymentChoice === 'full'
 
   const isFullyComped = estimatedTotal <= 0
-  const depositAmount = isFullyComped ? 0 : depositTotal
-  const balanceDue = Math.max(0, estimatedTotal - depositAmount)
+  const payAmount = isFullyComped
+    ? 0
+    : payInFull
+      ? estimatedTotal
+      : depositTotal
+  const balanceDue = Math.max(0, estimatedTotal - payAmount)
 
   const firstName = parentName ? parentName.split(' ')[0] : ''
   const camperListLabel = campers.length
@@ -37,7 +43,7 @@ export default function CampPayment() {
 
   const dataRef = useRef({})
   useEffect(() => {
-    dataRef.current = { registrationId, parentName, parentEmail, campers, camperCount, estimatedTotal, depositAmount }
+    dataRef.current = { registrationId, parentName, parentEmail, campers, camperCount, estimatedTotal, payAmount, paymentChoice, payInFull }
   })
 
   useEffect(() => {
@@ -60,8 +66,10 @@ export default function CampPayment() {
       style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay', height: 50 },
       createOrder: (_d, actions) => actions.order.create({
         purchase_units: [{
-          description: `Capital Core Dance Studio – Summer Camp Deposit (${camperCount} camper${camperCount !== 1 ? 's' : ''})`,
-          amount: { value: depositAmount.toFixed(2), currency_code: 'USD' },
+          description: payInFull
+            ? `Capital Core Dance Studio – Summer Camp Full Payment (${camperCount} camper${camperCount !== 1 ? 's' : ''})`
+            : `Capital Core Dance Studio – Summer Camp Deposit (${camperCount} camper${camperCount !== 1 ? 's' : ''})`,
+          amount: { value: payAmount.toFixed(2), currency_code: 'USD' },
         }],
       }),
       onApprove: async (_d, actions) => {
@@ -75,7 +83,7 @@ export default function CampPayment() {
       },
     }).render('#pp-camp-deposit')
     setPaypalRendered(true)
-  }, [paypalReady, paypalRendered, isFullyComped, depositAmount, camperCount])
+  }, [paypalReady, paypalRendered, isFullyComped, payAmount, payInFull, camperCount])
 
   async function confirmFreeRegistration() {
     await onPaymentSuccess(null)
@@ -92,8 +100,10 @@ export default function CampPayment() {
           .update({
             paypal_order_id: order?.id || null,
             deposit_paid: true,
-            deposit_amount: d.depositAmount,
+            deposit_amount: d.payAmount,
             deposit_paid_at: new Date().toISOString(),
+            paid_in_full: d.payInFull,
+            payment_choice: d.paymentChoice,
           })
           .eq('id', d.registrationId)
         if (error) console.error('DB update (non-fatal):', error)
@@ -113,7 +123,9 @@ export default function CampPayment() {
           campers: d.campers,
           camperCount: d.camperCount,
           estimatedTotal: d.estimatedTotal,
-          amount: d.depositAmount,
+          amount: d.payAmount,
+          paymentChoice: d.paymentChoice,
+          paidInFull: d.payInFull,
           paypalOrderId: order?.id || null,
           registrationId: d.registrationId,
         }),
@@ -123,7 +135,7 @@ export default function CampPayment() {
     }
 
     navigate('/camp-thankyou', {
-      state: { name: d.parentName, campers: d.campers, camperCount: d.camperCount },
+      state: { name: d.parentName, campers: d.campers, camperCount: d.camperCount, paymentChoice: d.paymentChoice, paidInFull: d.payInFull },
     })
   }
 
@@ -147,19 +159,25 @@ export default function CampPayment() {
             <p className="text-[#3a4a6a] text-sm leading-relaxed">
               {isFullyComped
                 ? `Confirm below to lock in ${camperListLabel ? `${camperListLabel}'s` : 'your camper\'s'} spot${camperCount > 1 ? 's' : ''}.`
-                : `Pay $${depositAmount} below to lock in ${camperListLabel ? `${camperListLabel}'s` : 'your camper\'s'} spot${camperCount > 1 ? 's' : ''}.`}
+                : `Pay $${payAmount.toFixed(2)} below to ${payInFull ? 'pay in full and lock in' : 'lock in'} ${camperListLabel ? `${camperListLabel}'s` : 'your camper\'s'} spot${camperCount > 1 ? 's' : ''}.`}
             </p>
           </div>
 
           <div className="bg-[#fff5f8] border border-[#f4c8d4] rounded-lg px-6 py-6">
-            <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">Hold Your Spot{camperCount > 1 ? 's' : ''}</p>
+            <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">{payInFull ? 'Pay In Full' : `Hold Your Spot${camperCount > 1 ? 's' : ''}`}</p>
             <h2 className="text-navy-dark text-xl font-black mb-2">
-              {isFullyComped ? 'Confirm your free registration' : `Pay your $${depositAmount} deposit`}
+              {isFullyComped
+                ? 'Confirm your free registration'
+                : payInFull
+                  ? `Pay your $${payAmount.toFixed(2)} camp balance`
+                  : `Pay your $${payAmount.toFixed(2)} deposit`}
             </h2>
             <p className="text-[#5a6a8a] text-sm leading-relaxed mb-5">
               {isFullyComped
                 ? `Your promo code covers the entire registration — no payment required. Click below to confirm and lock in the spot${camperCount > 1 ? 's' : ''}.`
-                : `$${DEPOSIT_PER_CAMPER} per camper, non-refundable. The remaining balance is due before camp begins.`}
+                : payInFull
+                  ? `Pay the full camp balance now — no follow-up payment required. The $${DEPOSIT_PER_CAMPER}-per-camper deposit portion is non-refundable.`
+                  : `$${DEPOSIT_PER_CAMPER} per camper, non-refundable. The remaining balance is due before camp begins.`}
             </p>
 
             <div className="bg-white rounded-lg border border-[#f4c8d4] px-4 py-3 mb-4">
@@ -201,16 +219,25 @@ export default function CampPayment() {
               )}
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="text-navy-dark font-bold text-sm">Deposit due today</p>
+                  <p className="text-navy-dark font-bold text-sm">{payInFull ? 'Full payment due today' : 'Deposit due today'}</p>
                   <p className="text-[#8a9aaa] text-xs">
-                    {camperListLabel ? `For ${camperListLabel}` : `${DEPOSIT_PER_CAMPER} × ${camperCount} camper${camperCount !== 1 ? 's' : ''} · holds the spot${camperCount !== 1 ? 's' : ''}`}
+                    {payInFull
+                      ? `Paying ${camperListLabel ? `${camperListLabel}'s` : 'the'} camp balance in full`
+                      : camperListLabel
+                        ? `For ${camperListLabel}`
+                        : `${DEPOSIT_PER_CAMPER} × ${camperCount} camper${camperCount !== 1 ? 's' : ''} · holds the spot${camperCount !== 1 ? 's' : ''}`}
                   </p>
                 </div>
-                <span className="text-navy-dark font-black text-2xl">${depositAmount}</span>
+                <span className="text-navy-dark font-black text-2xl">${payAmount.toFixed(2)}</span>
               </div>
-              {balanceDue > 0 && (
+              {balanceDue > 0 && !payInFull && (
                 <p className="text-[#8a9aaa] text-xs mt-2 pt-2 border-t border-[#f4c8d4]">
                   Remaining balance of <span className="font-semibold text-navy-dark">${balanceDue.toFixed(2)}</span> is due before camp begins.
+                </p>
+              )}
+              {payInFull && !isFullyComped && (
+                <p className="text-green-700 text-xs mt-2 pt-2 border-t border-[#f4c8d4]">
+                  ✓ Paying in full — no further payment will be required.
                 </p>
               )}
             </div>
