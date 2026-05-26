@@ -505,6 +505,15 @@ function buildAdultSeriesInterestCustomerEmail(data) {
   `
 }
 
+function buildSpiritWeekIdeaEmail(data) {
+  return `
+    <h2>New Teacher Appreciation Spirit Week Idea</h2>
+    <p><strong>From:</strong> ${escapeHtml(data.submitterName) || 'Anonymous'}</p>
+    <p><strong>Idea:</strong></p>
+    <p>${escapeHtml(data.idea)}</p>
+  `
+}
+
 function buildBirthdayDepositEmail(data) {
   return `
     <h2>Birthday Party Deposit Received</h2>
@@ -575,6 +584,9 @@ export default async function handler(req, res) {
   } else if (formType === 'adult_series_interest') {
     subject = 'New Adult Summer Series Interest'
     html = buildAdultSeriesInterestAdminEmail(data)
+  } else if (formType === 'spirit_week_idea') {
+    subject = 'New Spirit Week Idea'
+    html = buildSpiritWeekIdeaEmail(data)
   } else if (formType === 'recital_order') {
     subject = 'New Recital T-Shirt Order'
     html = buildRecitalOrderEmail(data)

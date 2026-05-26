@@ -1,8 +1,99 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
+import { supabase } from '../lib/supabase'
 import { localBusinessSchema } from '../lib/schema'
+
+function SpiritWeekIdeaForm() {
+  const [idea, setIdea] = useState('')
+  const [submitterName, setSubmitterName] = useState('')
+  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const [errorMsg, setErrorMsg] = useState('')
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!idea.trim()) return
+    setStatus('submitting')
+    setErrorMsg('')
+
+    const { error } = await supabase.from('spirit_week_ideas').insert([
+      {
+        idea: idea.trim(),
+        submitter_name: submitterName.trim() || null,
+      },
+    ])
+
+    if (error) {
+      setStatus('error')
+      setErrorMsg('Something went wrong. Please try again or email info@capitalcoredance.com.')
+      return
+    }
+
+    fetch('/api/notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formType: 'spirit_week_idea',
+        idea: idea.trim(),
+        submitterName: submitterName.trim(),
+      }),
+    }).catch(() => {})
+
+    setStatus('success')
+    setIdea('')
+    setSubmitterName('')
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="mt-5 bg-white border border-[#e8d8a8] rounded-lg px-5 py-4 text-center md:text-left">
+        <p className="text-[#b88820] font-black text-base">Got it — thank you!</p>
+        <p className="text-[#3a4a6a] text-sm mt-1">Your idea is in. We'll work the best ones into Spirit Week.</p>
+        <button
+          type="button"
+          onClick={() => setStatus('idle')}
+          className="text-[#b88820] text-xs font-bold hover:underline mt-2"
+        >
+          Submit another idea
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-3" aria-label="Spirit Week idea submission">
+      <textarea
+        id="spirit-week-idea"
+        rows={3}
+        placeholder="Your idea (e.g. 'twin day with their favorite teacher')"
+        required
+        value={idea}
+        onChange={(e) => setIdea(e.target.value)}
+        className="w-full bg-white text-navy-dark placeholder:text-[#8a9aaa] border border-[#d9c478] focus:border-[#b88820] focus:ring-1 focus:ring-[#b88820] rounded-md px-4 py-2.5 text-sm resize-none focus:outline-none"
+      />
+      <input
+        id="spirit-week-name"
+        type="text"
+        placeholder="Your name (optional)"
+        value={submitterName}
+        onChange={(e) => setSubmitterName(e.target.value)}
+        className="w-full bg-white text-navy-dark placeholder:text-[#8a9aaa] border border-[#d9c478] focus:border-[#b88820] focus:ring-1 focus:ring-[#b88820] rounded-md px-4 py-2.5 text-sm focus:outline-none"
+      />
+      {status === 'error' && (
+        <p className="text-brand-red text-xs">{errorMsg}</p>
+      )}
+      <button
+        type="submit"
+        disabled={status === 'submitting' || !idea.trim()}
+        className="bg-navy-dark text-white text-sm font-black px-6 py-3 rounded-md hover:bg-navy-mid transition-colors tracking-wide disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        {status === 'submitting' ? 'Sending…' : 'Submit Idea →'}
+      </button>
+    </form>
+  )
+}
 
 const SECTION_CARDS = [
   {
@@ -252,6 +343,32 @@ export default function Home() {
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Teacher Appreciation Spirit Week banner */}
+      <section className="px-6 py-10 bg-gradient-to-br from-[#fdf8ec] via-[#f7ecd0] to-[#fdf8ec]">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-center">
+          <img
+            src="/banner-teacher-appreciation.png"
+            alt="Capital Core Dance Teacher Appreciation Spirit Week — June 1 through June 5"
+            className="w-full rounded-xl shadow-lg border border-[#e8d8a8]"
+            loading="lazy"
+          />
+          <div className="text-center md:text-left">
+            <p className="text-[#b88820] text-[11px] font-black tracking-[0.4em] uppercase mb-2">
+              June 1 – June 5
+            </p>
+            <h2 className="text-navy-dark text-3xl md:text-4xl font-black leading-tight">
+              We want <span className="text-[#b88820]">your ideas!</span>
+            </h2>
+            <p className="text-[#3a4a6a] text-sm md:text-base mt-3 leading-relaxed">
+              We're celebrating the incredible instructors who inspire our dancers every day —
+              and we want Spirit Week to be packed with their favorite things. What are some
+              fun ways dancers can honor their teachers? Drop your ideas and we'll work them in.
+            </p>
+            <SpiritWeekIdeaForm />
+          </div>
         </div>
       </section>
 
