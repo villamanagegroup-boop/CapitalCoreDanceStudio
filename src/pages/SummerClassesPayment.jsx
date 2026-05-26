@@ -19,6 +19,10 @@ export default function SummerClassesPayment() {
   const paymentChoice = state?.paymentChoice || 'deposit'
   const amountDueToday = Number(state?.amountDueToday || 0)
   const balanceDue = Number(state?.balanceDue || 0)
+  const promoCode = state?.promoCode || null
+  const promoLabel = state?.promoLabel || null
+  const discountAmount = Number(state?.discountAmount || 0)
+  const isFreeTrial = amountDueToday <= 0 && promoCode
 
   const firstName = parentName ? parentName.split(' ')[0] : ''
   const dancerListLabel = dancers.length
@@ -50,6 +54,7 @@ export default function SummerClassesPayment() {
     dataRef.current = {
       registrationId, parentName, parentEmail, dancers, dancerCount,
       items, tuitionTotal, paymentChoice, amountDueToday, balanceDue,
+      promoCode, promoLabel, discountAmount,
     }
   })
 
@@ -128,6 +133,9 @@ export default function SummerClassesPayment() {
           balanceDue: d.balanceDue,
           paypalOrderId: order?.id || null,
           registrationId: d.registrationId,
+          promoCode: d.promoCode || null,
+          promoLabel: d.promoLabel || null,
+          discountAmount: d.discountAmount || 0,
         }),
       })
     } catch (e) {
@@ -144,8 +152,15 @@ export default function SummerClassesPayment() {
         tuitionTotal: d.tuitionTotal,
         amountPaid: d.amountDueToday,
         balanceDue: d.balanceDue,
+        promoCode: d.promoCode,
+        isFreeTrial,
       },
     })
+  }
+
+  async function confirmFreeTrial() {
+    setStatus('submitting')
+    await onPaymentSuccess({ id: null })
   }
 
   return (
@@ -166,29 +181,37 @@ export default function SummerClassesPayment() {
               {firstName ? `Registration received, ${firstName}!` : 'Registration received!'}
             </p>
             <p className="text-[#3a4a6a] text-sm leading-relaxed">
-              {allDropIn
-                ? `Confirm ${dancerCount > 1 ? 'these drop-ins' : 'this drop-in'} by paying the $${amountDueToday} fee below.`
-                : `Pay below to lock in ${dancerListLabel ? `${dancerListLabel}'s` : 'your'} summer class spot${dancerCount > 1 ? 's' : ''}.`}
+              {isFreeTrial
+                ? `Confirm ${dancerListLabel ? `${dancerListLabel}'s` : 'your'} free trial below — no payment needed.`
+                : allDropIn
+                  ? `Confirm ${dancerCount > 1 ? 'these drop-ins' : 'this drop-in'} by paying the $${amountDueToday} fee below.`
+                  : `Pay below to lock in ${dancerListLabel ? `${dancerListLabel}'s` : 'your'} summer class spot${dancerCount > 1 ? 's' : ''}.`}
             </p>
           </div>
 
-          <div className="bg-[#fff5f8] border border-[#f4c8d4] rounded-lg px-6 py-6">
-            <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">
-              {allDropIn ? 'Confirm Drop-In' : isFullPayment ? 'Pay In Full' : `Reserve Your Spot${dancerCount > 1 ? 's' : ''}`}
+          <div className={`rounded-lg px-6 py-6 ${isFreeTrial ? 'bg-[#fdf8ec] border border-[#e8d8a8]' : 'bg-[#fff5f8] border border-[#f4c8d4]'}`}>
+            <p className={`text-xs font-bold tracking-[0.3em] uppercase mb-2 ${isFreeTrial ? 'text-[#b88820]' : 'text-brand-red'}`}>
+              {isFreeTrial
+                ? 'Free Trial'
+                : allDropIn ? 'Confirm Drop-In' : isFullPayment ? 'Pay In Full' : `Reserve Your Spot${dancerCount > 1 ? 's' : ''}`}
             </p>
-            <h2 className="text-navy-dark text-xl font-black mb-2">{headlinePrimary}</h2>
+            <h2 className="text-navy-dark text-xl font-black mb-2">
+              {isFreeTrial ? 'Confirm your free trial' : headlinePrimary}
+            </h2>
             <p className="text-[#5a6a8a] text-sm leading-relaxed mb-5">
-              {allDropIn
-                ? 'Drop-in fees are non-refundable and subject to availability.'
-                : isFullPayment
-                  ? 'Pay the full tuition now and you\'re all set — nothing else due.'
-                  : `$50 deposit per dancer applies toward tuition. The remaining balance is due before the first class of the summer session.`}
+              {isFreeTrial
+                ? `Promo code ${promoCode} applied — your trial class is on us. The studio will reach out within 1–2 business days to confirm your class and time.`
+                : allDropIn
+                  ? 'Drop-in fees are non-refundable and subject to availability.'
+                  : isFullPayment
+                    ? 'Pay the full tuition now and you\'re all set — nothing else due.'
+                    : `$50 deposit per dancer applies toward tuition. The remaining balance is due before the first class of the summer session.`}
             </p>
 
             {/* Order summary */}
-            <div className="bg-white rounded-lg border border-[#f4c8d4] px-4 py-3 mb-4">
+            <div className={`bg-white rounded-lg border px-4 py-3 mb-4 ${isFreeTrial ? 'border-[#e8d8a8]' : 'border-[#f4c8d4]'}`}>
               {items.length > 0 && (
-                <ul className="text-[#5a6a8a] text-xs flex flex-col gap-1 mb-3 pb-3 border-b border-[#f4c8d4]">
+                <ul className={`text-[#5a6a8a] text-xs flex flex-col gap-1 mb-3 pb-3 border-b ${isFreeTrial ? 'border-[#e8d8a8]' : 'border-[#f4c8d4]'}`}>
                   {items.map((item) => (
                     <li key={item.key} className="flex justify-between gap-3">
                       <span>{item.label}</span>
@@ -203,6 +226,12 @@ export default function SummerClassesPayment() {
                   <span className="font-semibold text-navy-dark">${tuitionTotal}</span>
                 </div>
               )}
+              {discountAmount > 0 && (
+                <div className="flex justify-between text-sm mb-2">
+                  <span className="text-[#0a7c3e]">Promo discount{promoCode ? ` (${promoCode})` : ''}</span>
+                  <span className="font-semibold text-[#0a7c3e]">−${discountAmount}</span>
+                </div>
+              )}
               <div className="flex justify-between items-center">
                 <div>
                   <p className="text-navy-dark font-bold text-sm">Due today</p>
@@ -213,33 +242,46 @@ export default function SummerClassesPayment() {
                 <span className="text-navy-dark font-black text-2xl">${amountDueToday}</span>
               </div>
               {balanceDue > 0 && (
-                <p className="text-[#8a9aaa] text-xs mt-2 pt-2 border-t border-[#f4c8d4]">
+                <p className={`text-[#8a9aaa] text-xs mt-2 pt-2 border-t ${isFreeTrial ? 'border-[#e8d8a8]' : 'border-[#f4c8d4]'}`}>
                   Remaining balance of <span className="font-semibold text-navy-dark">${balanceDue}</span> due before the first class.
                 </p>
               )}
             </div>
 
             {status === 'submitting' && (
-              <div className="text-center py-3 text-navy-dark text-sm">Processing your payment…</div>
+              <div className="text-center py-3 text-navy-dark text-sm">{isFreeTrial ? 'Confirming your trial…' : 'Processing your payment…'}</div>
             )}
             {status === 'error' && (
               <div className="bg-red-50 border border-red-300 rounded-lg p-3 mb-3 text-red-700 text-sm">{errorMsg}</div>
             )}
-            {!import.meta.env.VITE_PAYPAL_CLIENT_ID && (
-              <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-3 mb-3 text-yellow-800 text-sm text-center">
-                PayPal is not configured yet. Please contact the studio to complete payment.
-              </div>
-            )}
 
-            <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-              <div id="pp-summer-classes" className="min-h-[50px]" />
-            </div>
+            {isFreeTrial ? (
+              <button
+                type="button"
+                onClick={confirmFreeTrial}
+                disabled={status === 'submitting'}
+                className="w-full bg-[#b88820] text-white font-black py-3 rounded-md hover:bg-[#8a6a1a] transition-colors disabled:opacity-60 disabled:cursor-not-allowed tracking-wide"
+              >
+                Confirm Free Trial →
+              </button>
+            ) : (
+              <>
+                {!import.meta.env.VITE_PAYPAL_CLIENT_ID && (
+                  <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-3 mb-3 text-yellow-800 text-sm text-center">
+                    PayPal is not configured yet. Please contact the studio to complete payment.
+                  </div>
+                )}
+                <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+                  <div id="pp-summer-classes" className="min-h-[50px]" />
+                </div>
+              </>
+            )}
 
             <Link
               to="/summer-classes"
               className="block w-full text-center text-[#5a6a8a] text-sm hover:text-navy-dark underline"
             >
-              I'll pay later — back to Summer Classes
+              {isFreeTrial ? 'Back to Summer Classes' : 'I\'ll pay later — back to Summer Classes'}
             </Link>
           </div>
 

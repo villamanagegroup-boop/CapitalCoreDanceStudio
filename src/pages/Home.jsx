@@ -377,10 +377,10 @@ export default function Home() {
         <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-center sm:text-left">
             <p className="text-navy-dark font-black text-lg leading-snug">Your first class is always FREE.</p>
-            <p className="text-[#3a6a8a] text-sm mt-0.5">Come try us out — no commitment needed.</p>
+            <p className="text-[#3a6a8a] text-sm mt-0.5">Come try us out — code <span className="font-bold tracking-wider">TRYITFREE</span> covers your trial.</p>
           </div>
           <Link
-            to="/contact?interest=trial"
+            to="/summer-classes/signup?promo=TRYITFREE"
             className="flex-shrink-0 bg-navy-dark text-white text-sm font-bold px-6 py-2 rounded-md hover:bg-navy-mid transition-colors whitespace-nowrap"
           >
             Register for a Trial →

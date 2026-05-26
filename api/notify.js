@@ -366,11 +366,15 @@ function buildSummerClassRegistrationEmail(data) {
   const itemLines = (data.items || [])
     .map((item) => `<li>${escapeHtml(item.label)} — $${escapeHtml(String(item.price))}</li>`)
     .join('')
+  const promoBlock = data.promoCode
+    ? `<p style="background:#fdf8ec;border:1px solid #e8d8a8;padding:8px 12px;border-radius:6px;"><strong>🎟 Promo applied:</strong> ${escapeHtml(data.promoCode)}${data.promoLabel ? ` — ${escapeHtml(data.promoLabel)}` : ''} (−$${escapeHtml(String(data.discountAmount || 0))})</p>`
+    : ''
   return `
     <h2>New Summer Class Registration</h2>
     <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
     <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
     <p><strong>Dancer count:</strong> ${escapeHtml(String(data.dancerCount || (data.dancers || []).length || 1))}</p>
+    ${promoBlock}
     <hr />
     <p><strong>Dancers:</strong></p>
     <ul>${renderDancersBlock(data.dancers)}</ul>
@@ -389,15 +393,21 @@ function buildSummerClassDepositEmail(data) {
   const itemLines = (data.items || [])
     .map((item) => `<li>${escapeHtml(item.label)} — $${escapeHtml(String(item.price))}</li>`)
     .join('')
+  const isFreeTrial = data.promoCode && (Number(data.amountPaid) || 0) === 0
+  const heading = isFreeTrial ? 'Free Trial Confirmed' : 'Summer Class Payment Received'
+  const promoBlock = data.promoCode
+    ? `<p style="background:#fdf8ec;border:1px solid #e8d8a8;padding:8px 12px;border-radius:6px;"><strong>🎟 Promo applied:</strong> ${escapeHtml(data.promoCode)}${data.promoLabel ? ` — ${escapeHtml(data.promoLabel)}` : ''} (−$${escapeHtml(String(data.discountAmount || 0))})</p>`
+    : ''
   return `
-    <h2>Summer Class Payment Received</h2>
+    <h2>${heading}</h2>
     <p><strong>Parent:</strong> ${escapeHtml(data.parentName)} &lt;${escapeHtml(data.email)}&gt;</p>
     <p><strong>Dancer count:</strong> ${escapeHtml(String(data.dancerCount || (data.dancers || []).length || 1))}</p>
     <p><strong>Payment Choice:</strong> ${escapeHtml(data.paymentChoice)}</p>
+    ${promoBlock}
     <p><strong>Amount Paid:</strong> $${escapeHtml(String(data.amountPaid || 0))}</p>
     <p><strong>Tuition Total:</strong> $${escapeHtml(String(data.tuitionTotal || 0))}</p>
     <p><strong>Balance Due Before First Class:</strong> $${escapeHtml(String(data.balanceDue || 0))}</p>
-    <p><strong>PayPal Order ID:</strong> ${escapeHtml(data.paypalOrderId) || 'N/A'}</p>
+    <p><strong>PayPal Order ID:</strong> ${escapeHtml(data.paypalOrderId) || (isFreeTrial ? 'N/A (free trial)' : 'N/A')}</p>
     <p><strong>Registration Record ID:</strong> ${escapeHtml(data.registrationId) || 'N/A'}</p>
     <hr />
     <p><strong>Dancers:</strong></p>

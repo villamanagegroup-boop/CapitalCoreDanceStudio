@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
+import { applyPromo, validatePromoCode } from '../lib/promos'
 
 const SUMMER_CLASSES = [
   { key: 'tu-tiny',  day: 'Tuesday',   time: '5:30 – 6:00 PM', name: 'Tiny Ballet & Tumble',             ages: 'Ages 2–3',  duration: '30 min', price: 120 },
@@ -93,9 +94,47 @@ function describeDancerItems(dancer) {
 
 export default function SummerClassesForm() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [form, setForm] = useState(INITIAL_FORM)
   const [status, setStatus] = useState('idle')
   const [errorMsg, setErrorMsg] = useState('')
+
+  // Promo code state
+  const [promoInput, setPromoInput] = useState('')
+  const [promo, setPromo] = useState(null) // { valid, code, label, discountType, discountValue } or null
+  const [promoStatus, setPromoStatus] = useState('idle') // idle | checking | applied | error
+  const [promoError, setPromoError] = useState('')
+
+  async function tryApplyPromo(rawCode) {
+    setPromoStatus('checking')
+    setPromoError('')
+    const result = await validatePromoCode(rawCode, 'summer_classes')
+    if (!result.valid) {
+      setPromo(null)
+      setPromoStatus('error')
+      setPromoError(result.error || 'That code isn\'t valid.')
+      return false
+    }
+    setPromo(result)
+    setPromoStatus('applied')
+    return true
+  }
+
+  function clearPromo() {
+    setPromo(null)
+    setPromoInput('')
+    setPromoStatus('idle')
+    setPromoError('')
+  }
+
+  // Auto-apply ?promo= from URL once on mount.
+  useEffect(() => {
+    const urlPromo = searchParams.get('promo')
+    if (!urlPromo) return
+    setPromoInput(urlPromo.toUpperCase())
+    tryApplyPromo(urlPromo)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const totals = useMemo(() => {
     const perDancer = form.dancers.map((d) => ({
@@ -111,22 +150,31 @@ export default function SummerClassesForm() {
     // Deposit logic per dancer:
     // - drop_in dancers pay $25 (full) now
     // - others: $50 deposit OR full tuition based on global paymentChoice
-    let dueToday = 0
+    let dueBeforePromo = 0
     for (const d of perDancer) {
       if (d.signupType === 'drop_in') {
-        dueToday += d.tuition
+        dueBeforePromo += d.tuition
       } else if (form.paymentChoice === 'full') {
-        dueToday += d.tuition
+        dueBeforePromo += d.tuition
       } else {
-        dueToday += Math.min(DEPOSIT_AMOUNT, d.tuition || DEPOSIT_AMOUNT)
+        dueBeforePromo += Math.min(DEPOSIT_AMOUNT, d.tuition || DEPOSIT_AMOUNT)
       }
     }
-    const balanceDue = Math.max(0, tuitionTotal - dueToday)
+
+    // Promo applies to the amount due today (trial codes zero it out).
+    const { discount, total: dueToday } = applyPromo(promo, dueBeforePromo)
+    const balanceDue = promo?.discountType === 'full'
+      ? 0
+      : Math.max(0, tuitionTotal - dueBeforePromo)
     const dancerCount = form.dancers.length
     const hasNonDropIn = perDancer.some((d) => d.signupType !== 'drop_in')
 
-    return { perDancer, items, tuitionTotal, dueToday, balanceDue, dancerCount, hasNonDropIn }
-  }, [form.dancers, form.paymentChoice])
+    return {
+      perDancer, items, tuitionTotal,
+      dueBeforePromo, discount, dueToday,
+      balanceDue, dancerCount, hasNonDropIn,
+    }
+  }, [form.dancers, form.paymentChoice, promo])
 
   function updateParent(id, value) {
     setForm((prev) => ({ ...prev, [id]: value }))
@@ -220,6 +268,9 @@ export default function SummerClassesForm() {
         payment_choice: totals.hasNonDropIn ? form.paymentChoice : 'full',
         amount_due_today: totals.dueToday,
         additional_notes: form.notes || null,
+        promo_code: promo?.code || null,
+        promo_label: promo?.label || null,
+        discount_amount: totals.discount || 0,
       }])
       .select()
       .single()
@@ -247,6 +298,9 @@ export default function SummerClassesForm() {
         amountDueToday: totals.dueToday,
         balanceDue: totals.balanceDue,
         notes: form.notes,
+        promoCode: promo?.code || null,
+        promoLabel: promo?.label || null,
+        discountAmount: totals.discount || 0,
       }),
     }).catch(() => {})
 
@@ -262,6 +316,9 @@ export default function SummerClassesForm() {
         paymentChoice: totals.hasNonDropIn ? form.paymentChoice : 'full',
         amountDueToday: totals.dueToday,
         balanceDue: totals.balanceDue,
+        promoCode: promo?.code || null,
+        promoLabel: promo?.label || null,
+        discountAmount: totals.discount || 0,
       },
     })
   }
@@ -640,6 +697,49 @@ export default function SummerClassesForm() {
               </div>
             )}
 
+            {/* Promo code */}
+            {totals.tuitionTotal > 0 && (
+              <div className="flex flex-col gap-2">
+                <p className={labelClass}>Promo code <span className="text-[#8a9aaa] text-xs font-normal">(optional)</span></p>
+                {promoStatus === 'applied' && promo ? (
+                  <div className="bg-[#f0faf5] border border-[#b5e0c8] rounded-md px-4 py-3 flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-[#0a7c3e] font-black text-sm">{promo.code} applied</p>
+                      <p className="text-[#3a4a6a] text-xs mt-0.5">{promo.label}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={clearPromo}
+                      className="text-[#5a6a8a] text-xs font-bold underline hover:text-navy-dark"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Enter code"
+                      value={promoInput}
+                      onChange={(e) => setPromoInput(e.target.value.toUpperCase())}
+                      className={`${inputClass} flex-1 uppercase tracking-wide`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => tryApplyPromo(promoInput)}
+                      disabled={promoStatus === 'checking' || !promoInput.trim()}
+                      className="bg-navy-dark text-white text-sm font-bold px-5 rounded-md hover:bg-navy-mid transition-colors disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
+                    >
+                      {promoStatus === 'checking' ? 'Checking…' : 'Apply'}
+                    </button>
+                  </div>
+                )}
+                {promoStatus === 'error' && promoError && (
+                  <p className="text-brand-red text-xs">{promoError}</p>
+                )}
+              </div>
+            )}
+
             {/* Running total */}
             {totals.items.length > 0 && (
               <div className="bg-white border-2 border-navy-dark rounded-lg px-5 py-4">
@@ -658,6 +758,12 @@ export default function SummerClassesForm() {
                   <span className="text-[#5a6a8a]">Tuition total</span>
                   <span className="font-semibold text-navy-dark">${totals.tuitionTotal}</span>
                 </div>
+                {totals.discount > 0 && (
+                  <div className="flex justify-between text-sm pt-1">
+                    <span className="text-[#0a7c3e]">Promo discount{promo?.code ? ` (${promo.code})` : ''}</span>
+                    <span className="font-semibold text-[#0a7c3e]">−${totals.discount}</span>
+                  </div>
+                )}
                 <div className="flex justify-between items-center pt-2">
                   <span className="text-navy-dark font-bold">Due today</span>
                   <span className="text-navy-dark font-black text-2xl">${totals.dueToday}</span>
@@ -665,6 +771,11 @@ export default function SummerClassesForm() {
                 {totals.balanceDue > 0 && (
                   <p className="text-[#8a9aaa] text-xs mt-2">
                     Remaining balance of <span className="font-semibold text-navy-dark">${totals.balanceDue}</span> due before the first class.
+                  </p>
+                )}
+                {promo?.discountType === 'full' && (
+                  <p className="text-[#3a4a6a] text-xs mt-2 leading-relaxed bg-[#fdf8ec] border border-[#e8d8a8] rounded-md px-3 py-2">
+                    <span className="font-black text-[#b88820]">Free trial applied.</span> This code is for new dancers trying one class. The studio will confirm your selection before classes begin.
                   </p>
                 )}
               </div>
@@ -737,7 +848,11 @@ export default function SummerClassesForm() {
               disabled={status === 'submitting'}
               className="bg-brand-red text-white font-bold py-3 rounded-md hover:bg-red-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {status === 'submitting' ? 'Submitting…' : `Continue to Payment · $${totals.dueToday} →`}
+              {status === 'submitting'
+                ? 'Submitting…'
+                : totals.dueToday <= 0
+                  ? 'Confirm Free Trial Registration →'
+                  : `Continue to Payment · $${totals.dueToday} →`}
             </button>
 
             <p className="text-[#8a9aaa] text-xs text-center">
