@@ -216,3 +216,70 @@ export function simpleBreadcrumb(currentName, currentPath) {
     { name: currentName, path: currentPath },
   ])
 }
+
+// ── FAQ (answer-engine optimization) ──────────────────────────
+// faqs: [{ q, a }]
+export function faqSchema(faqs) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
+  }
+}
+
+// ── Blog post (article) ───────────────────────────────────────
+export function blogPostingSchema({ title, description, slug, datePublished, dateModified, image }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: image ? `${SITE_URL}${image}` : `${SITE_URL}/og-image.jpg`,
+    datePublished,
+    dateModified: dateModified || datePublished,
+    inLanguage: 'en-US',
+    url: `${SITE_URL}/blog/${slug}`,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blog/${slug}`,
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Capital Core Dance Studio',
+      url: SITE_URL,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Capital Core Dance Studio',
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+    },
+  }
+}
+
+// ── Blog index (list of posts) ────────────────────────────────
+// posts: [{ slug, title, description }]
+export function blogListSchema(posts) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Capital Core Dance Studio Blog',
+    description:
+      'News, guides, and tips on dance classes, summer camps, the annual recital, birthday parties, and studio events in Midlothian, VA.',
+    url: `${SITE_URL}/blog`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Capital Core Dance Studio',
+      url: SITE_URL,
+    },
+    blogPost: posts.map(({ slug, title, description }) => ({
+      '@type': 'BlogPosting',
+      headline: title,
+      description,
+      url: `${SITE_URL}/blog/${slug}`,
+    })),
+  }
+}

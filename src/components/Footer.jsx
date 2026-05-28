@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { to: '/birthdays', label: 'Birthdays' },
   { to: '/recital', label: 'Recital' },
   { to: '/recitalshop', label: 'Recital Shop' },
+  { to: '/blog', label: 'Blog' },
   { to: '/faq', label: 'FAQ' },
   { to: '/contact', label: 'Contact Us' },
 ]

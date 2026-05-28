@@ -1,0 +1,624 @@
+// Blog content for Capital Core Dance Studio.
+// SEO + AEO (answer-engine) optimized: every post leads with a plain-language
+// "quick answer" (tldr), uses question-style headings, ships FAQ structured
+// data, and links to the studio page(s) it references.
+//
+// Each post: { slug, category, accent, date (ISO), readMinutes, title,
+//   metaTitle, metaDescription, excerpt, tldr, related[], sections[], faqs[] }
+// related[0] is rendered as the primary CTA button; all are shown as links.
+
+export const POSTS = [
+  {
+    slug: 'summer-dance-camps-2026-themed-weeks',
+    category: 'Summer Camps',
+    accent: '#7ab3e8',
+    date: '2026-05-20',
+    readMinutes: 5,
+    title: 'Summer Dance Camps 2026: All 8 Themed Weeks Explained',
+    metaTitle:
+      'Summer Dance Camps 2026 in Midlothian, VA — All 8 Themed Weeks | Capital Core Dance Studio',
+    metaDescription:
+      'A week-by-week guide to Capital Core Dance Studio’s 8 themed summer dance camps for kids ages 4–13 in Midlothian, VA. Dates, themes, pricing, and how to register for summer 2026.',
+    excerpt:
+      'From Rainbow Remix to Princess and Heroes, here is every one of our eight themed summer camp weeks for 2026 — with dates, who they’re for, and how to register.',
+    tldr:
+      'Capital Core Dance Studio runs 8 themed summer dance camp weeks for kids ages 4–13, Monday–Friday from 9:30 AM to 3:30 PM, June 15 through August 7, 2026. Each week has its own creative theme, and you can register for one week or several.',
+    related: [
+      { to: '/camps', label: 'See All 8 Camp Weeks & Register' },
+      { to: '/summer-classes', label: 'Prefer evening classes? Summer Classes' },
+    ],
+    sections: [
+      {
+        heading: 'What are the 2026 summer camp dates and times?',
+        body: [
+          'Our summer camps run Monday through Friday, 9:30 AM to 3:30 PM, from mid-June through early August 2026. Before-care and after-care are available at $15 per hour, per day, for families who need an earlier drop-off or later pickup.',
+          'Camps are designed for dancers ages 4 to 13, and no prior dance experience is required. Each day blends dance instruction with themed crafts, games, and music so campers stay engaged from morning to afternoon.',
+        ],
+      },
+      {
+        heading: 'The 8 themed weeks at a glance',
+        body: ['Each week is built around its own theme, so dancers can attend several weeks without repeating the experience:'],
+        list: [
+          'Week 1 (June 15–19) — Rainbow Remix: self-expression through vibrant styles, crafts, and joyful music.',
+          'Week 2 (June 22–26) — Glow Dance Party: neon crafts, upbeat choreography, and a glowing studio celebration.',
+          'Week 3 (June 29–July 3) — Pop Stars and Performers: spotlight routines that build confidence and stage presence.',
+          'Week 4 (July 6–10) — Around the World: music, movement, and cultural rhythms from across the globe.',
+          'Week 5 (July 13–17) — Beach Bash Boogie: sunny, feel-good routines and beach-themed crafts.',
+          'Week 6 (July 20–24) — Movie Magic: choreography inspired by favorite movie soundtracks.',
+          'Week 7 (July 27–31) — Dance & Dream Spirit Week: affirmations, goal-setting, and confidence-building.',
+          'Week 8 (August 3–7) — Princess and Heroes: character movement, imaginative play, and story-driven dance.',
+        ],
+      },
+      {
+        heading: 'How much do the camps cost?',
+        body: [
+          'A full week (Monday–Friday) is $205 for current Capital Core dancers and $225 for non-studio campers. Half-day full weeks are $155/$175, single full days are $50/$55, and single half days are $35/$40.',
+          'You can mix and match weeks, full days, and half-days during registration, and families enrolled in Fall 2025 / Spring 2026 classes get the current-dancer rate. CertifiKid deals can save $40–$60 per week.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'What ages are the summer dance camps for?',
+        a: 'Summer camps are for dancers ages 4 to 13. Activities are grouped so younger and older campers are both challenged and supported.',
+      },
+      {
+        q: 'Do campers need dance experience?',
+        a: 'No. Camps welcome first-time dancers and experienced students alike — every week is built to be beginner-friendly.',
+      },
+      {
+        q: 'Can my child attend more than one week?',
+        a: 'Yes. Because each of the 8 weeks has a different theme, many campers attend multiple weeks. You can register for any combination of weeks during signup.',
+      },
+      {
+        q: 'Is before- and after-care available?',
+        a: 'Yes. Before-care and after-care are offered at $15 per hour, per day, for families who need a drop-off before 9:30 AM or pickup after 3:30 PM.',
+      },
+    ],
+  },
+
+  {
+    slug: 'summer-dance-classes-2026-guide',
+    category: 'Summer Classes',
+    accent: '#f4a060',
+    date: '2026-05-18',
+    readMinutes: 5,
+    title: 'Your Guide to Summer Dance Classes 2026 (Ages 2 to Teen)',
+    metaTitle:
+      'Summer Dance Classes 2026 in Midlothian, VA — Schedule & Pricing | Capital Core Dance Studio',
+    metaDescription:
+      'Everything about Capital Core Dance Studio’s 6-week summer dance classes, June 23–July 30, 2026. Class list for ages 2 to teen, three pricing options including the Flex Pass, and how to sign up.',
+    excerpt:
+      'Our 6-week summer session keeps dancers moving all summer. Here’s the class lineup, three flexible pricing options, and how the deposit works.',
+    tldr:
+      'Capital Core’s summer dance classes run for 6 weeks, June 23 to July 30, 2026, on Tuesday, Wednesday, and Thursday evenings. There are classes for ages 2 through teen, and you can pay per class, buy a Summer Flex Pass ($329 unlimited), or drop in ($25/class).',
+    related: [
+      { to: '/summer-classes', label: 'View Classes & Sign Up' },
+      { to: '/camps', label: 'Looking for daytime camps instead?' },
+    ],
+    sections: [
+      {
+        heading: 'When do summer classes run?',
+        body: [
+          'The summer session is 6 weeks long, running June 23 through July 30, 2026, with classes held on Tuesday, Wednesday, and Thursday evenings. It’s a great way for current dancers to keep their skills sharp and for new dancers to try the studio in a low-pressure setting.',
+        ],
+      },
+      {
+        heading: 'What classes are offered?',
+        body: ['The lineup spans our youngest movers through teens:'],
+        list: [
+          'Tiny Ballet & Tumble (our littlest dancers, ages 2+)',
+          'Beginner Ballet & Hip Hop',
+          'Tumble Techniques',
+          'Beginner Ballet & Tap',
+          'Hip Hop',
+          'Ballet & Contemporary Technique',
+          'Beginner Jazz & Tumble',
+          'A Tik Tok Hip Hop workshop',
+        ],
+      },
+      {
+        heading: 'How does pricing and signup work?',
+        body: [
+          'There are three ways to pay: per-class enrollment for the full 6 weeks ($120–$180 each depending on length), a Summer Flex Pass ($329 for unlimited classes all summer — the best value for busy families), or single drop-ins at $25 per class per week.',
+          'A $50 deposit reserves your dancer’s spot for per-class and Flex Pass enrollments and applies toward tuition; drop-ins are paid in full at signup. If your dancer already attends Capital Core, just mark them as a Returning Dancer and we’ll pull their details from our records.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'How long is the summer dance session?',
+        a: 'It is a 6-week session running June 23 through July 30, 2026, with classes on Tuesday, Wednesday, and Thursday evenings.',
+      },
+      {
+        q: 'What is the Summer Flex Pass?',
+        a: 'The Flex Pass is $329 for unlimited summer classes across all six weeks — the best value if your dancer wants to attend several classes per week.',
+      },
+      {
+        q: 'Can I sign up more than one dancer?',
+        a: 'Yes. The signup form lets you add as many dancers as you like. Each picks their own classes (or Flex Pass, or drop-in), and the deposit scales accordingly.',
+      },
+      {
+        q: 'Do I have to re-enter info for a returning dancer?',
+        a: 'No. Mark the dancer as a Returning Dancer and give their name — we already have their age and other details on file.',
+      },
+    ],
+  },
+
+  {
+    slug: 'night-at-the-cinema-recital-2026',
+    category: 'Recital',
+    accent: '#c0392b',
+    date: '2026-05-24',
+    readMinutes: 4,
+    title: 'A Night at the Cinema: What to Know About Our 2026 Recital',
+    metaTitle:
+      'A Night at the Cinema — 2026 Recital, June 12–14 | Capital Core Dance Studio',
+    metaDescription:
+      'Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema,” runs June 12–14, 2026. Learn about recital fees, who participates, and where to find tickets and keepsakes.',
+    excerpt:
+      'Our annual recital is the highlight of the dance year. Here’s what “A Night at the Cinema” involves, what the recital fee covers, and how to prepare.',
+    tldr:
+      'Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema,” takes place June 12–14, 2026. All enrolled dancers are invited to perform, the recital fee starts at $100 for the first dance (costume included), and tickets and keepsakes are available through the Recital Shop.',
+    related: [
+      { to: '/recital', label: 'Recital Details & Tickets' },
+      { to: '/recitalshop', label: 'Shop Recital Keepsakes' },
+    ],
+    sections: [
+      {
+        heading: 'When and what is the 2026 recital?',
+        body: [
+          '“A Night at the Cinema” is our 2026 year-end showcase, taking place June 12–14, 2026. It’s a professional, full-production performance where dancers take the stage with their classes to celebrate everything they’ve worked on all year.',
+          'Participation is encouraged for all enrolled dancers but is not required. Dancers who take part perform with their class in a polished, theater-style setting that families love to watch.',
+        ],
+      },
+      {
+        heading: 'What does the recital fee cover?',
+        body: [
+          'The recital fee is $100 for the first dance and includes the costume. A second costume is $85, and a third costume and beyond is $65 each. The fee covers the costume, the recital venue, and the production costs that go into staging a full show.',
+          'Families with multiple dancers receive a discount, and payment plans are available so the cost can be spread out ahead of the performance.',
+        ],
+      },
+      {
+        heading: 'How do I get tickets and keepsakes?',
+        body: [
+          'Tickets and recital keepsakes — like commemorative shirts and flowers — are available through our online Recital Shop. Ordering ahead means everything is ready for the big night without a last-minute scramble at the door.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'When is the 2026 recital?',
+        a: 'The 2026 recital, “A Night at the Cinema,” runs June 12–14, 2026.',
+      },
+      {
+        q: 'Does every dancer have to perform?',
+        a: 'No. Participation is encouraged but optional. Dancers who choose to perform appear with their class in a professional showcase setting.',
+      },
+      {
+        q: 'How much is the recital fee?',
+        a: 'It is $100 for the first dance (costume included), $85 for a second costume, and $65 for each additional costume. Multi-dancer discounts and payment plans are available.',
+      },
+      {
+        q: 'Where do I buy tickets and recital merchandise?',
+        a: 'Tickets and keepsakes such as shirts and flowers are sold through the online Recital Shop on our website.',
+      },
+    ],
+  },
+
+  {
+    slug: 'adult-summer-series-movement-for-women',
+    category: 'Adult Classes',
+    accent: '#f4a8b4',
+    date: '2026-05-16',
+    readMinutes: 4,
+    title: 'The Adult Summer Series: Movement Classes for Women',
+    metaTitle:
+      'Adult Summer Series — Movement Classes for Women in Midlothian, VA | Capital Core Dance Studio',
+    metaDescription:
+      'Capital Core Dance Studio’s Adult Summer Series is a beginner-friendly 6-week movement series for women, with three rotating themes: Calm Confidence, Throwback Flow, and Femme Flow. Join the interest list.',
+    excerpt:
+      'A boutique movement series made for women — no experience needed. Here’s what the three rotating classes are about and how to get on the interest list.',
+    tldr:
+      'The Adult Summer Series is a beginner-friendly, 6-week movement series for women at Capital Core Dance Studio in Midlothian, VA. It features three rotating themes — Calm Confidence, Throwback Flow, and Femme Flow — offered once a week. Day, time, and pricing are being finalized from interest-list responses.',
+    related: [
+      { to: '/adult-summer-series', label: 'Join the Interest List' },
+      { to: '/contact', label: 'Questions? Contact the Studio' },
+    ],
+    sections: [
+      {
+        heading: 'Who is the Adult Summer Series for?',
+        body: [
+          'This is a boutique, women-only movement series designed for adults of any experience level — absolutely no dance background required. It runs for six weeks, once a week, in a supportive community space at our Midlothian studio.',
+          'Whether you danced years ago or have never set foot in a studio, the series is built to feel welcoming, low-pressure, and genuinely fun.',
+        ],
+      },
+      {
+        heading: 'What are the three classes?',
+        body: ['The series rotates through three themes so every week feels fresh:'],
+        list: [
+          'Calm Confidence — a graceful class combining mindful movement, breathwork, and confidence-building exercises.',
+          'Throwback Flow — a feel-good cardio dance class set to throwback hits.',
+          'Femme Flow — grace, strength, and feminine expression blended into one empowering movement experience.',
+        ],
+      },
+      {
+        heading: 'How do I sign up?',
+        body: [
+          'We’re currently collecting interest-list signups so we can lock in the day, time, and pricing that work for the most people. Options under consideration include Monday or Friday 5–9 PM, Tuesday/Wednesday/Thursday after 8 PM, and Sunday mornings 10 AM–1 PM.',
+          'Submit the interest form on the Adult Summer Series page and you’ll get a confirmation email and be first to know when registration opens.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'Do I need dance experience to join?',
+        a: 'No. The Adult Summer Series is beginner-friendly and welcomes women with no dance background at all.',
+      },
+      {
+        q: 'What are the three class themes?',
+        a: 'Calm Confidence (mindful movement and breathwork), Throwback Flow (cardio dance to throwback hits), and Femme Flow (grace, strength, and feminine expression).',
+      },
+      {
+        q: 'When does it meet?',
+        a: 'Class times are being finalized from interest-list responses. Possible options include Monday or Friday 5–9 PM, weeknights after 8 PM, and Sunday mornings 10 AM–1 PM, all at our Midlothian studio.',
+      },
+      {
+        q: 'How do I reserve a spot?',
+        a: 'Submit the interest form on the Adult Summer Series page. You’ll get a confirmation email and early access when registration opens.',
+      },
+    ],
+  },
+
+  {
+    slug: 'dance-birthday-party-guide-midlothian',
+    category: 'Birthday Parties',
+    accent: '#d4b8f4',
+    date: '2026-05-12',
+    readMinutes: 5,
+    title: 'How to Throw the Perfect Dance Birthday Party in Midlothian',
+    metaTitle:
+      'Kids Dance Birthday Parties in Midlothian, VA — Themes & Pricing | Capital Core Dance Studio',
+    metaDescription:
+      'Plan a stress-free dance birthday party at Capital Core Dance Studio in Midlothian, VA. Packages start at $199 for up to 10 kids, with themes from Princess to Hip Hop. See what’s included and how to book.',
+    excerpt:
+      'A private studio, an instructor-led dance party, and zero cleanup for you. Here’s how our birthday parties work, the themes available, and how to lock in a date.',
+    tldr:
+      'Capital Core Dance Studio hosts private kids’ dance birthday parties in Midlothian, VA. Packages start at $199 for up to 10 children for a 90-minute party and include the space, an instructor-led dance party, themed activities, music, tables and chairs, and setup/cleanup. A $50 deposit books your date.',
+    related: [
+      { to: '/birthdays', label: 'See Party Packages & Book' },
+      { to: '/contact', label: 'Ask About a Custom Theme' },
+    ],
+    sections: [
+      {
+        heading: 'What’s included in a dance birthday party?',
+        body: [
+          'Each party includes a private studio space, an instructor-led dance party, themed activities, music, tables and chairs, and full setup and cleanup. Parents simply bring the cake and food — we handle the rest, so you can actually enjoy the celebration.',
+          'The standard package covers up to 10 children for a 90-minute private party, and additional children can be added.',
+        ],
+      },
+      {
+        heading: 'What themes can we choose from?',
+        body: ['Pick a theme that fits the birthday star:'],
+        list: [
+          'Princess & Fairytale Dance',
+          'Hip Hop Dance Party',
+          'Pop Star Dance Party',
+          'Glow Dance Party',
+          'Unicorn & Rainbow Party',
+          'Preschool Wiggle & Giggle',
+          'Tea Party & Royal Celebration',
+          'Superhero Movement Party',
+          'Dance & Craft Party',
+        ],
+      },
+      {
+        heading: 'How much does it cost and how do I book?',
+        body: [
+          'Packages start at $199 for up to 10 children for a 90-minute party. A $50 non-refundable deposit is required to book, with the balance due on party day. Custom themes and upgrades — like glow parties and crafts — are also available.',
+          'Book using the online booking form on the Birthday Parties page. Weekend dates fill quickly, so reserve early to get your preferred slot.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'How much does a dance birthday party cost?',
+        a: 'Packages start at $199 and include up to 10 children for a 90-minute private party. Additional children can be added, and a $50 non-refundable deposit books the date.',
+      },
+      {
+        q: 'What’s included in the package?',
+        a: 'A private studio, an instructor-led dance party, themed activities, music, tables and chairs, and setup and cleanup. Parents just bring the cake and food.',
+      },
+      {
+        q: 'Can we request a custom theme?',
+        a: 'Yes. In addition to our standard themes, custom themes and upgrades like glow parties and crafts are available — just ask when you book.',
+      },
+      {
+        q: 'How far in advance should we book?',
+        a: 'As early as possible. Availability is limited, especially on weekends, so booking ahead gives you the best choice of dates.',
+      },
+    ],
+  },
+
+  {
+    slug: 'free-trial-dance-class-first-time',
+    category: 'Getting Started',
+    accent: '#b8f0d4',
+    date: '2026-05-08',
+    readMinutes: 4,
+    title: 'Trying Dance for the First Time? Start With a Free Trial Class',
+    metaTitle:
+      'Free Trial Dance Class in Midlothian, VA — How It Works | Capital Core Dance Studio',
+    metaDescription:
+      'New to dance? Capital Core Dance Studio offers a free first class with no commitment for dancers of all ages in Midlothian, VA. Here’s how to claim your free trial and what to expect.',
+    excerpt:
+      'Not sure if dance is the right fit? Your first class is always free. Here’s how the trial works and how we match your dancer to the right class.',
+    tldr:
+      'Capital Core Dance Studio offers a free first class with no commitment for new dancers of any age. To claim it, fill out the Contact form and choose “Register for a Free Trial” — the studio matches your dancer to a class within 1–2 business days.',
+    related: [
+      { to: '/contact', label: 'Claim Your Free Trial Class' },
+      { to: '/classes', label: 'Browse Class Styles First' },
+    ],
+    sections: [
+      {
+        heading: 'Is the first class really free?',
+        body: [
+          'Yes — your first class is always free, with no commitment required. It’s the easiest, lowest-pressure way to see whether a style and the studio are the right fit before you enroll.',
+          'We welcome dancers from age 2 through adults, and most of our classes are open to beginners. Our instructors never assume prior experience, so a free trial is a comfortable place to start.',
+        ],
+      },
+      {
+        heading: 'How do I claim my free trial?',
+        body: [
+          'Fill out the Contact form on our website and choose “Register for a Free Trial” from the interest dropdown. We’ll match your dancer with the right class for their age and level and follow up within 1–2 business days.',
+          'Not sure which style to try? Browse the Classes page first — from ballet and tap to hip hop and acro — then mention your interest in the form.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'How do I sign up for a free trial class?',
+        a: 'Submit the Contact form and select “Register for a Free Trial” from the interest dropdown. The studio will match your dancer with a class within 1–2 business days.',
+      },
+      {
+        q: 'What ages can take a free trial?',
+        a: 'Dancers from age 2 through adults are welcome. Most classes are open to beginners with no prior experience required.',
+      },
+      {
+        q: 'Is there any commitment with the trial?',
+        a: 'No. The first class is free with no obligation to enroll afterward.',
+      },
+    ],
+  },
+
+  {
+    slug: 'what-is-the-mini-series',
+    category: 'Classes',
+    accent: '#f4a060',
+    date: '2026-05-06',
+    readMinutes: 3,
+    title: 'What Is the Mini Series? Two Dance Styles in One Class',
+    metaTitle:
+      'The Mini Series — Two Dance Styles, One Class | Capital Core Dance Studio',
+    metaDescription:
+      'Capital Core Dance Studio’s Mini Series is a short-term, low-commitment program that combines two dance styles into one fun session. A great way to try something new in Midlothian, VA.',
+    excerpt:
+      'The Mini Series packs two dance styles into a single session — a low-commitment way to explore something new. Here’s how it works.',
+    tldr:
+      'The Mini Series is a short-term Capital Core Dance Studio program where each class combines two dance styles into one fun session. It’s a low-commitment way for dancers to try something new and is typically offered in spring and fall.',
+    related: [
+      { to: '/mini-series', label: 'Explore the Mini Series' },
+      { to: '/classes', label: 'See All Year-Round Classes' },
+    ],
+    sections: [
+      {
+        heading: 'How does the Mini Series work?',
+        body: [
+          'The Mini Series is a short-term program where each class blends two dance styles into a single session — think the energy of one style paired with the technique of another. It’s designed to be a low-commitment way for dancers to sample something new without signing up for a full semester.',
+          'Because it’s short-run, it’s perfect for dancers who are curious about a style they haven’t tried, or for newcomers who want a taste of studio life before committing to year-round classes.',
+        ],
+      },
+      {
+        heading: 'When is it offered?',
+        body: [
+          'The Mini Series is typically offered in spring and fall. If you’re weighing it against our regular programming, the Classes page lists every year-round style we teach, from ballet and jazz to hip hop, tap, acro, and more.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'What is the Mini Series?',
+        a: 'It is a short-term program where each class combines two dance styles into one fun session — a low-commitment way to try something new.',
+      },
+      {
+        q: 'When is the Mini Series offered?',
+        a: 'It is typically offered in spring and fall.',
+      },
+      {
+        q: 'Is the Mini Series good for beginners?',
+        a: 'Yes. Its short, low-commitment format makes it an easy entry point for newcomers and for dancers curious about a new style.',
+      },
+    ],
+  },
+
+  {
+    slug: 'dance-styles-parents-guide',
+    category: 'Classes',
+    accent: '#7ab3e8',
+    date: '2026-05-04',
+    readMinutes: 6,
+    title: 'A Parent’s Guide to Dance Class Styles at Capital Core',
+    metaTitle:
+      'Dance Styles for Kids in Midlothian, VA — A Parent’s Guide | Capital Core Dance Studio',
+    metaDescription:
+      'Ballet, jazz, hip hop, tap, acro, contemporary, and more — a parent’s guide to the dance styles taught at Capital Core Dance Studio in Midlothian, VA, and how to choose the right class for your child.',
+    excerpt:
+      'Ballet or hip hop? Tap or acro? Here’s a plain-English guide to the styles we teach and how to pick the right starting point for your dancer.',
+    tldr:
+      'Capital Core Dance Studio teaches ballet, jazz, hip hop, contemporary, tap, acro, tumbling, lyrical, musical theatre, Irish dance, and pom/cheer, plus preschool creative movement (ages 2–5) and adult classes. New dancers can start with almost any style — most classes are open to beginners.',
+    related: [
+      { to: '/classes', label: 'Browse Classes & Schedule' },
+      { to: '/faq', label: 'More Questions? Read the FAQ' },
+    ],
+    sections: [
+      {
+        heading: 'What dance styles does Capital Core teach?',
+        body: [
+          'We offer a wide range of styles for dancers of every age and level: ballet, jazz, hip hop, contemporary, tap, acro, tumbling, lyrical, musical theatre, Irish dance, and pom/cheer. Our youngest dancers (ages 2–5) start with preschool creative movement, and we also offer adult fitness classes.',
+        ],
+      },
+      {
+        heading: 'How do I choose the right style for my child?',
+        body: [
+          'There’s no wrong first step. Ballet builds the foundation of technique, posture, and discipline that supports every other style. Hip hop and jazz are high-energy and great for kids who love music and movement. Tap is rhythmic and playful, while acro and tumbling blend dance with gymnastics-style skills.',
+          'For very young children, preschool creative movement focuses on coordination, listening, and fun rather than formal technique. Most classes are open to beginners, and our instructors are trained to support all skill levels — so it’s fine to just pick the style your child is most excited about.',
+        ],
+      },
+      {
+        heading: 'How long are classes and what ages do you teach?',
+        body: [
+          'We teach dancers from age 2 through adults. Class lengths range from 30 minutes for preschool and tiny classes up to 90 minutes for older, more advanced levels, depending on the style and age group.',
+          'The full weekly schedule is on the Classes page. If you’re still deciding, remember your first class is always free — a no-pressure way to find the right fit.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'What dance styles do you offer?',
+        a: 'Ballet, jazz, hip hop, contemporary, tap, acro, tumbling, lyrical, musical theatre, Irish dance, and pom/cheer, plus preschool creative movement for ages 2–5 and adult classes.',
+      },
+      {
+        q: 'What is the best first dance style for a young child?',
+        a: 'For ages 2–5, preschool creative movement is ideal. For older beginners, ballet builds foundational technique, while hip hop and jazz are great high-energy starting points. Most classes are open to beginners.',
+      },
+      {
+        q: 'What ages do you teach?',
+        a: 'We welcome dancers from age 2 through adults, with progressive levels from beginner to advanced.',
+      },
+      {
+        q: 'How long is each class?',
+        a: 'Class lengths range from 30 minutes for preschool/tiny classes up to 90 minutes, depending on the style, age group, and level.',
+      },
+    ],
+  },
+
+  {
+    slug: 'recital-shop-shirts-flowers-keepsakes',
+    category: 'Recital',
+    accent: '#c0392b',
+    date: '2026-05-22',
+    readMinutes: 3,
+    title: 'Recital Shop: Shirts, Flowers & Keepsakes for the Big Night',
+    metaTitle:
+      'Recital Shop — Shirts, Flowers & Keepsakes | Capital Core Dance Studio',
+    metaDescription:
+      'Order commemorative shirts, flowers, and keepsakes for Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema,” through the online Recital Shop. Reserve ahead so everything’s ready for showtime.',
+    excerpt:
+      'Make recital night memorable with commemorative shirts, flowers, and keepsakes — ordered ahead so there’s no last-minute scramble.',
+    tldr:
+      'The Recital Shop is where families order commemorative shirts, flowers, and keepsakes for Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema” (June 12–14, 2026). Ordering online ahead of time means everything is ready for the performance.',
+    related: [
+      { to: '/recitalshop', label: 'Visit the Recital Shop' },
+      { to: '/recital', label: 'See Full Recital Details' },
+    ],
+    sections: [
+      {
+        heading: 'What can I order from the Recital Shop?',
+        body: [
+          'The online Recital Shop is your one stop for everything that makes recital night special — commemorative shirts to remember the show, flowers to celebrate your dancer, and keepsakes that capture the moment.',
+          'Everything ties into our 2026 production, “A Night at the Cinema,” taking place June 12–14, 2026.',
+        ],
+      },
+      {
+        heading: 'Why order ahead?',
+        body: [
+          'Ordering online before the performance means your shirts, flowers, and keepsakes are ready and waiting — no last-minute scramble at the door, and no risk of items selling out. It also lets you surprise your dancer with flowers timed perfectly to their big moment.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'What does the Recital Shop sell?',
+        a: 'Commemorative recital shirts, flowers, and keepsakes tied to the 2026 production, “A Night at the Cinema.”',
+      },
+      {
+        q: 'When is the recital these items are for?',
+        a: 'The 2026 recital, “A Night at the Cinema,” takes place June 12–14, 2026.',
+      },
+      {
+        q: 'Should I order before recital night?',
+        a: 'Yes. Ordering ahead through the online shop ensures items are ready for the performance and don’t sell out.',
+      },
+    ],
+  },
+
+  {
+    slug: 'dance-tuition-fees-discounts-2026',
+    category: 'Enrollment',
+    accent: '#d4b8f4',
+    date: '2026-05-02',
+    readMinutes: 5,
+    title: 'Understanding Dance Tuition, Fees & Discounts for 2026',
+    metaTitle:
+      'Dance Class Tuition & Fees 2026 in Midlothian, VA | Capital Core Dance Studio',
+    metaDescription:
+      'A clear breakdown of Capital Core Dance Studio’s 2026 tuition by class length, registration fees, semesters, and the discounts available for multiple classes and siblings in Midlothian, VA.',
+    excerpt:
+      'How much does dance cost per month? Here’s a transparent breakdown of tuition by class length, registration fees, and the discounts that can lower your total.',
+    tldr:
+      'At Capital Core Dance Studio, monthly tuition is based on class length: $65 (30 min), $85 (45 min), $105 (60 min), $125 (75 min), and $150 (90 min). Registration is $65 per dancer per semester or $120 for the full year, and multi-class, multi-student, and sibling discounts are available.',
+    related: [
+      { to: '/tuition', label: 'View Full Tuition Details' },
+      { to: '/faq', label: 'Enrollment FAQ' },
+    ],
+    sections: [
+      {
+        heading: 'How much does tuition cost?',
+        body: ['Monthly tuition is based on the length of the class:'],
+        list: [
+          '30-minute class — $65/month',
+          '45-minute class — $85/month',
+          '60-minute class — $105/month',
+          '75-minute class — $125/month',
+          '90-minute class — $150/month',
+        ],
+      },
+      {
+        heading: 'What about registration fees and semesters?',
+        body: [
+          'There’s a $65 registration fee per dancer per semester, or $120 for the full year covering both semesters. We run two semesters annually: Fall (August–December) and Spring (January–June). Once registered, dancers are locked into their classes and pricing for the semester.',
+          'Full-semester tuition rates are also available if you’d prefer to pay by semester rather than monthly.',
+        ],
+      },
+      {
+        heading: 'What discounts can lower my cost?',
+        body: [
+          'Several discounts can bring your total down: multi-class discounts for dancers enrolled in more than one class, multi-student discounts for families with multiple dancers, and sibling discounts on registration fees, including family fee caps.',
+          'All payments run through our iClassPro portal, which accepts major credit and debit cards, ACH transfers, and checks. Reach out if you’d like help estimating your family’s total.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: 'How much do dance classes cost per month?',
+        a: 'Tuition is based on class length: $65 (30 min), $85 (45 min), $105 (60 min), $125 (75 min), and $150 (90 min) per month. Full-semester rates are also available.',
+      },
+      {
+        q: 'What is the registration fee?',
+        a: 'It is $65 per dancer per semester, or $120 for the full year covering both semesters. Sibling discounts and family fee caps apply for families with multiple dancers.',
+      },
+      {
+        q: 'When are the semesters?',
+        a: 'There are two semesters per year: Fall (August–December) and Spring (January–June).',
+      },
+      {
+        q: 'What discounts are available?',
+        a: 'Multi-class discounts, multi-student discounts for families with several dancers, and sibling discounts on registration fees.',
+      },
+    ],
+  },
+]
+
+export function getPostBySlug(slug) {
+  return POSTS.find((p) => p.slug === slug)
+}
