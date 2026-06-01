@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
@@ -9,7 +9,46 @@ const DEPOSIT_PER_CAMPER = 50
 
 export default function CampPayment() {
   const navigate = useNavigate()
-  const { state } = useLocation()
+  const { state: routerState } = useLocation()
+  const { registrationId: urlId } = useParams()
+
+  // Two entry points:
+  //   1. /camp-payment — coming from the camp-registration form (state in router)
+  //   2. /pay/camp/:registrationId — coming from an emailed payment link (load from DB)
+  const [loadedRow, setLoadedRow] = useState(null)
+  const [loadStatus, setLoadStatus] = useState(urlId && !routerState ? 'loading' : 'ready')
+
+  useEffect(() => {
+    if (!urlId || routerState) return
+    let cancelled = false
+    ;(async () => {
+      const { data, error } = await supabase
+        .from('camp_registrations')
+        .select('*')
+        .eq('id', urlId)
+        .single()
+      if (cancelled) return
+      if (error || !data) { setLoadStatus('not_found'); return }
+      setLoadedRow(data)
+      setLoadStatus(data.deposit_paid ? 'already_paid' : 'ready')
+    })()
+    return () => { cancelled = true }
+  }, [urlId, routerState])
+
+  // Derive a unified `state`-shaped object from whichever source we have.
+  const dbState = loadedRow ? {
+    registrationId: loadedRow.id,
+    parentName: loadedRow.parent_name,
+    email: loadedRow.email,
+    campers: Array.isArray(loadedRow.campers) ? loadedRow.campers : [],
+    camperCount: loadedRow.camper_count || 1,
+    promoCode: loadedRow.promo_code,
+    promoDiscount: Number(loadedRow.promo_discount || 0),
+    estimatedTotal: Number(loadedRow.estimated_total || 0),
+    depositTotal: DEPOSIT_PER_CAMPER * (loadedRow.camper_count || 1),
+    paymentChoice: loadedRow.payment_choice || 'deposit',
+  } : null
+  const state = routerState || dbState
 
   const registrationId = state?.registrationId || null
   const parentName = state?.parentName || ''
@@ -137,6 +176,60 @@ export default function CampPayment() {
     navigate('/camp-thankyou', {
       state: { name: d.parentName, campers: d.campers, camperCount: d.camperCount, paymentChoice: d.paymentChoice, paidInFull: d.payInFull },
     })
+  }
+
+  // ── Link-flow status screens ───────────────────────────────────
+  if (loadStatus === 'loading') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <SEO title="Loading… | Capital Core Dance Studio" description="Loading your payment details." noindex />
+        <Navbar />
+        <section className="bg-white flex-1 px-6 py-16">
+          <div className="max-w-md mx-auto text-center text-[#5a6a8a] text-sm">Loading your registration…</div>
+        </section>
+        <Footer />
+      </div>
+    )
+  }
+  if (loadStatus === 'not_found') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <SEO title="Registration Not Found | Capital Core Dance Studio" description="We couldn't find that camp registration." noindex />
+        <Navbar />
+        <section className="bg-white flex-1 px-6 py-16">
+          <div className="max-w-md mx-auto text-center flex flex-col gap-4">
+            <p className="text-navy-dark font-black text-xl">We couldn't find that registration.</p>
+            <p className="text-[#5a6a8a] text-sm">The link may be expired or incorrect. Please reach out and we'll send you a fresh one.</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mt-2">
+              <a href="tel:8042344014" className="bg-brand-red text-white font-bold px-6 py-2.5 rounded-md hover:bg-red-700 transition-colors text-sm">Call (804) 234-4014</a>
+              <a href="mailto:info@capitalcoredance.com" className="border border-surface-border text-navy-dark font-bold px-6 py-2.5 rounded-md hover:bg-surface-light transition-colors text-sm">Email Us</a>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    )
+  }
+  if (loadStatus === 'already_paid') {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <SEO title="Deposit Already Paid | Capital Core Dance Studio" description="This camp deposit has already been paid." noindex />
+        <Navbar />
+        <section className="bg-white flex-1 px-6 py-16">
+          <div className="max-w-md mx-auto text-center flex flex-col gap-4">
+            <div className="text-4xl">✓</div>
+            <p className="text-navy-dark font-black text-xl">This deposit is already paid.</p>
+            <p className="text-[#5a6a8a] text-sm">
+              We have {parentName || 'your'} camp registration on file
+              {loadedRow?.deposit_paid_at ? ` since ${new Date(loadedRow.deposit_paid_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}` : ''}
+              . No further action needed — we'll be in touch with what to bring on the first day.
+            </p>
+            <Link to="/camps" className="text-brand-red text-sm font-bold hover:underline mt-2">← Back to Summer Camps</Link>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    )
   }
 
   return (

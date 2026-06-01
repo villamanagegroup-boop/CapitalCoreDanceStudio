@@ -49,6 +49,7 @@ export default function App() {
         <Route path="/camps" element={<Camps />} />
         <Route path="/camp-registration" element={<CampForm />} />
         <Route path="/camp-payment" element={<CampPayment />} />
+        <Route path="/pay/camp/:registrationId" element={<CampPayment />} />
         <Route path="/camp-thankyou" element={<CampThankYou />} />
         <Route path="/mini-series" element={<MiniSeries />} />
         <Route path="/summer-classes" element={<SummerClasses />} />
