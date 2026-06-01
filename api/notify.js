@@ -515,6 +515,12 @@ function buildAdultSeriesInterestCustomerEmail(data) {
   `
 }
 
+// Preserved for future restoration. The Spirit Week idea form was removed from
+// Home.jsx in early June 2026 when Instructor Appreciation moved to June 9–12
+// (no more crowd-sourced ideas needed). The `spirit_week_ideas` Supabase table
+// still exists with prior submissions. To restore: add SpiritWeekIdeaForm back
+// to Home.jsx, and the formType === 'spirit_week_idea' branch below is ready
+// to handle the email side.
 function buildSpiritWeekIdeaEmail(data) {
   return `
     <h2>New Teacher Appreciation Spirit Week Idea</h2>
