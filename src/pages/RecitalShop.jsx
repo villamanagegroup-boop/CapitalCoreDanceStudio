@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
 import { breadcrumbSchema, productSchema } from '../lib/schema'
+import PrivacyNotice from '../components/PrivacyNotice'
 
 const SHOP_JSON_LD = [
   breadcrumbSchema([
@@ -844,6 +845,7 @@ export default function RecitalShop() {
                             PayPal is not configured yet. Add <code className="font-mono">VITE_PAYPAL_CLIENT_ID</code> to your .env file.
                           </div>
                         )}
+                        <PrivacyNotice className="mb-3 text-[#b8d4f0] [&_a]:text-[#C9A84C] [&_a]:hover:text-[#d4b85a]" />
                         {total > 0 ? (
                           <div className="bg-white rounded-lg p-4">
                             <div id="pp-checkout" className="min-h-[50px]" />

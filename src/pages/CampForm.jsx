@@ -5,6 +5,7 @@ import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
+import PrivacyNotice from '../components/PrivacyNotice'
 
 const CAMP_WEEKS = [
   { key: 'wk1', label: 'Week 1: June 15 – June 19 · Rainbow Remix' },
@@ -1075,6 +1076,8 @@ export default function CampForm() {
             {status === 'error' && (
               <p className="text-brand-red text-sm">{errorMsg}</p>
             )}
+
+            <PrivacyNotice />
 
             <button
               type="submit"

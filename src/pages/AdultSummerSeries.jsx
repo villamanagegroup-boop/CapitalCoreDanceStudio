@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
+import PrivacyNotice from '../components/PrivacyNotice'
 
 const CLASSES = [
   {
@@ -535,6 +536,8 @@ export default function AdultSummerSeries() {
                   {status === 'error' && (
                     <p className="text-brand-red text-sm">{errorMsg}</p>
                   )}
+
+                  <PrivacyNotice />
 
                   <button
                     type="submit"

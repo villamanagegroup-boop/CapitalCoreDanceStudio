@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
 import { simpleBreadcrumb } from '../lib/schema'
+import PrivacyNotice from '../components/PrivacyNotice'
 
 const INITIAL_FORM = {
   firstName: '',
@@ -271,6 +272,8 @@ export default function Contact() {
               {status === 'error' && (
                 <p className="text-brand-red text-sm">{errorMsg}</p>
               )}
+
+              <PrivacyNotice />
 
               <button
                 type="submit"

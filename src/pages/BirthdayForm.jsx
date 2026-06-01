@@ -5,6 +5,7 @@ import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
+import PrivacyNotice from '../components/PrivacyNotice'
 
 const THEMES = [
   'Princess & Fairytale Dance',
@@ -64,6 +65,7 @@ const REFERRAL_OPTIONS = [
 ]
 
 const INITIAL_FORM = {
+  juneSpecial: '',
   parentName: '',
   email: '',
   phone: '',
@@ -91,6 +93,24 @@ const INITIAL_FORM = {
   policyConfirm: false,
   waiverAck: false,
 }
+
+// June 2026 birthday promotion choices. Stored on the row via promo_code so no
+// schema migration is needed — the studio team applies the actual discount /
+// free upgrades manually when confirming the booking.
+const JUNE_SPECIAL_OPTIONS = [
+  {
+    value: '50_off',
+    promoCode: 'JUNE50',
+    label: '50% off my birthday package',
+    detail: 'Half off the base party package price.',
+  },
+  {
+    value: 'two_upgrades',
+    promoCode: 'JUNE2UP',
+    label: 'Two free upgrades of my choice',
+    detail: 'Pick any two upgrades below at no charge.',
+  },
+]
 
 export default function BirthdayForm() {
   const navigate = useNavigate()
@@ -126,6 +146,12 @@ export default function BirthdayForm() {
       ? [...form.upgrades.filter((u) => u !== 'Other'), `Other: ${form.upgradeOther}`]
       : form.upgrades
 
+    // Apply the June Special selection by setting promo_code automatically.
+    // If the parent also typed a promo code, theirs wins so admin discounts
+    // (e.g. CGADMIN100) still take effect.
+    const juneSpecial = JUNE_SPECIAL_OPTIONS.find((o) => o.value === form.juneSpecial)
+    const resolvedPromoCode = form.promoCode || juneSpecial?.promoCode || null
+
     const { error } = await supabase.from('birthday_bookings').insert([{
       parent_name: form.parentName,
       email: form.email,
@@ -144,7 +170,7 @@ export default function BirthdayForm() {
       bringing_food: form.bringingFood,
       allergies: form.allergies || null,
       referral: form.referral,
-      promo_code: form.promoCode || null,
+      promo_code: resolvedPromoCode,
       additional_notes: form.notes || null,
     }])
 
@@ -175,7 +201,8 @@ export default function BirthdayForm() {
           bringingFood: form.bringingFood,
           allergies: form.allergies,
           referral: form.referral,
-          promoCode: form.promoCode,
+          promoCode: resolvedPromoCode,
+          juneSpecial: juneSpecial?.label || null,
           notes: form.notes,
         }),
       }).catch(() => {})
@@ -186,7 +213,7 @@ export default function BirthdayForm() {
           email: form.email,
           birthdayName: form.birthdayName,
           dateFirst: form.dateFirst,
-          promoCode: validatedPromo?.code || null,
+          promoCode: validatedPromo?.code || juneSpecial?.promoCode || null,
           isFullyComped: validatedPromo?.type === 'comp_deposit',
         },
       })
@@ -217,6 +244,71 @@ export default function BirthdayForm() {
         <div className="max-w-2xl mx-auto">
 
           <form className="flex flex-col gap-8" onSubmit={handleSubmit} aria-label="Birthday party booking form">
+
+            {/* ── June Birthday Special ── */}
+            <div className="rounded-xl border-2 border-[#f4a8b4] bg-gradient-to-br from-[#fff0f6] via-[#ffd6e7] to-[#fff0f6] px-5 py-5">
+              <p className="text-[#d6336c] text-[11px] font-black tracking-[0.3em] uppercase mb-1">
+                June Special · Studio Birthday
+              </p>
+              <h2 className="text-navy-dark text-lg font-black leading-tight">
+                We're turning 1 — pick your perk
+              </h2>
+              <p className="text-[#5a3a4a] text-xs mt-1.5 leading-relaxed">
+                Book in June and choose one of these on us. Schedule the party for any
+                future available date.
+              </p>
+
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {JUNE_SPECIAL_OPTIONS.map((opt) => {
+                  const selected = form.juneSpecial === opt.value
+                  return (
+                    <label
+                      key={opt.value}
+                      className={`cursor-pointer rounded-lg border-2 px-4 py-3 transition-colors ${
+                        selected
+                          ? 'border-[#d6336c] bg-white shadow-sm'
+                          : 'border-[#f4c8d4] bg-white/60 hover:border-[#e890a5]'
+                      }`}
+                    >
+                      <div className="flex items-start gap-2.5">
+                        <input
+                          type="radio"
+                          name="juneSpecial"
+                          id="juneSpecial"
+                          value={opt.value}
+                          checked={selected}
+                          onChange={handleChange}
+                          className="mt-0.5 accent-[#d6336c]"
+                        />
+                        <div>
+                          <p className="text-navy-dark text-sm font-bold leading-snug">
+                            {opt.label}
+                          </p>
+                          <p className="text-[#5a6a8a] text-xs mt-1 leading-relaxed">
+                            {opt.detail}
+                          </p>
+                        </div>
+                      </div>
+                    </label>
+                  )
+                })}
+              </div>
+
+              {form.juneSpecial === 'two_upgrades' && (
+                <p className="mt-3 text-[11px] text-[#5a3a4a] italic">
+                  Pick your two upgrades in the &ldquo;Optional Upgrades&rdquo; step below — we'll comp
+                  them when we confirm your booking.
+                </p>
+              )}
+              {form.juneSpecial && (
+                <p className="mt-3 text-[11px] text-[#5a6a8a]">
+                  No promo code needed — the studio team will apply your June Special when
+                  we reach out to confirm.
+                </p>
+              )}
+            </div>
+
+            <hr className="border-surface-border" />
 
             {/* ── Contact Info ── */}
             <div className="flex flex-col gap-5">
@@ -498,6 +590,8 @@ export default function BirthdayForm() {
             {status === 'error' && (
               <p className="text-brand-red text-sm">{errorMsg}</p>
             )}
+
+            <PrivacyNotice />
 
             <button
               type="submit"

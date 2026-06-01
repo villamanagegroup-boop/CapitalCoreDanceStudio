@@ -187,8 +187,27 @@ export default function Home() {
       </section>
 
       {/* Flyers */}
+      {/*
+        Birthday Parties tile is hidden during the June 2026 studio-birthday
+        promo (we feature the June birthday flyer in its own pink side-by-side
+        card below). To restore — when the user says "add the birthday flyer
+        back" — re-insert this entry into the array between Recital Shop and
+        Summer Camps:
+
+        {
+          to: '/birthdays',
+          img: '/flyer-birthday-parties.png',
+          alt: 'Kids dance birthday party packages starting at $199 — Capital Core Dance Studio',
+          imgClass: 'object-cover',
+          title: 'Birthday Parties',
+          subtitle: 'Private packages from $199',
+          accent: 'text-[#c0392b]',
+        },
+
+        Then change `lg:grid-cols-5` below from 4 back to 5.
+      */}
       <section className="py-10 px-6" style={{ backgroundColor: '#ede0fa' }}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
             {
               to: '/recitalshop',
@@ -198,15 +217,6 @@ export default function Home() {
               title: 'Recital Shop',
               subtitle: 'A Night at the Cinema · June 13',
               accent: 'text-[#C9A84C]',
-            },
-            {
-              to: '/birthdays',
-              img: '/flyer-birthday-parties.png',
-              alt: 'Kids dance birthday party packages starting at $199 — Capital Core Dance Studio',
-              imgClass: 'object-cover',
-              title: 'Birthday Parties',
-              subtitle: 'Private packages from $199',
-              accent: 'text-[#c0392b]',
             },
             {
               to: '/camps',
@@ -255,29 +265,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instructor Appreciation announcement */}
-      <section className="px-6 py-10 bg-gradient-to-br from-[#fdf8ec] via-[#f7ecd0] to-[#fdf8ec]">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-6 md:gap-8 items-center">
-          <img
-            src="/flyer-instructor-appreciation.png"
-            alt="Capital Core Dance Instructor Appreciation — June 9 through June 12"
-            className="w-full rounded-xl shadow-lg border border-[#e8d8a8]"
-            loading="lazy"
-          />
-          <div className="text-center md:text-left">
-            <p className="text-[#b88820] text-[11px] font-black tracking-[0.4em] uppercase mb-2">
-              A Quick Update
-            </p>
-            <h2 className="text-navy-dark text-3xl md:text-4xl font-black leading-tight">
-              Instructor Appreciation is <span className="text-[#b88820]">moving to June 9–12</span>
-            </h2>
-            <p className="text-[#3a4a6a] text-sm md:text-base mt-3 leading-relaxed">
-              We've shifted Instructor Appreciation a little closer to recital so we can
-              celebrate our amazing instructors alongside our dancers during the show.
-              More details coming soon — until then, help us show our instructors just
-              how much they mean to the CCD family.
-            </p>
+      {/* Side-by-side announcements: Instructor Appreciation + June Birthday Special */}
+      <section className="px-6 py-10 bg-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
+
+          {/* Instructor Appreciation */}
+          <div className="flex flex-col rounded-2xl bg-gradient-to-br from-[#fdf8ec] via-[#f7ecd0] to-[#fdf8ec] border border-[#e8d8a8] overflow-hidden shadow-md">
+            <img
+              src="/flyer-instructor-appreciation.png"
+              alt="Capital Core Dance Instructor Appreciation — June 9 through June 12"
+              className="w-full aspect-square object-cover"
+              loading="lazy"
+            />
+            <div className="p-6 text-center md:text-left flex flex-col flex-1">
+              <p className="text-[#b88820] text-[11px] font-black tracking-[0.4em] uppercase mb-2">
+                A Quick Update
+              </p>
+              <h2 className="text-navy-dark text-xl md:text-2xl font-black leading-tight">
+                Instructor Appreciation is <span className="text-[#b88820]">moving to June 9–12</span>
+              </h2>
+              <p className="text-[#3a4a6a] text-sm mt-3 leading-relaxed">
+                We've shifted Instructor Appreciation a little closer to recital so we can
+                celebrate our amazing instructors alongside our dancers during the show.
+                More details coming soon — help us show our instructors just how much they
+                mean to the CCD family.
+              </p>
+            </div>
           </div>
+
+          {/* June Birthday Special */}
+          <div className="flex flex-col rounded-2xl bg-gradient-to-br from-[#fff0f6] via-[#ffd6e7] to-[#fff0f6] border border-[#f4c8d4] overflow-hidden shadow-md">
+            <img
+              src="/flyer-june-birthday-special.png"
+              alt="Capital Core Dance is turning 1 — June birthday party special: 50% off a package or two free upgrades"
+              className="w-full aspect-square object-cover"
+              loading="lazy"
+            />
+            <div className="p-6 text-center md:text-left flex flex-col flex-1">
+              <p className="text-[#d6336c] text-[11px] font-black tracking-[0.4em] uppercase mb-2">
+                All June Long
+              </p>
+              <h2 className="text-navy-dark text-xl md:text-2xl font-black leading-tight">
+                We're turning 1 — <span className="text-[#d6336c]">let's celebrate!</span>
+              </h2>
+              <p className="text-[#3a4a6a] text-sm mt-3 leading-relaxed flex-1">
+                Every party booked in June gets your pick:
+                <span className="font-bold text-[#d6336c]"> 50% off a birthday package</span> or
+                <span className="font-bold text-[#d6336c]"> two free upgrades</span>. Schedule
+                for any future available date — book in June to lock in the deal.
+              </p>
+              <Link
+                to="/birthday-booking"
+                className="inline-block self-center md:self-start mt-5 bg-[#d6336c] text-white font-bold px-7 py-3 rounded-md hover:bg-[#b82658] transition-colors text-sm tracking-wide"
+              >
+                Book Your Party →
+              </Link>
+            </div>
+          </div>
+
         </div>
       </section>
 

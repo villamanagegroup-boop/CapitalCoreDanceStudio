@@ -38,6 +38,7 @@ const SECTIONS = [
     title: 'Cookies & Analytics',
     body: [
       'Our website may use cookies or similar technologies to keep your session active, remember preferences, and understand which pages are most useful to families. You can control cookies through your browser settings.',
+      'On your first visit you will see a short notice at the bottom of the page summarizing this policy. Selecting "Got it" acknowledges that you have read this Privacy Policy and stores a small preference in your browser so the notice is not shown again. It is not a marketing or advertising consent — we do not use third-party advertising trackers on this site.',
     ],
   },
   {

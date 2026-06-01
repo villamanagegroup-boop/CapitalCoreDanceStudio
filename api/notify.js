@@ -537,8 +537,12 @@ function buildBirthdayDepositEmail(data) {
 }
 
 function buildBirthdayEmail(data) {
+  const juneSpecialLine = data.juneSpecial
+    ? `<p style="background:#fff0f6;border:1px solid #f4c8d4;padding:8px 12px;border-radius:6px;"><strong>🎂 June Special chosen:</strong> ${escapeHtml(data.juneSpecial)}</p>`
+    : ''
   return `
     <h2>New Birthday Party Booking Request</h2>
+    ${juneSpecialLine}
     <p><strong>Parent Name:</strong> ${escapeHtml(data.parentName)}</p>
     <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>

@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
+import PrivacyNotice from '../components/PrivacyNotice'
 
 const YOUTH_SIZES = ['YS', 'YM', 'YL', 'YXL', 'YXXL']
 const ADULT_SIZES = ['S', 'M', 'L', 'XL', '2XL']
@@ -573,6 +574,8 @@ export default function RecitalShirts() {
                       <code className="font-mono">VITE_PAYPAL_CLIENT_ID</code> to your .env file.
                     </div>
                   )}
+                  <PrivacyNotice className="text-[#b8d4f0] [&_a]:text-[#C9A84C] [&_a]:hover:text-[#d4b85a]" />
+
                   {total > 0 ? (
                     <div className="bg-white rounded-xl p-4 mt-2">
                       <div id="paypal-btn" className="min-h-[50px]" />

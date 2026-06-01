@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { supabase } from '../lib/supabase'
 import { applyPromo, validatePromoCode } from '../lib/promos'
+import PrivacyNotice from '../components/PrivacyNotice'
 
 const SUMMER_CLASSES = [
   { key: 'tu-tiny',  day: 'Tuesday',   time: '5:30 – 6:00 PM', name: 'Tiny Ballet & Tumble',             ages: 'Ages 2–3',  duration: '30 min', price: 120 },
@@ -842,6 +843,8 @@ export default function SummerClassesForm() {
             {status === 'error' && (
               <p className="text-brand-red text-sm">{errorMsg}</p>
             )}
+
+            <PrivacyNotice />
 
             <button
               type="submit"
