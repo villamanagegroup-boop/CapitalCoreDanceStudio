@@ -163,6 +163,7 @@ export default function RecitalShop() {
   const [youthQty, setYouthQty] = useState(initSizeQty(YOUTH_SIZES))
   const [adultSizeQty, setAdultSizeQty] = useState(initSizeQty(ADULT_SIZES))
   const [sizeChart, setSizeChart] = useState(null)
+  const [lightbox, setLightbox] = useState(null) // { src, alt } | null
 
   // Combined contact + checkout
   const [name, setName] = useState('')
@@ -256,6 +257,16 @@ export default function RecitalShop() {
     script.onerror = () => console.error('Failed to load PayPal SDK')
     document.head.appendChild(script)
   }, [])
+
+  // ── Close lightbox on Escape ──────────────────────────────
+  useEffect(() => {
+    if (!lightbox) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightbox(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [lightbox])
 
   // ── Render PayPal buttons ─────────────────────────────────
   useEffect(() => {
@@ -536,32 +547,55 @@ export default function RecitalShop() {
                 <p className="text-gray-500 text-sm mt-1">Pre-order $10 · Day of show $15 · Pickup at the show</p>
               </div>
 
-              <div className="bg-[#fdf8f0] border border-[#C9A84C]/25 rounded-xl p-6 mb-6">
-                <p className="text-gray-700 text-sm leading-relaxed mb-3">
-                  The official "A Night at the Cinema" program — featuring the full cast list, dance order,
-                  and venue information for {SHOW_INFO.venue}.
-                </p>
-                <div className="flex items-center justify-between bg-white border border-[#C9A84C]/30 rounded-lg px-4 py-3">
-                  <span className="text-[#0B1F3A] text-sm font-bold">
-                    {isAfterShow ? 'Day-of pricing' : 'Pre-order pricing'}
-                  </span>
-                  <span className="text-[#C9A84C] font-black text-xl">{fmtPrice(PROGRAM_PRICE)} each</span>
-                </div>
-                {!isAfterShow && (
-                  <p className="text-gray-500 text-xs mt-2 italic">
-                    Pre-order pricing ends June 12, 2026. Programs purchased on or after the show date will be $15.
-                  </p>
-                )}
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-[#0B1F3A] font-bold text-sm">Number of Programs</p>
-                    <p className="text-gray-400 text-xs">{fmtPrice(PROGRAM_PRICE)} each</p>
+              <div className="grid md:grid-cols-[1fr_auto] gap-6 items-start">
+                {/* Left column — details &amp; order */}
+                <div>
+                  <div className="bg-[#fdf8f0] border border-[#C9A84C]/25 rounded-xl p-6 mb-6">
+                    <p className="text-gray-700 text-sm leading-relaxed mb-3">
+                      The official "A Night at the Cinema" program — featuring the full cast list, dance order,
+                      and venue information for {SHOW_INFO.venue}.
+                    </p>
+                    <div className="flex items-center justify-between bg-white border border-[#C9A84C]/30 rounded-lg px-4 py-3">
+                      <span className="text-[#0B1F3A] text-sm font-bold">
+                        {isAfterShow ? 'Day-of pricing' : 'Pre-order pricing'}
+                      </span>
+                      <span className="text-[#C9A84C] font-black text-xl">{fmtPrice(PROGRAM_PRICE)} each</span>
+                    </div>
+                    {!isAfterShow && (
+                      <p className="text-gray-500 text-xs mt-2 italic">
+                        Pre-order pricing ends June 12, 2026. Programs purchased on or after the show date will be $15.
+                      </p>
+                    )}
                   </div>
-                  <Stepper qty={programQty} onInc={() => inc(setProgramQty)} onDec={() => dec(setProgramQty)} />
+
+                  <div className="bg-gray-50 rounded-xl p-5">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-[#0B1F3A] font-bold text-sm">Number of Programs</p>
+                        <p className="text-gray-400 text-xs">{fmtPrice(PROGRAM_PRICE)} each</p>
+                      </div>
+                      <Stepper qty={programQty} onInc={() => inc(setProgramQty)} onDec={() => dec(setProgramQty)} />
+                    </div>
+                  </div>
                 </div>
+
+                {/* Right column — program preview */}
+                <figure className="md:w-[260px] mx-auto md:mx-0">
+                  <button
+                    type="button"
+                    onClick={() => setLightbox({ src: '/program-preview.png', alt: 'Preview pages of the A Night at the Cinema 2026 recital show program.' })}
+                    className="group block w-full overflow-hidden rounded-xl border border-[#C9A84C]/30 shadow-md cursor-zoom-in"
+                  >
+                    <img
+                      src="/program-preview.png"
+                      alt="Preview pages of the A Night at the Cinema 2026 recital show program, shown as filmstrip frames with cast photos and dance titles."
+                      className="w-full transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  </button>
+                  <figcaption className="text-center text-gray-400 text-xs mt-2 italic">
+                    A peek inside this year's program · tap to enlarge
+                  </figcaption>
+                </figure>
               </div>
             </section>
 
@@ -885,6 +919,25 @@ export default function RecitalShop() {
               <img src={sizeChart === 'youth' ? '/kids-size-chart.png' : '/adult-size-chart.png'} alt={sizeChart === 'youth' ? 'Youth Size Chart' : 'Adult Size Chart'} className="w-full rounded-lg" />
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Image lightbox — program preview &amp; shirt designs */}
+      {lightbox && (
+        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 sm:p-8" onClick={() => setLightbox(null)}>
+          <button
+            onClick={() => setLightbox(null)}
+            aria-label="Close"
+            className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl leading-none transition-colors"
+          >
+            ×
+          </button>
+          <img
+            src={lightbox.src}
+            alt={lightbox.alt}
+            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import InstagramBanner from '../components/InstagramBanner'
 import SEO from '../components/SEO'
 import { localBusinessSchema } from '../lib/schema'
 
@@ -386,6 +387,7 @@ export default function Home() {
       </section>
       </main>
 
+      <InstagramBanner />
       <Footer />
     </div>
   )
