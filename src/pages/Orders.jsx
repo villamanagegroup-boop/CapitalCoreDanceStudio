@@ -367,6 +367,7 @@ function StatusPill({ status }) {
 function Gate({ onUnlock }) {
   const [val, setVal] = useState('')
   const [error, setError] = useState(false)
+  const [show, setShow] = useState(false)
 
   function submit(e) {
     e.preventDefault()
@@ -385,14 +386,33 @@ function Gate({ onUnlock }) {
         <h1 className="text-white text-2xl font-bold mb-6" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
           Orders
         </h1>
-        <input
-          type="password"
-          autoFocus
-          value={val}
-          onChange={(e) => { setVal(e.target.value); setError(false) }}
-          placeholder="Passcode"
-          className="w-full bg-white/5 border border-white/20 text-white rounded-lg px-4 py-2.5 text-sm text-center placeholder:text-white/30 focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/30"
-        />
+        <div className="relative">
+          <input
+            type={show ? 'text' : 'password'}
+            autoFocus
+            value={val}
+            onChange={(e) => { setVal(e.target.value); setError(false) }}
+            placeholder="Passcode"
+            className="w-full bg-white/5 border border-white/20 text-white rounded-lg pl-4 pr-11 py-2.5 text-sm text-center placeholder:text-white/30 focus:outline-none focus:border-[#C9A84C] focus:ring-1 focus:ring-[#C9A84C]/30"
+          />
+          <button
+            type="button"
+            onClick={() => setShow((s) => !s)}
+            aria-label={show ? 'Hide passcode' : 'Show passcode'}
+            title={show ? 'Hide passcode' : 'Show passcode'}
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-white/40 hover:text-white transition-colors"
+          >
+            {show ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" /><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" /><path d="M6.61 6.61A13.5 13.5 0 0 0 2 12s3 7 10 7a9.7 9.7 0 0 0 5.39-1.61" /><line x1="2" y1="2" x2="22" y2="22" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" />
+              </svg>
+            )}
+          </button>
+        </div>
         {error && <p className="text-red-400 text-xs mt-2">Incorrect passcode</p>}
         <button
           type="submit"
