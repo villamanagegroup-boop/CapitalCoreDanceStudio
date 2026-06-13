@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { to: '/recitalshop', label: 'Recital Shop' },
   { to: '/blog', label: 'Blog' },
   { to: '/faq', label: 'FAQ' },
+  { to: '/orders', label: 'Admin Orders' },
   { to: '/contact', label: 'Contact Us' },
 ]
 
@@ -124,7 +125,6 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
             <Link to="/privacy" className="text-[#5a7aaa] text-xs hover:text-white transition-colors">Privacy</Link>
             <Link to="/terms" className="text-[#5a7aaa] text-xs hover:text-white transition-colors">Terms</Link>
-            <Link to="/orders" className="text-[#3a4a6a] text-xs hover:text-white transition-colors">Admin Orders</Link>
             <a href="https://www.instagram.com/capitalcoredance" target="_blank" rel="noreferrer" className="text-[#5a7aaa] text-xs hover:text-[#f4a8b4] transition-colors">Instagram</a>
             <a href="https://www.facebook.com/p/Capital-Core-Dance-Challenge-61566002721661/" target="_blank" rel="noreferrer" className="text-[#5a7aaa] text-xs hover:text-[#7ab3e8] transition-colors">Facebook</a>
             <p className="text-[#3a4a6a] text-xs">Managed by Hicks Virtual Solutions LLC</p>
