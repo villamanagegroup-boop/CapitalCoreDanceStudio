@@ -13,7 +13,10 @@ const NAV_LINKS = [
   { to: '/recitalshop', label: 'Recital Shop' },
   { to: '/blog', label: 'Blog' },
   { to: '/faq', label: 'FAQ' },
-  { to: '/orders', label: 'Admin Orders' },
+  // Internal recital orders viewer — hidden from the public footer.
+  // Re-enable by uncommenting when orders are open again. The /orders
+  // route still works directly (passcode-gated); this only controls the link.
+  // { to: '/orders', label: 'Admin Orders' },
   { to: '/contact', label: 'Contact Us' },
 ]
 
