@@ -116,19 +116,19 @@ const FAQS = [
     items: [
       {
         q: 'What is the Adult Summer Series?',
-        a: 'It\'s a boutique 6-week movement series for women — three rotating themes (Calm Confidence, Throwback Energy, Femme Flow) offered once a week. Beginner friendly, no experience needed, in a supportive community space.',
+        a: 'It\'s a 90-minute movement experience for women — one class that flows through three parts: Throwback Energy, Femme Flow, and Calm Confidence. Beginner friendly, no experience needed, in a supportive, judgment-free space. Move. Connect. Grow.',
       },
       {
         q: 'When and where does it meet?',
-        a: 'Class times are being finalized based on interest-list responses. Available options include Monday or Friday 5–9 PM, Tuesday/Wednesday/Thursday after 8 PM, and Sunday mornings 10 AM – 1 PM. All classes are at our studio in Midlothian, VA.',
+        a: 'Mondays from 6:00 to 7:30 PM, six weeks starting Monday, June 29, 2026 (June 29 and July 6, 13, 20, 27, plus August 3). All classes are at our studio in Midlothian, VA.',
       },
       {
-        q: 'How do I sign up?',
-        a: 'We\'re currently collecting interest-list signups so we can finalize day, time, and pricing. Visit the Adult Summer Series page and submit the interest form — you\'ll get a confirmation email and be first to know when registration opens.',
+        q: 'How do I sign up and what does it cost?',
+        a: 'Registration is open online — visit the Adult Summer Series page and reserve your spot with secure payment. It\'s $25 per drop-in class, or grab the Summer Series Pass for $120 to attend all six Mondays and save $30. Spots are limited.',
       },
       {
-        q: 'What are the three classes?',
-        a: 'Calm Confidence is a graceful movement class with mindful movement, breathwork, and confidence-building exercises. Throwback Energy is a feel-good cardio dance class to throwback hits. Femme Flow blends grace, strength, and feminine expression into an empowering movement experience.',
+        q: 'What\'s included in each class?',
+        a: 'Every 90-minute class includes all three: 45 minutes of Throwback Energy (feel-good, high-energy dance to throwback hits), 30 minutes of Femme Flow (graceful, empowering movement that builds confidence), and 15 minutes of Calm Confidence (stretch, breathe, and reconnect to leave feeling centered).',
       },
     ],
   },

@@ -155,37 +155,37 @@ export const POSTS = [
     metaTitle:
       'Adult Summer Series — Movement Classes for Women in Midlothian, VA | Capital Core Dance Studio',
     metaDescription:
-      'Capital Core Dance Studio’s Adult Summer Series is a beginner-friendly 6-week movement series for women, with three rotating themes: Calm Confidence, Throwback Energy, and Femme Flow. Join the interest list.',
+      'Capital Core Dance Studio’s Adult Summer Series is a 90-minute Monday-night movement experience for women in Midlothian, VA — every class blends Throwback Energy, Femme Flow, and Calm Confidence. Six weeks from June 29. $25 drop-in or $120 pass. Registration open.',
     excerpt:
-      'A boutique movement series made for women — no experience needed. Here’s what the three rotating classes are about and how to get on the interest list.',
+      'A 90-minute movement experience made for women — no experience needed. Here’s what every class includes, when it meets, and how to register.',
     tldr:
-      'The Adult Summer Series is a beginner-friendly, 6-week movement series for women at Capital Core Dance Studio in Midlothian, VA. It features three rotating themes — Calm Confidence, Throwback Energy, and Femme Flow — offered once a week. Day, time, and pricing are being finalized from interest-list responses.',
+      'The Adult Summer Series is a beginner-friendly, 90-minute movement experience for women at Capital Core Dance Studio in Midlothian, VA. Every Monday class (6:00–7:30 PM, six weeks from June 29, 2026) blends 45 minutes of Throwback Energy, 30 minutes of Femme Flow, and 15 minutes of Calm Confidence. It’s $25 per drop-in or $120 for the Summer Series Pass (all six classes). Registration is open.',
     related: [
-      { to: '/adult-summer-series', label: 'Join the Interest List' },
+      { to: '/adult-summer-series', label: 'Register for the Series' },
       { to: '/contact', label: 'Questions? Contact the Studio' },
     ],
     sections: [
       {
         heading: 'Who is the Adult Summer Series for?',
         body: [
-          'This is a boutique, women-only movement series designed for adults of any experience level — absolutely no dance background required. It runs for six weeks, once a week, in a supportive community space at our Midlothian studio.',
-          'Whether you danced years ago or have never set foot in a studio, the series is built to feel welcoming, low-pressure, and genuinely fun.',
+          'This is a women-only movement experience designed for adults of any experience level — absolutely no dance background required. It runs Mondays from 6:00 to 7:30 PM for six weeks, starting June 29, 2026, in a supportive, judgment-free space at our Midlothian studio.',
+          'Whether you danced years ago or have never set foot in a studio, every 90-minute class is built to feel welcoming, low-pressure, and genuinely fun.',
         ],
       },
       {
-        heading: 'What are the three classes?',
-        body: ['The series rotates through three themes so every week feels fresh:'],
+        heading: 'What’s in every 90-minute class?',
+        body: ['Each class flows through three parts, so you get a little of everything every week:'],
         list: [
-          'Calm Confidence — a graceful class combining mindful movement, breathwork, and confidence-building exercises.',
-          'Throwback Energy — a feel-good cardio dance class set to throwback hits.',
-          'Femme Flow — grace, strength, and feminine expression blended into one empowering movement experience.',
+          'Throwback Energy (45 min) — feel-good, high-energy dance to your favorite throwback hits.',
+          'Femme Flow (30 min) — graceful, empowering movement that builds confidence and helps you feel strong.',
+          'Calm Confidence (15 min) — stretch, breathe, and reconnect to leave feeling centered and refreshed.',
         ],
       },
       {
-        heading: 'How do I sign up?',
+        heading: 'How do I sign up, and what does it cost?',
         body: [
-          'We’re currently collecting interest-list signups so we can lock in the day, time, and pricing that work for the most people. Options under consideration include Monday or Friday 5–9 PM, Tuesday/Wednesday/Thursday after 8 PM, and Sunday mornings 10 AM–1 PM.',
-          'Submit the interest form on the Adult Summer Series page and you’ll get a confirmation email and be first to know when registration opens.',
+          'Registration is open. It’s $25 per drop-in class, or you can grab the Summer Series Pass for $120 to attend all six Mondays and save $30.',
+          'Head to the Adult Summer Series page, choose a drop-in or the full pass, and reserve your spot with secure online payment. Spots are limited.',
         ],
       },
     ],
@@ -195,16 +195,16 @@ export const POSTS = [
         a: 'No. The Adult Summer Series is beginner-friendly and welcomes women with no dance background at all.',
       },
       {
-        q: 'What are the three class themes?',
-        a: 'Calm Confidence (mindful movement and breathwork), Throwback Energy (cardio dance to throwback hits), and Femme Flow (grace, strength, and feminine expression).',
+        q: 'What’s included in each class?',
+        a: 'Every 90-minute class blends all three parts: 45 minutes of Throwback Energy (dance to throwback hits), 30 minutes of Femme Flow (graceful, confidence-building movement), and 15 minutes of Calm Confidence (stretch, breathe, and reconnect).',
       },
       {
         q: 'When does it meet?',
-        a: 'Class times are being finalized from interest-list responses. Possible options include Monday or Friday 5–9 PM, weeknights after 8 PM, and Sunday mornings 10 AM–1 PM, all at our Midlothian studio.',
+        a: 'Mondays from 6:00 to 7:30 PM, six weeks starting June 29, 2026, at our Midlothian studio.',
       },
       {
-        q: 'How do I reserve a spot?',
-        a: 'Submit the interest form on the Adult Summer Series page. You’ll get a confirmation email and early access when registration opens.',
+        q: 'How do I reserve a spot, and what does it cost?',
+        a: 'Register online on the Adult Summer Series page. It’s $25 per drop-in or $120 for the Summer Series Pass (all six classes — save $30). Spots are limited.',
       },
     ],
   },
