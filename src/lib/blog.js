@@ -155,11 +155,11 @@ export const POSTS = [
     metaTitle:
       'Adult Summer Series — Movement Classes for Women in Midlothian, VA | Capital Core Dance Studio',
     metaDescription:
-      'Capital Core Dance Studio’s Adult Summer Series is a beginner-friendly 6-week movement series for women, with three rotating themes: Calm Confidence, Throwback Flow, and Femme Flow. Join the interest list.',
+      'Capital Core Dance Studio’s Adult Summer Series is a beginner-friendly 6-week movement series for women, with three rotating themes: Calm Confidence, Throwback Energy, and Femme Flow. Join the interest list.',
     excerpt:
       'A boutique movement series made for women — no experience needed. Here’s what the three rotating classes are about and how to get on the interest list.',
     tldr:
-      'The Adult Summer Series is a beginner-friendly, 6-week movement series for women at Capital Core Dance Studio in Midlothian, VA. It features three rotating themes — Calm Confidence, Throwback Flow, and Femme Flow — offered once a week. Day, time, and pricing are being finalized from interest-list responses.',
+      'The Adult Summer Series is a beginner-friendly, 6-week movement series for women at Capital Core Dance Studio in Midlothian, VA. It features three rotating themes — Calm Confidence, Throwback Energy, and Femme Flow — offered once a week. Day, time, and pricing are being finalized from interest-list responses.',
     related: [
       { to: '/adult-summer-series', label: 'Join the Interest List' },
       { to: '/contact', label: 'Questions? Contact the Studio' },
@@ -177,7 +177,7 @@ export const POSTS = [
         body: ['The series rotates through three themes so every week feels fresh:'],
         list: [
           'Calm Confidence — a graceful class combining mindful movement, breathwork, and confidence-building exercises.',
-          'Throwback Flow — a feel-good cardio dance class set to throwback hits.',
+          'Throwback Energy — a feel-good cardio dance class set to throwback hits.',
           'Femme Flow — grace, strength, and feminine expression blended into one empowering movement experience.',
         ],
       },
@@ -196,7 +196,7 @@ export const POSTS = [
       },
       {
         q: 'What are the three class themes?',
-        a: 'Calm Confidence (mindful movement and breathwork), Throwback Flow (cardio dance to throwback hits), and Femme Flow (grace, strength, and feminine expression).',
+        a: 'Calm Confidence (mindful movement and breathwork), Throwback Energy (cardio dance to throwback hits), and Femme Flow (grace, strength, and feminine expression).',
       },
       {
         q: 'When does it meet?',

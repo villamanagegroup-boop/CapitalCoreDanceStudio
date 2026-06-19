@@ -43,7 +43,7 @@ const SECTION_CARDS = [
     photo: '/card-adult-dance.jpg',
     imageAlt: 'Women dancing together in an adult movement class at Capital Core Dance Studio',
     description:
-      'A 90-minute Monday-night movement series for women — Throwback Flow, Femme Flow, and Calm Confidence. Beginner friendly. $25 drop-in or $120 series pass.',
+      'A 90-minute Monday-night movement series for women — Throwback Energy, Femme Flow, and Calm Confidence. Beginner friendly. $25 drop-in or $120 series pass.',
     linkLabel: 'Register Now',
   },
   {
@@ -151,7 +151,7 @@ export default function Home() {
             {
               to: '/adult-summer-series',
               img: '/flyer-adult-summer-series.png',
-              alt: 'Adult Summer Series — a 90-minute movement experience for women — Throwback Flow, Femme Flow, Calm Confidence — Mondays 6 to 7:30 PM — Capital Core Dance Studio Midlothian VA',
+              alt: 'Adult Summer Series — a 90-minute movement experience for women — Throwback Energy, Femme Flow, Calm Confidence — Mondays 6 to 7:30 PM — Capital Core Dance Studio Midlothian VA',
               imgClass: 'object-cover',
               title: 'Adult Summer Series',
               subtitle: 'For women · registration open',

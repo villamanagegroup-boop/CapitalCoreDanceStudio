@@ -8,22 +8,22 @@ import SEO from '../components/SEO'
 const SEGMENTS = [
   {
     minutes: '45 Minutes',
-    title: 'Throwback Flow',
-    description: 'Dance, move, and laugh to your favorite throwback hits.',
+    title: 'Throwback Energy',
+    description: 'Dance, move, and laugh to your favorite throwback hits. High energy, feel-good vibes, and nonstop fun.',
     accent: '#c9a868',
     accentInk: '#7a5a1f',
   },
   {
     minutes: '30 Minutes',
     title: 'Femme Flow',
-    description: 'Build confidence through graceful, empowering movement.',
+    description: 'Build confidence through graceful, empowering movement that helps you feel strong, confident, and you.',
     accent: '#a83a4c',
     accentInk: '#7a1f1f',
   },
   {
     minutes: '15 Minutes',
     title: 'Calm Confidence',
-    description: 'Stretch, breathe, and reconnect before heading into your weekend.',
+    description: 'Stretch, breathe, and reconnect with yourself. Leave feeling refreshed, centered, and confident.',
     accent: '#7a3e42',
     accentInk: '#5a2e32',
   },
@@ -41,7 +41,7 @@ export default function AdultSummerSeries() {
     <div className="min-h-screen flex flex-col bg-warm-ivory">
       <SEO
         title="Adult Summer Series · Monday-Night Movement for Women | Capital Core Dance Studio"
-        description="A 90-minute movement experience for women in Midlothian, VA — Throwback Flow, Femme Flow & Calm Confidence. Mondays 6–7:30 PM, six weeks from June 29. $25 drop-in or $120 Summer Series Pass. Registration now open."
+        description="A 90-minute movement experience for women in Midlothian, VA — Throwback Energy, Femme Flow & Calm Confidence. Mondays 6–7:30 PM, six weeks from June 29. $25 drop-in or $120 Summer Series Pass. Registration now open."
         canonical="/adult-summer-series"
       />
       <Navbar />
@@ -210,7 +210,7 @@ export default function AdultSummerSeries() {
             <div className="lg:sticky lg:top-24">
               <img
                 src="/flyer-adult-summer-series.png"
-                alt="Capital Core Adult Summer Series flyer — a 90-minute movement experience for women — Throwback Flow, Femme Flow, Calm Confidence — Mondays 6 to 7:30 PM"
+                alt="Capital Core Adult Summer Series flyer — a 90-minute movement experience for women — Throwback Energy, Femme Flow, Calm Confidence — Mondays 6 to 7:30 PM"
                 className="w-full rounded-md shadow-xl border border-surface-border"
               />
             </div>

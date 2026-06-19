@@ -492,7 +492,7 @@ function buildAdultSeriesInterestCustomerEmail(data) {
       <div style="background:#f4ebe2;border-top:1px solid #d9c7b8;border-bottom:1px solid #d9c7b8;padding:22px 28px;margin-top:18px;">
         <p style="margin:0 0 8px;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#7a3e42;font-style:italic;">The Series</p>
         <p style="margin:0;font-size:15px;color:#3d2828;line-height:1.7;">
-          Three rotating themes — <em>Calm Confidence</em>, <em>Throwback Flow</em>, and <em>Femme Flow</em> — once a week for six weeks. Beginner friendly. No experience required. Just you, the music, and a community that moves.
+          Three rotating themes — <em>Calm Confidence</em>, <em>Throwback Energy</em>, and <em>Femme Flow</em> — once a week for six weeks. Beginner friendly. No experience required. Just you, the music, and a community that moves.
         </p>
       </div>
 
@@ -596,7 +596,7 @@ function buildAdultSeriesCustomerEmail(data) {
       <div style="background:#f4ebe2;border-top:1px solid #d9c7b8;border-bottom:1px solid #d9c7b8;padding:22px 28px;margin-top:18px;">
         <p style="margin:0 0 8px;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#7a3e42;font-style:italic;">Every Class</p>
         <p style="margin:0;font-size:15px;color:#3d2828;line-height:1.7;">
-          90 minutes of movement — <em>45 min Throwback Flow</em>, <em>30 min Femme Flow</em>, and <em>15 min Calm Confidence</em>.
+          90 minutes of movement — <em>45 min Throwback Energy</em>, <em>30 min Femme Flow</em>, and <em>15 min Calm Confidence</em>.
           Wear something comfortable you can move in. No experience needed.
         </p>
       </div>

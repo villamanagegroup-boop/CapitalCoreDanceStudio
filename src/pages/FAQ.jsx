@@ -116,7 +116,7 @@ const FAQS = [
     items: [
       {
         q: 'What is the Adult Summer Series?',
-        a: 'It\'s a boutique 6-week movement series for women — three rotating themes (Calm Confidence, Throwback Flow, Femme Flow) offered once a week. Beginner friendly, no experience needed, in a supportive community space.',
+        a: 'It\'s a boutique 6-week movement series for women — three rotating themes (Calm Confidence, Throwback Energy, Femme Flow) offered once a week. Beginner friendly, no experience needed, in a supportive community space.',
       },
       {
         q: 'When and where does it meet?',
@@ -128,7 +128,7 @@ const FAQS = [
       },
       {
         q: 'What are the three classes?',
-        a: 'Calm Confidence is a graceful movement class with mindful movement, breathwork, and confidence-building exercises. Throwback Flow is a feel-good cardio dance class to throwback hits. Femme Flow blends grace, strength, and feminine expression into an empowering movement experience.',
+        a: 'Calm Confidence is a graceful movement class with mindful movement, breathwork, and confidence-building exercises. Throwback Energy is a feel-good cardio dance class to throwback hits. Femme Flow blends grace, strength, and feminine expression into an empowering movement experience.',
       },
     ],
   },

@@ -173,7 +173,7 @@ export default function AdultSeriesForm() {
       <PageHeader
         eyebrow="Adult Summer Series · Mondays 6:00 – 7:30 PM"
         title="Register for the Series"
-        subtitle="A 90-minute movement experience for women — Throwback Flow, Femme Flow & Calm Confidence. Grab the full pass or drop in for a single Monday."
+        subtitle="A 90-minute movement experience for women — Throwback Energy, Femme Flow & Calm Confidence. Grab the full pass or drop in for a single Monday."
       />
 
       <section className="bg-white flex-1 px-6 py-12">
