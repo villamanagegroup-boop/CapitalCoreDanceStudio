@@ -26,7 +26,6 @@ const SECTIONS = [
       'To run the studio and this website, we rely on a small set of trusted services that handle data on our behalf:',
     ],
     list: [
-      'iClassPro — class registration, scheduling, and tuition payments',
       'PayPal — recital ticket, merchandise, and birthday deposit payments',
       'Supabase — secure storage for form submissions and orders',
       'Resend — email delivery for booking confirmations and notifications',
@@ -50,7 +49,7 @@ const SECTIONS = [
   {
     title: 'Data Security',
     body: [
-      'We take reasonable steps to protect the information we collect. Payments are processed through PayPal and iClassPro, both of which use industry-standard encryption. We never store full credit card numbers on our website or servers.',
+      'We take reasonable steps to protect the information we collect. Payments are processed through PayPal, which uses industry-standard encryption. We never store full credit card numbers on our website or servers.',
     ],
   },
   {

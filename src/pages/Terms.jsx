@@ -15,14 +15,14 @@ const SECTIONS = [
   {
     title: 'Class Enrollment & Trial Class',
     body: [
-      'New dancers are welcome to attend a free trial class to see if it\'s the right fit. Enrollment is processed through our iClassPro portal. Spots in each class are limited and assigned on a first-come, first-served basis once enrollment is complete.',
+      'New dancers are welcome to attend a free trial class to see if it\'s the right fit. Enrollment is processed through our online student portal. Spots in each class are limited and assigned on a first-come, first-served basis once enrollment is complete.',
       'Once enrolled, dancers are expected to attend classes consistently. Persistent absences may result in losing the spot to a dancer on the waitlist.',
     ],
   },
   {
     title: 'Tuition, Fees & Payment',
     body: [
-      'Tuition is billed monthly or per semester depending on the program. A semester registration fee applies. All payments are processed securely through iClassPro (for tuition) or PayPal (for tickets, merchandise, and birthday deposits).',
+      'Tuition is billed monthly or per semester depending on the program. A semester registration fee applies. All payments are processed securely through our online student portal (for tuition) or PayPal (for tickets, merchandise, and birthday deposits).',
       'Tuition is due on the first of each month. Late or missed payments may result in suspension of class access until the balance is brought current.',
     ],
   },
@@ -63,7 +63,7 @@ const SECTIONS = [
   {
     title: 'Cancellations & Inclement Weather',
     body: [
-      'In the event of inclement weather or unforeseen circumstances, we may cancel or reschedule classes. We will communicate cancellations as quickly as possible by email, social media, and our iClassPro portal.',
+      'In the event of inclement weather or unforeseen circumstances, we may cancel or reschedule classes. We will communicate cancellations as quickly as possible by email, social media, and our online student portal.',
       'If a class is canceled by the studio, families will be offered a makeup class when reasonably possible.',
     ],
   },

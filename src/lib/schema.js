@@ -76,7 +76,6 @@ export const localBusinessSchema = {
       { '@type': 'Offer', name: 'Adult Summer Series', url: `${SITE_URL}/adult-summer-series` },
       { '@type': 'Offer', name: 'Mini Series Spring Classes', url: `${SITE_URL}/mini-series` },
       { '@type': 'Offer', name: 'Birthday Party Packages', url: `${SITE_URL}/birthdays` },
-      { '@type': 'Offer', name: 'Annual Recital', url: `${SITE_URL}/recital` },
     ],
   },
   sameAs: SOCIAL,

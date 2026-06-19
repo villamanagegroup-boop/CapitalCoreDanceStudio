@@ -39,22 +39,12 @@ const SECTION_CARDS = [
   {
     to: '/adult-summer-series',
     title: 'Adult Dance',
-    subtitle: 'Move For Confidence',
+    subtitle: 'Move. Connect. Grow.',
     photo: '/card-adult-dance.jpg',
     imageAlt: 'Women dancing together in an adult movement class at Capital Core Dance Studio',
     description:
-      'A boutique summer movement series for women — Calm Confidence, Throwback Flow, and Femme Flow. Beginner friendly, supportive community.',
-    linkLabel: 'View Adult Series',
-  },
-  {
-    to: '/recital',
-    title: 'Recital',
-    subtitle: 'Annual showcase',
-    photo: '/card-recital.jpg',
-    imageAlt: 'Annual dance recital performance at Capital Core Dance Studio',
-    description:
-      'Our annual recital is the highlight of the year — a chance for every dancer to shine on stage in front of family and friends.',
-    linkLabel: 'View Recital Info',
+      'A 90-minute Monday-night movement series for women — Throwback Flow, Femme Flow, and Calm Confidence. Beginner friendly. $25 drop-in or $120 series pass.',
+    linkLabel: 'Register Now',
   },
   {
     to: '/contact',
@@ -114,86 +104,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Recital shop banner — cinema marquee */}
-      <section className="relative px-6 py-7 bg-gradient-to-r from-[#080f1c] via-[#0d1a3a] to-[#080f1c] overflow-hidden">
-        <style>{`
-          .marquee-playfair { font-family: 'Playfair Display', Georgia, serif; }
-          @keyframes marquee-shimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-          }
-          .marquee-btn {
-            background: linear-gradient(135deg, #C9A84C 0%, #f4d97a 45%, #ffe89c 50%, #f4d97a 55%, #C9A84C 100%);
-            background-size: 250% 250%;
-            animation: marquee-shimmer 4s ease-in-out infinite;
-          }
-          @keyframes bulb-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.25; }
-          }
-          .marquee-bulb { animation: bulb-blink 2s ease-in-out infinite; }
-          .marquee-curtain-left {
-            position: absolute; top: 0; left: 0; bottom: 0; width: 12%;
-            background: linear-gradient(to right, rgba(130,10,10,0.5) 0%, rgba(110,10,10,0.2) 50%, transparent 100%);
-            pointer-events: none;
-          }
-          .marquee-curtain-right {
-            position: absolute; top: 0; right: 0; bottom: 0; width: 12%;
-            background: linear-gradient(to left, rgba(130,10,10,0.5) 0%, rgba(110,10,10,0.2) 50%, transparent 100%);
-            pointer-events: none;
-          }
-        `}</style>
-
-        {/* Curtains */}
-        <div className="marquee-curtain-left" />
-        <div className="marquee-curtain-right" />
-
-        {/* Top gold strip */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
-        {/* Marquee bulbs along top */}
-        <div className="absolute top-2 left-0 right-0 flex justify-center gap-2.5 pointer-events-none">
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-            <span
-              key={i}
-              className="w-1 h-1 rounded-full bg-[#C9A84C] marquee-bulb"
-              style={{ animationDelay: `${i * 0.15}s`, boxShadow: '0 0 6px rgba(201,168,76,0.8)' }}
-            />
-          ))}
-        </div>
-
-        {/* Spotlights */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-1/4 w-48 h-48 bg-[#C9A84C]/8 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 -translate-y-1/2 right-1/4 w-48 h-48 bg-[#f4a8b4]/8 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 pt-3">
-          <div className="text-center sm:text-left">
-            <p className="text-[#C9A84C] text-[10px] font-black tracking-[0.5em] uppercase mb-1">Now Showing</p>
-            <p className="marquee-playfair italic text-white text-2xl md:text-3xl font-black leading-tight">
-              A Night at the Cinema
-            </p>
-            <p className="text-white/55 text-xs mt-1.5 tracking-wide">
-              Annual Recital · Tickets, Programs &amp; T-Shirts
-            </p>
-          </div>
-          <Link
-            to="/recitalshop"
-            className="relative flex-shrink-0 marquee-btn text-[#0B1F3A] text-sm font-black px-7 py-3 rounded-lg shadow-2xl shadow-[#C9A84C]/30 hover:scale-105 transition-transform tracking-widest uppercase whitespace-nowrap"
-          >
-            Enter Shop →
-          </Link>
-        </div>
-
-        {/* Bottom gold strip */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
-      </section>
-
       {/* Flyers */}
       {/*
         Birthday Parties tile is hidden during the June 2026 studio-birthday
         promo (we feature the June birthday flyer in its own pink side-by-side
         card below). To restore — when the user says "add the birthday flyer
-        back" — re-insert this entry into the array between Recital Shop and
-        Summer Camps:
+        back" — re-insert this entry into the array before Summer Camps:
 
         {
           to: '/birthdays',
@@ -205,20 +121,14 @@ export default function Home() {
           accent: 'text-[#c0392b]',
         },
 
-        Then change `lg:grid-cols-5` below from 4 back to 5.
+        Then bump `lg:grid-cols-3` below to 4.
+
+        The Recital Shop tile that used to lead this grid was removed after the
+        June 2026 recital wrapped.
       */}
       <section className="py-10 px-6" style={{ backgroundColor: '#ede0fa' }}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
-            {
-              to: '/recitalshop',
-              img: '/flyer-night-at-the-cinema.png',
-              alt: 'A Night at the Cinema — Spring Recital tickets on sale, June 13 2026 at Richmond Christian School — Capital Core Dance Studio',
-              imgClass: 'object-cover',
-              title: 'Recital Shop',
-              subtitle: 'A Night at the Cinema · June 13',
-              accent: 'text-[#C9A84C]',
-            },
             {
               to: '/camps',
               img: '/flyer-summer-camps.png',
@@ -241,10 +151,10 @@ export default function Home() {
             {
               to: '/adult-summer-series',
               img: '/flyer-adult-summer-series.png',
-              alt: 'Adult Summer Series — Move for Confidence, Connection & Community — Calm Confidence, Throwback Flow, Femme Flow — Capital Core Dance Studio Midlothian VA',
-              imgClass: 'object-cover object-top',
+              alt: 'Adult Summer Series — a 90-minute movement experience for women — Throwback Flow, Femme Flow, Calm Confidence — Mondays 6 to 7:30 PM — Capital Core Dance Studio Midlothian VA',
+              imgClass: 'object-cover',
               title: 'Adult Summer Series',
-              subtitle: 'For women · interest list open',
+              subtitle: 'For women · registration open',
               accent: 'text-[#7a3e42]',
             },
           ].map(({ to, img, alt, imgClass, imgStyle, title, subtitle, accent }) => (
@@ -266,33 +176,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Side-by-side announcements: Instructor Appreciation + June Birthday Special */}
-      <section className="px-6 py-10 bg-white">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
-
-          {/* Instructor Appreciation */}
-          <div className="flex flex-col rounded-2xl bg-gradient-to-br from-[#fdf8ec] via-[#f7ecd0] to-[#fdf8ec] border border-[#e8d8a8] overflow-hidden shadow-md">
-            <img
-              src="/flyer-instructor-appreciation.png"
-              alt="Capital Core Dance Instructor Appreciation — June 9 through June 12"
-              className="w-full aspect-square object-cover"
-              loading="lazy"
-            />
-            <div className="p-6 text-center md:text-left flex flex-col flex-1">
-              <p className="text-[#b88820] text-[11px] font-black tracking-[0.4em] uppercase mb-2">
-                A Quick Update
-              </p>
-              <h2 className="text-navy-dark text-xl md:text-2xl font-black leading-tight">
-                Instructor Appreciation is <span className="text-[#b88820]">moving to June 9–12</span>
-              </h2>
-              <p className="text-[#3a4a6a] text-sm mt-3 leading-relaxed">
-                We've shifted Instructor Appreciation a little closer to recital so we can
-                celebrate our amazing instructors alongside our dancers during the show.
-                More details coming soon — help us show our instructors just how much they
-                mean to the CCD family.
-              </p>
-            </div>
-          </div>
+      {/* June Birthday Special announcement */}
+      <section className="px-6 py-10" style={{ backgroundColor: '#fff5f8' }}>
+        <div className="max-w-xl mx-auto">
 
           {/* June Birthday Special */}
           <div className="flex flex-col rounded-2xl bg-gradient-to-br from-[#fff0f6] via-[#ffd6e7] to-[#fff0f6] border border-[#f4c8d4] overflow-hidden shadow-md">

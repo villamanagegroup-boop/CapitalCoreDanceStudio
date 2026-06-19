@@ -9,8 +9,6 @@ const NAV_LINKS = [
   { to: '/adult-summer-series', label: 'Adult Summer Series' },
   { to: '/tuition', label: 'Tuition' },
   { to: '/birthdays', label: 'Birthdays' },
-  { to: '/recital', label: 'Recital' },
-  { to: '/recitalshop', label: 'Recital Shop' },
   { to: '/blog', label: 'Blog' },
   { to: '/faq', label: 'FAQ' },
   // Internal recital orders viewer — hidden from the public footer.
@@ -20,15 +18,13 @@ const NAV_LINKS = [
   { to: '/contact', label: 'Contact Us' },
 ]
 
-const PORTAL_URL = 'https://portal.iclasspro.com/capitalcoredance/dashboard'
-
 export default function Footer() {
   return (
     <footer className="bg-navy-dark px-6 pt-10 pb-6">
       <div className="max-w-6xl mx-auto">
 
         {/* Main footer grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-[#2a3a5a]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-[#2a3a5a]">
 
           {/* Studio info */}
           <div>
@@ -100,24 +96,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Portal CTA */}
-          <div className="flex flex-col justify-between">
-            <div>
-              <div className="text-[#5a7aaa] text-xs font-bold uppercase tracking-widest mb-4">Student Portal</div>
-              <p className="text-[#8a9aaa] text-xs mb-4 leading-relaxed">
-                Manage enrollments, make payments, and access your account through our iClassPro portal.
-              </p>
-            </div>
-            <a
-              href={PORTAL_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="block bg-brand-red text-white text-center text-xs font-bold px-5 py-3 rounded-md hover:bg-red-700 transition-colors"
-            >
-              Enter Studio Portal →
-            </a>
           </div>
 
         </div>

@@ -1,6 +1,6 @@
 # Capital Core Dance Studio
 
-> Capital Core Dance Studio is a family-owned dance school in Midlothian, Virginia, offering year-round dance classes, summer camps, birthday parties, and an annual recital for kids and adults. Located at 13110 Midlothian Turnpike, the studio serves families across Midlothian, Chesterfield County, and the greater Richmond, VA area.
+> Capital Core Dance Studio is a family-owned dance school in Midlothian, Virginia, offering year-round dance classes, summer camps, birthday parties, and adult movement programs for kids and adults. Located at 13110 Midlothian Turnpike, the studio serves families across Midlothian, Chesterfield County, and the greater Richmond, VA area.
 
 ## About
 
@@ -23,22 +23,14 @@ Six-week summer session, June 23 – July 30, 2026. Tuesday, Wednesday, and Thur
 ### Summer Dance Camps (https://capitalcoredance.com/camps)
 Eight themed weeks of dance camps for ages 4–13, running June through August 2026. Monday–Friday, 9:30 AM – 3:30 PM. Single days, half-days, and before/aftercare available. Pricing: $205/week for current dancers, $225/week for non-studio campers.
 
-### Adult Summer Series — Move For Confidence, Connection & Community (https://capitalcoredance.com/adult-summer-series)
-A boutique 6-week movement series for women in Midlothian, VA. Three rotating themes — Calm Confidence (mindful movement + breathwork), Throwback Flow (feel-good cardio choreo to throwback hits), and Femme Flow (grace + strength + feminine expression). Once a week. Beginner friendly, no experience needed. Currently collecting interest-list signups; registration dates and class times announced soon.
+### Adult Summer Series — Move. Connect. Grow. (https://capitalcoredance.com/adult-summer-series)
+A 90-minute movement experience for women in Midlothian, VA. Mondays 6:00–7:30 PM, six weeks starting June 29, 2026. Every class includes 45 minutes of Throwback Flow (feel-good choreo to throwback hits), 30 minutes of Femme Flow (graceful, empowering movement), and 15 minutes of Calm Confidence (stretch + breathe). Beginner friendly, no experience needed, supportive and judgment-free. Pricing: $25 drop-in or $120 Summer Series Pass (all 6 classes). Registration is open online with secure payment; spots are limited.
 
 ### Mini Series (https://capitalcoredance.com/mini-series)
 Six-week spring program (April 6 – May 15, 2026) combining two dance styles per session. $145 per series. A low-commitment way to try a new style.
 
 ### Birthday Parties (https://capitalcoredance.com/birthdays)
 Private 90-minute dance birthday parties for kids. Packages start at $199 and include up to 10 children, instructor-led party, themed activities, music, and setup/cleanup. $50 non-refundable deposit secures the date.
-
-### Annual Recital (https://capitalcoredance.com/recital)
-"A Night at the Cinema" — Capital Core Dance Studio's spring 2026 recital.
-- **Dress Rehearsal:** Friday, June 12, 2026 at 6:00 PM
-- **Recital Performance:** Saturday, June 13, 2026 at 2:00 PM
-- **Venue:** Richmond Christian School, 6511 Belmont Rd, Chesterfield, VA 23832
-- **Tickets:** $25 per adult, free for children 3 and under
-- **Tickets, programs, and shirts:** https://capitalcoredance.com/recitalshop
 
 ## Tuition (https://capitalcoredance.com/tuition)
 
@@ -51,7 +43,7 @@ Class pricing scales by length:
 
 Registration fee: $65 per dancer per semester, or $120 for the full year. Multi-class, sibling, and family discounts available.
 
-Semesters: Fall (August–December) and Spring (January–June). Recital fee is $100 for the first costume, $85 for the second, and $65 for additional costumes.
+Semesters: Fall (August–December) and Spring (January–June).
 
 ## Common Questions (https://capitalcoredance.com/faq)
 
@@ -69,16 +61,14 @@ Semesters: Fall (August–December) and Spring (January–June). Recital fee is 
 
 ## Blog (https://capitalcoredance.com/blog)
 
-Guides and announcements about classes, camps, the recital, parties, and getting started:
+Guides and announcements about classes, camps, parties, and getting started:
 - Summer Dance Camps 2026: All 8 Themed Weeks Explained — https://capitalcoredance.com/blog/summer-dance-camps-2026-themed-weeks
 - Your Guide to Summer Dance Classes 2026 (Ages 2 to Teen) — https://capitalcoredance.com/blog/summer-dance-classes-2026-guide
-- A Night at the Cinema: What to Know About Our 2026 Recital — https://capitalcoredance.com/blog/night-at-the-cinema-recital-2026
 - The Adult Summer Series: Movement Classes for Women — https://capitalcoredance.com/blog/adult-summer-series-movement-for-women
 - How to Throw the Perfect Dance Birthday Party in Midlothian — https://capitalcoredance.com/blog/dance-birthday-party-guide-midlothian
 - Trying Dance for the First Time? Start With a Free Trial Class — https://capitalcoredance.com/blog/free-trial-dance-class-first-time
 - What Is the Mini Series? Two Dance Styles in One Class — https://capitalcoredance.com/blog/what-is-the-mini-series
 - A Parent's Guide to Dance Class Styles at Capital Core — https://capitalcoredance.com/blog/dance-styles-parents-guide
-- Recital Shop: Shirts, Flowers & Keepsakes for the Big Night — https://capitalcoredance.com/blog/recital-shop-shirts-flowers-keepsakes
 - Understanding Dance Tuition, Fees & Discounts for 2026 — https://capitalcoredance.com/blog/dance-tuition-fees-discounts-2026
 
 ## Contact (https://capitalcoredance.com/contact)
@@ -99,8 +89,6 @@ Facebook: https://www.facebook.com/p/Capital-Core-Dance-Challenge-61566002721661
 - Summer Camps: https://capitalcoredance.com/camps
 - Mini Series: https://capitalcoredance.com/mini-series
 - Birthday Parties: https://capitalcoredance.com/birthdays
-- Recital Info: https://capitalcoredance.com/recital
-- Recital Shop (tickets, programs, shirts): https://capitalcoredance.com/recitalshop
 - Blog: https://capitalcoredance.com/blog
 - FAQ: https://capitalcoredance.com/faq
 - Contact: https://capitalcoredance.com/contact

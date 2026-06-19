@@ -14,16 +14,21 @@ import SummerClassesForm from './pages/SummerClassesForm'
 import SummerClassesPayment from './pages/SummerClassesPayment'
 import SummerClassesThankYou from './pages/SummerClassesThankYou'
 import AdultSummerSeries from './pages/AdultSummerSeries'
+import AdultSeriesForm from './pages/AdultSeriesForm'
+import AdultSeriesPayment from './pages/AdultSeriesPayment'
+import AdultSeriesThankYou from './pages/AdultSeriesThankYou'
 import Birthdays from './pages/Birthdays'
 import BirthdayForm from './pages/BirthdayForm'
 import BirthdayPayment from './pages/BirthdayPayment'
 import BirthdayThankYou from './pages/BirthdayThankYou'
 import Contact from './pages/Contact'
-import Recital from './pages/Recital'
-import RecitalShirts from './pages/RecitalShirts'
-import RecitalShirtThankYou from './pages/RecitalShirtThankYou'
-import RecitalShop from './pages/RecitalShop'
-import RecitalShopThankYou from './pages/RecitalShopThankYou'
+// Recital pages removed from the public site after the June 2026 recital wrapped.
+// Page files are preserved — re-import and re-add the routes below to restore.
+// import Recital from './pages/Recital'
+// import RecitalShirts from './pages/RecitalShirts'
+// import RecitalShirtThankYou from './pages/RecitalShirtThankYou'
+// import RecitalShop from './pages/RecitalShop'
+// import RecitalShopThankYou from './pages/RecitalShopThankYou'
 import FAQ from './pages/FAQ'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -58,16 +63,22 @@ export default function App() {
         <Route path="/summer-classes/payment" element={<SummerClassesPayment />} />
         <Route path="/summer-classes/thankyou" element={<SummerClassesThankYou />} />
         <Route path="/adult-summer-series" element={<AdultSummerSeries />} />
+        <Route path="/adult-summer-series/signup" element={<AdultSeriesForm />} />
+        <Route path="/adult-summer-series/payment" element={<AdultSeriesPayment />} />
+        <Route path="/adult-summer-series/thankyou" element={<AdultSeriesThankYou />} />
         <Route path="/birthdays" element={<Birthdays />} />
         <Route path="/birthday-booking" element={<BirthdayForm />} />
         <Route path="/birthday-payment" element={<BirthdayPayment />} />
         <Route path="/birthday-thankyou" element={<BirthdayThankYou />} />
         <Route path="/contact" element={<Contact />} />
+        {/* Recital routes removed after the June 2026 recital. Restore by
+            uncommenting these and the imports above.
         <Route path="/recital" element={<Recital />} />
         <Route path="/recital/shirts" element={<RecitalShirts />} />
         <Route path="/recital/shirts/thankyou" element={<RecitalShirtThankYou />} />
         <Route path="/recitalshop" element={<RecitalShop />} />
         <Route path="/recitalshop/thankyou" element={<RecitalShopThankYou />} />
+        */}
         <Route path="/faq" element={<FAQ />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />

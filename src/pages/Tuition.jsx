@@ -133,40 +133,6 @@ export default function Tuition() {
             </p>
           </div>
 
-          {/* Recital fee */}
-          <div className="border border-surface-border border-l-4 border-l-[#f4a8b4] rounded-lg px-5 py-5">
-            <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">Recital Fee</p>
-            <div className="flex flex-col gap-2 mb-3">
-              <div className="flex items-baseline gap-2">
-                <span className="text-navy-dark font-black text-2xl">$100</span>
-                <span className="text-[#5a6a8a] text-sm">/ first dance (includes costume)</span>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-navy-dark font-black text-xl">$85</span>
-                <span className="text-[#5a6a8a] text-sm">/ second costume</span>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-navy-dark font-black text-xl">$65</span>
-                <span className="text-[#5a6a8a] text-sm">/ third costume and beyond</span>
-              </div>
-            </div>
-            <p className="text-[#3a4a6a] text-sm leading-relaxed mb-3">
-              Covers costume(s) per dancer, our recital space, and all backend costs associated with being in the recital. Tickets will be available for purchase.
-            </p>
-            <div className="bg-[#fff5f8] border border-[#f4c8d4] rounded px-4 py-2 text-sm text-[#3a4a6a] mb-3">
-              <span className="font-bold">Recital dates:</span> June 12–14, 2026
-            </div>
-            <p className="text-[#5a6a8a] text-xs italic mb-4">
-              Families with multiple dancers receive a discount on recital fees. Payment plans are also available — contact us to learn more.
-            </p>
-            <Link
-              to="/recital"
-              className="inline-block bg-navy-dark text-white text-sm font-bold px-5 py-2 rounded-md hover:bg-navy-mid transition-colors"
-            >
-              View Recital Page →
-            </Link>
-          </div>
-
           {/* Class prices */}
           <div>
             <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2">Class Pricing</p>

@@ -284,14 +284,12 @@ export default function Classes() {
             </div>
           )}
 
-          <a
-            href="https://portal.iclasspro.com/capitalcoredance/classes"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/contact"
             className="mt-10 block w-full bg-navy-dark text-white text-center font-bold py-3 rounded-md hover:bg-navy-mid transition-colors"
           >
             Enroll Now
-          </a>
+          </Link>
         </div>
       </section>
 

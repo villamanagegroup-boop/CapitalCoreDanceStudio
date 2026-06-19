@@ -8,7 +8,6 @@ const NAV_LINKS = [
   { to: '/adult-summer-series', label: 'Adults' },
   { to: '/tuition', label: 'Tuition' },
   { to: '/birthdays', label: 'Birthdays' },
-  { to: '/recital', label: 'Recital' },
 ]
 
 export default function Navbar() {
@@ -23,17 +22,6 @@ export default function Navbar() {
 
   return (
     <nav className="bg-navy-dark sticky top-0 z-50">
-      <style>{`
-        @keyframes nav-shimmer {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .nav-recital-btn {
-          background: linear-gradient(135deg, #C9A84C 0%, #f4d97a 45%, #ffe89c 50%, #f4d97a 55%, #C9A84C 100%);
-          background-size: 250% 250%;
-          animation: nav-shimmer 4s ease-in-out infinite;
-        }
-      `}</style>
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 flex-shrink-0">
@@ -51,18 +39,6 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-
-          {/* Fancy Recital Shop button */}
-          <Link
-            to="/recitalshop"
-            className="relative nav-recital-btn text-[#0B1F3A] text-xs font-black px-4 py-2 rounded-md tracking-widest uppercase shadow-lg shadow-[#C9A84C]/30 hover:shadow-xl hover:shadow-[#C9A84C]/60 hover:scale-105 transition-all whitespace-nowrap"
-          >
-            <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f4a8b4] opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#f4a8b4] border border-white/40" />
-            </span>
-            Recital Shop
-          </Link>
 
           <Link
             to="/contact"
@@ -95,17 +71,6 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-          <Link
-            to="/recitalshop"
-            onClick={() => setMenuOpen(false)}
-            className="relative nav-recital-btn text-[#0B1F3A] text-xs font-black px-5 py-3 rounded-md text-center tracking-widest uppercase shadow-lg shadow-[#C9A84C]/30 mt-1"
-          >
-            <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f4a8b4] opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#f4a8b4] border border-white/40" />
-            </span>
-            Recital Shop
-          </Link>
           <Link
             to="/contact"
             onClick={() => setMenuOpen(false)}

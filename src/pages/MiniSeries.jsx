@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import PageHeader from '../components/PageHeader'
 import Footer from '../components/Footer'
@@ -138,14 +139,12 @@ export default function MiniSeries() {
             </div>
           )}
 
-          <a
-            href="https://portal.iclasspro.com/capitalcoredance/camps/10?sortBy=time"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            to="/contact"
             className="mt-8 block w-full bg-brand-red text-white text-center font-bold py-3 rounded-md hover:bg-red-700 transition-colors"
           >
             Register Now
-          </a>
+          </Link>
         </div>
       </section>
 

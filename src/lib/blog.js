@@ -146,67 +146,6 @@ export const POSTS = [
   },
 
   {
-    slug: 'night-at-the-cinema-recital-2026',
-    category: 'Recital',
-    accent: '#c0392b',
-    date: '2026-05-24',
-    readMinutes: 4,
-    title: 'A Night at the Cinema: What to Know About Our 2026 Recital',
-    metaTitle:
-      'A Night at the Cinema — 2026 Recital, June 12–14 | Capital Core Dance Studio',
-    metaDescription:
-      'Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema,” runs June 12–14, 2026. Learn about recital fees, who participates, and where to find tickets and keepsakes.',
-    excerpt:
-      'Our annual recital is the highlight of the dance year. Here’s what “A Night at the Cinema” involves, what the recital fee covers, and how to prepare.',
-    tldr:
-      'Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema,” takes place June 12–14, 2026. All enrolled dancers are invited to perform, the recital fee starts at $100 for the first dance (costume included), and tickets and keepsakes are available through the Recital Shop.',
-    related: [
-      { to: '/recital', label: 'Recital Details & Tickets' },
-      { to: '/recitalshop', label: 'Shop Recital Keepsakes' },
-    ],
-    sections: [
-      {
-        heading: 'When and what is the 2026 recital?',
-        body: [
-          '“A Night at the Cinema” is our 2026 year-end showcase, taking place June 12–14, 2026. It’s a professional, full-production performance where dancers take the stage with their classes to celebrate everything they’ve worked on all year.',
-          'Participation is encouraged for all enrolled dancers but is not required. Dancers who take part perform with their class in a polished, theater-style setting that families love to watch.',
-        ],
-      },
-      {
-        heading: 'What does the recital fee cover?',
-        body: [
-          'The recital fee is $100 for the first dance and includes the costume. A second costume is $85, and a third costume and beyond is $65 each. The fee covers the costume, the recital venue, and the production costs that go into staging a full show.',
-          'Families with multiple dancers receive a discount, and payment plans are available so the cost can be spread out ahead of the performance.',
-        ],
-      },
-      {
-        heading: 'How do I get tickets and keepsakes?',
-        body: [
-          'Tickets and recital keepsakes — like commemorative shirts and flowers — are available through our online Recital Shop. Ordering ahead means everything is ready for the big night without a last-minute scramble at the door.',
-        ],
-      },
-    ],
-    faqs: [
-      {
-        q: 'When is the 2026 recital?',
-        a: 'The 2026 recital, “A Night at the Cinema,” runs June 12–14, 2026.',
-      },
-      {
-        q: 'Does every dancer have to perform?',
-        a: 'No. Participation is encouraged but optional. Dancers who choose to perform appear with their class in a professional showcase setting.',
-      },
-      {
-        q: 'How much is the recital fee?',
-        a: 'It is $100 for the first dance (costume included), $85 for a second costume, and $65 for each additional costume. Multi-dancer discounts and payment plans are available.',
-      },
-      {
-        q: 'Where do I buy tickets and recital merchandise?',
-        a: 'Tickets and keepsakes such as shirts and flowers are sold through the online Recital Shop on our website.',
-      },
-    ],
-  },
-
-  {
     slug: 'adult-summer-series-movement-for-women',
     category: 'Adult Classes',
     accent: '#f4a8b4',
@@ -503,56 +442,6 @@ export const POSTS = [
   },
 
   {
-    slug: 'recital-shop-shirts-flowers-keepsakes',
-    category: 'Recital',
-    accent: '#c0392b',
-    date: '2026-05-22',
-    readMinutes: 3,
-    title: 'Recital Shop: Shirts, Flowers & Keepsakes for the Big Night',
-    metaTitle:
-      'Recital Shop — Shirts, Flowers & Keepsakes | Capital Core Dance Studio',
-    metaDescription:
-      'Order commemorative shirts, flowers, and keepsakes for Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema,” through the online Recital Shop. Reserve ahead so everything’s ready for showtime.',
-    excerpt:
-      'Make recital night memorable with commemorative shirts, flowers, and keepsakes — ordered ahead so there’s no last-minute scramble.',
-    tldr:
-      'The Recital Shop is where families order commemorative shirts, flowers, and keepsakes for Capital Core Dance Studio’s 2026 recital, “A Night at the Cinema” (June 12–14, 2026). Ordering online ahead of time means everything is ready for the performance.',
-    related: [
-      { to: '/recitalshop', label: 'Visit the Recital Shop' },
-      { to: '/recital', label: 'See Full Recital Details' },
-    ],
-    sections: [
-      {
-        heading: 'What can I order from the Recital Shop?',
-        body: [
-          'The online Recital Shop is your one stop for everything that makes recital night special — commemorative shirts to remember the show, flowers to celebrate your dancer, and keepsakes that capture the moment.',
-          'Everything ties into our 2026 production, “A Night at the Cinema,” taking place June 12–14, 2026.',
-        ],
-      },
-      {
-        heading: 'Why order ahead?',
-        body: [
-          'Ordering online before the performance means your shirts, flowers, and keepsakes are ready and waiting — no last-minute scramble at the door, and no risk of items selling out. It also lets you surprise your dancer with flowers timed perfectly to their big moment.',
-        ],
-      },
-    ],
-    faqs: [
-      {
-        q: 'What does the Recital Shop sell?',
-        a: 'Commemorative recital shirts, flowers, and keepsakes tied to the 2026 production, “A Night at the Cinema.”',
-      },
-      {
-        q: 'When is the recital these items are for?',
-        a: 'The 2026 recital, “A Night at the Cinema,” takes place June 12–14, 2026.',
-      },
-      {
-        q: 'Should I order before recital night?',
-        a: 'Yes. Ordering ahead through the online shop ensures items are ready for the performance and don’t sell out.',
-      },
-    ],
-  },
-
-  {
     slug: 'dance-tuition-fees-discounts-2026',
     category: 'Enrollment',
     accent: '#d4b8f4',
@@ -594,7 +483,7 @@ export const POSTS = [
         heading: 'What discounts can lower my cost?',
         body: [
           'Several discounts can bring your total down: multi-class discounts for dancers enrolled in more than one class, multi-student discounts for families with multiple dancers, and sibling discounts on registration fees, including family fee caps.',
-          'All payments run through our iClassPro portal, which accepts major credit and debit cards, ACH transfers, and checks. Reach out if you’d like help estimating your family’s total.',
+          'All payments run through our online student portal, which accepts major credit and debit cards, ACH transfers, and checks. Reach out if you’d like help estimating your family’s total.',
         ],
       },
     ],

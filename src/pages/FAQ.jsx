@@ -41,7 +41,7 @@ const FAQS = [
       },
       {
         q: 'How do I enroll my child?',
-        a: 'You can enroll online through our iClassPro student portal. If you have questions before signing up, feel free to reach out to us by phone at 804-234-4014 or by email at info@capitalcoredance.com.',
+        a: 'You can enroll online through our student portal. If you have questions before signing up, feel free to reach out to us by phone at 804-234-4014 or by email at info@capitalcoredance.com.',
       },
       {
         q: 'How much do classes cost?',
@@ -61,24 +61,7 @@ const FAQS = [
       },
       {
         q: 'How do I pay?',
-        a: 'All payments are made through our iClassPro portal. We accept all major credit and debit cards, ACH transfers, and checks. If you have trouble with the portal, just contact us and we\'ll help.',
-      },
-    ],
-  },
-  {
-    category: 'Recital',
-    items: [
-      {
-        q: 'Do you have an annual recital?',
-        a: 'Yes! Our 2026 recital is "A Night at the Cinema" taking place June 12–14, 2026. All enrolled dancers participate in the performance.',
-      },
-      {
-        q: 'How much does the recital cost?',
-        a: 'The recital fee is $100 for the first dance (which includes the costume), $85 for a second costume, and $65 for a third costume and beyond. This covers the costume, recital venue, and all associated production costs. Families with multiple dancers receive a discount, and payment plans are available.',
-      },
-      {
-        q: 'Do all students have to participate in the recital?',
-        a: 'Participation in the recital is encouraged but not required. If you choose to participate, your dancer will perform with their class in a professional showcase setting.',
+        a: 'All payments are made securely through our online student portal. We accept all major credit and debit cards, ACH transfers, and checks. If you have trouble with the portal, just contact us and we\'ll help.',
       },
     ],
   },
