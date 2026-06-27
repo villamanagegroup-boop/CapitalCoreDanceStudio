@@ -10,7 +10,7 @@ import PrivacyNotice from '../components/PrivacyNotice'
 
 const SUMMER_CLASSES = [
   { key: 'tu-tiny',  day: 'Tuesday',   time: '5:30 – 6:10 PM', name: 'Tiny Ballet & Tumble',             ages: 'Ages 2–3',  duration: '40 min', price: 120 },
-  { key: 'tu-tumb',  day: 'Tuesday',   time: '6:10 – 7:00 PM', name: 'Tumble',                           ages: 'Ages 6+',   duration: '50 min', price: 120 },
+  { key: 'tu-tumb',  day: 'Tuesday',   time: '6:10 – 7:00 PM', name: 'Tumble Techniques',                ages: 'Ages 6+',   duration: '50 min', price: 120 },
   { key: 'we-bbtap', day: 'Wednesday', time: '5:30 – 6:30 PM', name: 'Beginner Ballet & Tap',            ages: 'Ages 5–7',  duration: '60 min', price: 140 },
   { key: 'we-hh',    day: 'Wednesday', time: '6:30 – 7:15 PM', name: 'Hip Hop',                          ages: 'Ages 5+',   duration: '45 min', price: 120 },
   { key: 'we-tt',    day: 'Wednesday', time: '7:15 – 8:00 PM', name: 'Tik Tok Hip Hop Dance Workshop',   ages: 'Ages 6+',   duration: '45 min', price: 120 },

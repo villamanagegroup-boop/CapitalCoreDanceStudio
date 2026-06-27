@@ -108,7 +108,7 @@ export const POSTS = [
         body: ['The lineup spans our youngest movers through teens:'],
         list: [
           'Tiny Ballet & Tumble (our littlest dancers, ages 2+)',
-          'Tumble',
+          'Tumble Techniques',
           'Beginner Ballet & Tap',
           'Hip Hop',
           'A Tik Tok Hip Hop workshop',

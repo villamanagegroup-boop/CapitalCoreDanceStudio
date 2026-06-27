@@ -70,7 +70,7 @@ const FAQS = [
     items: [
       {
         q: 'Do you offer summer dance classes?',
-        a: 'Yes! Our 6-week summer session runs June 23 – July 30, 2026 with classes on Tuesday and Wednesday evenings. We have classes for dancers ages 2 through teen including Tiny Ballet & Tumble, Tumble, Beginner Ballet & Tap, Hip Hop, and a Tik Tok Hip Hop workshop.',
+        a: 'Yes! Our 6-week summer session runs June 23 – July 30, 2026 with classes on Tuesday and Wednesday evenings. We have classes for dancers ages 2 through teen including Tiny Ballet & Tumble, Tumble Techniques, Beginner Ballet & Tap, Hip Hop, and a Tik Tok Hip Hop workshop.',
       },
       {
         q: 'How much do summer classes cost?',

@@ -22,7 +22,7 @@ const SCHEDULE = [
     day: 'Tuesday',
     classes: [
       { name: 'Tiny Ballet & Tumble', time: '5:30 – 6:10 PM', ages: 'Ages 2–3', duration: '40 min class', price: 120 },
-      { name: 'Tumble', time: '6:10 – 7:00 PM', ages: 'Ages 6+', duration: '50 min class', price: 120 },
+      { name: 'Tumble Techniques', time: '6:10 – 7:00 PM', ages: 'Ages 6+', duration: '50 min class', price: 120 },
     ],
   },
   {
