@@ -96,9 +96,16 @@ export default function AdultSeriesForm() {
       ? 'Summer Series Pass · all 6 Mondays'
       : `Drop-In · ${dateLabel(form.dropInDate)}`
 
-    const { data, error } = await supabase
+    // Generate the row id client-side so we never have to read the row back.
+    // The table has an anon INSERT policy but (deliberately) no SELECT policy,
+    // so `.insert().select()` would fail RLS on the read-back. We already know
+    // the id, and the payment step updates by id without selecting.
+    const registrationId = crypto.randomUUID()
+
+    const { error } = await supabase
       .from('adult_series_registrations')
       .insert([{
+        id: registrationId,
         name: form.name,
         email: form.email,
         phone: form.phone || null,
@@ -111,8 +118,6 @@ export default function AdultSeriesForm() {
         discount_amount: totals.discount || 0,
         notes: form.notes || null,
       }])
-      .select()
-      .single()
 
     if (error) {
       console.error('Supabase insert error:', JSON.stringify(error, null, 2))
@@ -143,7 +148,7 @@ export default function AdultSeriesForm() {
 
     navigate('/adult-summer-series/payment', {
       state: {
-        registrationId: data?.id || null,
+        registrationId,
         name: form.name,
         email: form.email,
         registrationType: form.regType,
