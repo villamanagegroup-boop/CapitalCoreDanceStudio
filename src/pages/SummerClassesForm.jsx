@@ -9,15 +9,11 @@ import { applyPromo, validatePromoCode } from '../lib/promos'
 import PrivacyNotice from '../components/PrivacyNotice'
 
 const SUMMER_CLASSES = [
-  { key: 'tu-tiny',  day: 'Tuesday',   time: '5:30 – 6:00 PM', name: 'Tiny Ballet & Tumble',             ages: 'Ages 2–3',  duration: '30 min', price: 120 },
-  { key: 'tu-bbhh',  day: 'Tuesday',   time: '6:00 – 7:00 PM', name: 'Beginner Ballet & Hip Hop',        ages: 'Ages 5–7',  duration: '60 min', price: 140 },
-  { key: 'tu-tumb',  day: 'Tuesday',   time: '7:00 – 7:45 PM', name: 'Tumble Techniques',                ages: 'Ages 6+',   duration: '45 min', price: 120 },
+  { key: 'tu-tiny',  day: 'Tuesday',   time: '5:30 – 6:10 PM', name: 'Tiny Ballet & Tumble',             ages: 'Ages 2–3',  duration: '40 min', price: 120 },
+  { key: 'tu-tumb',  day: 'Tuesday',   time: '6:10 – 7:00 PM', name: 'Tumble',                           ages: 'Ages 6+',   duration: '50 min', price: 120 },
   { key: 'we-bbtap', day: 'Wednesday', time: '5:30 – 6:30 PM', name: 'Beginner Ballet & Tap',            ages: 'Ages 5–7',  duration: '60 min', price: 140 },
   { key: 'we-hh',    day: 'Wednesday', time: '6:30 – 7:15 PM', name: 'Hip Hop',                          ages: 'Ages 5+',   duration: '45 min', price: 120 },
-  { key: 'we-bc',    day: 'Wednesday', time: '7:15 – 8:30 PM', name: 'Ballet & Contemporary Technique',  ages: 'Ages 7+',   duration: '75 min', price: 180 },
-  { key: 'th-tiny',  day: 'Thursday',  time: '5:30 – 6:00 PM', name: 'Tiny Ballet & Tumble',             ages: 'Ages 3–4',  duration: '30 min', price: 120 },
-  { key: 'th-jt',    day: 'Thursday',  time: '6:00 – 7:00 PM', name: 'Beginner Jazz & Tumble',           ages: 'Ages 5–9',  duration: '60 min', price: 140 },
-  { key: 'th-tt',    day: 'Thursday',  time: '7:00 – 7:45 PM', name: 'Tik Tok Hip Hop Dance Workshop',   ages: 'Ages 6+',   duration: '45 min', price: 120 },
+  { key: 'we-tt',    day: 'Wednesday', time: '7:15 – 8:00 PM', name: 'Tik Tok Hip Hop Dance Workshop',   ages: 'Ages 6+',   duration: '45 min', price: 120 },
 ]
 
 const SESSION_WEEKS = [
@@ -505,7 +501,7 @@ export default function SummerClassesForm() {
                           <span className={labelClass}>How will {dancer.name || 'this dancer'} join us?</span>
                           <div className="grid grid-cols-1 gap-2 mt-1">
                             {[
-                              { value: 'classes',   title: 'Per Class · Full 6 Weeks',  desc: 'Pick one or more classes. $120–$180 each.' },
+                              { value: 'classes',   title: 'Per Class · Full 6 Weeks',  desc: 'Pick one or more classes. $120–$140 each.' },
                               { value: 'flex_pass', title: 'Summer Flex Pass · $329',   desc: 'Unlimited classes all summer.' },
                               { value: 'drop_in',   title: 'Drop-In · $25',             desc: 'Try one class for a single week.' },
                             ].map((opt) => {
@@ -546,7 +542,7 @@ export default function SummerClassesForm() {
                         {dancer.signupType === 'classes' && (
                           <div className="flex flex-col gap-2">
                             <span className={labelClass}>Choose classes <span className="text-brand-red text-xs font-normal">required</span></span>
-                            {['Tuesday', 'Wednesday', 'Thursday'].map((day) => (
+                            {['Tuesday', 'Wednesday'].map((day) => (
                               <div key={day} className="flex flex-col gap-1.5 mt-1">
                                 <div className="flex items-center gap-2">
                                   <span className="text-navy-dark font-bold text-xs uppercase tracking-wide">{day}</span>

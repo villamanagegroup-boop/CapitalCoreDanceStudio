@@ -15,16 +15,14 @@ const ACCENT_COLORS = [
 const DAY_ACCENTS = {
   Tuesday: { text: 'text-brand-red', bg: 'bg-[#fff5f8]', border: 'border-[#f4c8d4]' },
   Wednesday: { text: 'text-[#7a4ed8]', bg: 'bg-[#f4ecff]', border: 'border-[#d7c4f4]' },
-  Thursday: { text: 'text-brand-red', bg: 'bg-[#fff5f8]', border: 'border-[#f4c8d4]' },
 }
 
 const SCHEDULE = [
   {
     day: 'Tuesday',
     classes: [
-      { name: 'Tiny Ballet & Tumble', time: '5:30 – 6:00 PM', ages: 'Ages 2–3', duration: '30 min class', price: 120 },
-      { name: 'Beginner Ballet & Hip Hop', time: '6:00 – 7:00 PM', ages: 'Ages 5–7', duration: '60 min class', price: 140 },
-      { name: 'Tumble Techniques', time: '7:00 – 7:45 PM', ages: 'Ages 6+', duration: '45 min class', price: 120 },
+      { name: 'Tiny Ballet & Tumble', time: '5:30 – 6:10 PM', ages: 'Ages 2–3', duration: '40 min class', price: 120 },
+      { name: 'Tumble', time: '6:10 – 7:00 PM', ages: 'Ages 6+', duration: '50 min class', price: 120 },
     ],
   },
   {
@@ -32,15 +30,7 @@ const SCHEDULE = [
     classes: [
       { name: 'Beginner Ballet & Tap', time: '5:30 – 6:30 PM', ages: 'Ages 5–7', duration: '60 min class', price: 140 },
       { name: 'Hip Hop', time: '6:30 – 7:15 PM', ages: 'Ages 5+', duration: '45 min class', price: 120 },
-      { name: 'Ballet & Contemporary Technique', time: '7:15 – 8:30 PM', ages: 'Ages 7+', duration: '75 min class', price: 180 },
-    ],
-  },
-  {
-    day: 'Thursday',
-    classes: [
-      { name: 'Tiny Ballet & Tumble', time: '5:30 – 6:00 PM', ages: 'Ages 3–4', duration: '30 min class', price: 120 },
-      { name: 'Beginner Jazz & Tumble', time: '6:00 – 7:00 PM', ages: 'Ages 5–9', duration: '60 min class', price: 140 },
-      { name: 'Tik Tok Hip Hop Dance Workshop', time: '7:00 – 7:45 PM', ages: 'Ages 6+', duration: '45 min class', price: 120 },
+      { name: 'Tik Tok Hip Hop Dance Workshop', time: '7:15 – 8:00 PM', ages: 'Ages 6+', duration: '45 min class', price: 120 },
     ],
   },
 ]
@@ -50,7 +40,7 @@ export default function SummerClasses() {
     <div className="min-h-screen flex flex-col">
       <SEO
         title="Summer Dance Classes 2026 in Midlothian, VA | Capital Core Dance Studio"
-        description="Six-week summer dance classes June 23 – July 30 at Capital Core Dance Studio in Midlothian, VA. Ballet, hip hop, jazz, tap, contemporary, and tumble for ages 2 through teen. $50 deposit reserves your dancer's spot."
+        description="Six-week summer dance classes June 23 – July 30 at Capital Core Dance Studio in Midlothian, VA. Ballet, hip hop, tap, and tumble for ages 2 through teen. $50 deposit reserves your dancer's spot."
         canonical="/summer-classes"
         jsonLd={simpleBreadcrumb('Summer Classes', '/summer-classes')}
       />
@@ -58,7 +48,7 @@ export default function SummerClasses() {
       <PageHeader
         eyebrow="6 Weeks of Fun · June 23 – July 30"
         title="Summer Dance Classes"
-        subtitle="Tuesday, Wednesday, and Thursday evenings. Pick a class, grab the Flex Pass, or drop in for the week."
+        subtitle="Tuesday and Wednesday evenings. Pick a class, grab the Flex Pass, or drop in for the week."
       />
 
       {/* Flyer */}
@@ -95,7 +85,7 @@ export default function SummerClasses() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
             <div className="bg-[#fff5f8] border border-[#f4c8d4] rounded-lg p-5 text-center">
               <p className="text-brand-red text-[10px] font-bold tracking-[0.3em] uppercase mb-1">Per Class</p>
-              <p className="text-navy-dark font-black text-2xl">$120–$180</p>
+              <p className="text-navy-dark font-black text-2xl">$120–$140</p>
               <p className="text-[#5a6a8a] text-xs mt-1">for the full 6 weeks</p>
             </div>
             <div className="bg-[#f4ecff] border border-[#d7c4f4] rounded-lg p-5 text-center">
@@ -114,7 +104,7 @@ export default function SummerClasses() {
             Summer 2026 Schedule
           </p>
           <h2 className="text-navy-dark text-2xl font-black mb-8">
-            June 23 – July 30 · Three evenings a week
+            June 23 – July 30 · Two evenings a week
           </h2>
 
           <div className="flex flex-col gap-10">

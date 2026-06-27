@@ -49,7 +49,7 @@ export default function Tuition() {
             <p className="text-brand-red text-xs font-bold tracking-[0.3em] uppercase mb-2 mt-2">Summer Class Pricing</p>
             <h2 className="text-navy-dark text-2xl font-black mb-2">6-Week Summer Session</h2>
             <p className="text-[#3a4a6a] text-sm leading-relaxed mb-5">
-              Three pricing options for our Tuesday / Wednesday / Thursday summer schedule. A $50 deposit reserves your spot — applies toward tuition.
+              Three pricing options for our Tuesday / Wednesday summer schedule. A $50 deposit reserves your spot — applies toward tuition.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">

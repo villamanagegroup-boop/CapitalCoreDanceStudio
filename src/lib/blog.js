@@ -87,11 +87,11 @@ export const POSTS = [
     metaTitle:
       'Summer Dance Classes 2026 in Midlothian, VA — Schedule & Pricing | Capital Core Dance Studio',
     metaDescription:
-      'Everything about Capital Core Dance Studio’s 6-week summer dance classes, June 23–July 30, 2026. Class list for ages 2 to teen, three pricing options including the Flex Pass, and how to sign up.',
+      'Everything about Capital Core Dance Studio’s 6-week summer dance classes, June 23–July 30, 2026, on Tuesday and Wednesday evenings. Class list for ages 2 to teen, three pricing options including the Flex Pass, and how to sign up.',
     excerpt:
       'Our 6-week summer session keeps dancers moving all summer. Here’s the class lineup, three flexible pricing options, and how the deposit works.',
     tldr:
-      'Capital Core’s summer dance classes run for 6 weeks, June 23 to July 30, 2026, on Tuesday, Wednesday, and Thursday evenings. There are classes for ages 2 through teen, and you can pay per class, buy a Summer Flex Pass ($329 unlimited), or drop in ($25/class).',
+      'Capital Core’s summer dance classes run for 6 weeks, June 23 to July 30, 2026, on Tuesday and Wednesday evenings. There are classes for ages 2 through teen, and you can pay per class, buy a Summer Flex Pass ($329 unlimited), or drop in ($25/class).',
     related: [
       { to: '/summer-classes', label: 'View Classes & Sign Up' },
       { to: '/camps', label: 'Looking for daytime camps instead?' },
@@ -100,7 +100,7 @@ export const POSTS = [
       {
         heading: 'When do summer classes run?',
         body: [
-          'The summer session is 6 weeks long, running June 23 through July 30, 2026, with classes held on Tuesday, Wednesday, and Thursday evenings. It’s a great way for current dancers to keep their skills sharp and for new dancers to try the studio in a low-pressure setting.',
+          'The summer session is 6 weeks long, running June 23 through July 30, 2026, with classes held on Tuesday and Wednesday evenings. It’s a great way for current dancers to keep their skills sharp and for new dancers to try the studio in a low-pressure setting.',
         ],
       },
       {
@@ -108,19 +108,16 @@ export const POSTS = [
         body: ['The lineup spans our youngest movers through teens:'],
         list: [
           'Tiny Ballet & Tumble (our littlest dancers, ages 2+)',
-          'Beginner Ballet & Hip Hop',
-          'Tumble Techniques',
+          'Tumble',
           'Beginner Ballet & Tap',
           'Hip Hop',
-          'Ballet & Contemporary Technique',
-          'Beginner Jazz & Tumble',
           'A Tik Tok Hip Hop workshop',
         ],
       },
       {
         heading: 'How does pricing and signup work?',
         body: [
-          'There are three ways to pay: per-class enrollment for the full 6 weeks ($120–$180 each depending on length), a Summer Flex Pass ($329 for unlimited classes all summer — the best value for busy families), or single drop-ins at $25 per class per week.',
+          'There are three ways to pay: per-class enrollment for the full 6 weeks ($120–$140 each depending on length), a Summer Flex Pass ($329 for unlimited classes all summer — the best value for busy families), or single drop-ins at $25 per class per week.',
           'A $50 deposit reserves your dancer’s spot for per-class and Flex Pass enrollments and applies toward tuition; drop-ins are paid in full at signup. If your dancer already attends Capital Core, just mark them as a Returning Dancer and we’ll pull their details from our records.',
         ],
       },
@@ -128,7 +125,7 @@ export const POSTS = [
     faqs: [
       {
         q: 'How long is the summer dance session?',
-        a: 'It is a 6-week session running June 23 through July 30, 2026, with classes on Tuesday, Wednesday, and Thursday evenings.',
+        a: 'It is a 6-week session running June 23 through July 30, 2026, with classes on Tuesday and Wednesday evenings.',
       },
       {
         q: 'What is the Summer Flex Pass?',
