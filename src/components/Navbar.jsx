@@ -22,9 +22,9 @@ export default function Navbar() {
 
   return (
     <nav className="bg-navy-dark sticky top-0 z-50">
-      <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-6 py-3 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 flex-shrink-0">
+        <Link to="/" className="flex items-center gap-3 flex-shrink-0 justify-self-start">
           <img src="/logo.png" alt="Capital Core Dance Studio" className="h-10 w-10 object-contain flex-shrink-0" />
           <div>
             <div className="text-white font-black text-sm tracking-widest">CAPITAL CORE</div>
@@ -32,30 +32,33 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-7">
+        {/* Desktop nav — centered */}
+        <div className="hidden md:flex items-center justify-center gap-6 lg:gap-7">
           {NAV_LINKS.map(({ to, label }) => (
             <Link key={to} to={to} className={`text-sm font-medium transition-colors ${linkClass(to)}`}>
               {label}
             </Link>
           ))}
+        </div>
 
+        {/* Right: Contact (desktop) + hamburger (mobile) */}
+        <div className="flex items-center justify-end justify-self-end col-start-3">
           <Link
             to="/contact"
-            className="bg-brand-red text-white text-sm font-bold px-5 py-2 rounded-md hover:bg-red-700 transition-colors"
+            className="hidden md:inline-flex bg-brand-red text-white text-sm font-bold px-5 py-2 rounded-md hover:bg-red-700 transition-colors"
           >
             Contact Us
           </Link>
-        </div>
 
-        {/* Hamburger button */}
-        <button
-          className="md:hidden text-white text-xl leading-none"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? '✕' : '☰'}
-        </button>
+          {/* Hamburger button */}
+          <button
+            className="md:hidden text-white text-xl leading-none"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? '✕' : '☰'}
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown */}
